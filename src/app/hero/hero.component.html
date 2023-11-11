@@ -17,8 +17,8 @@
          </select>
          <select class=" col form-select border-2 py-3">
         <option selected="">Doctor</option>
-        <option value="1"> 1</option>
-        <option value="2"> 2</option>
+        <option *ngFor="let doctor of doctors" value="1"> {{doctor.name}}</option>
+        <!-- <option value="2"> 2</option> -->
 
       </select>
       <button class=" col-md-2 btn appointment-btn scrollto btn-lg me-4 text-dark-50 fw-bold mb-0 ">Search</button>

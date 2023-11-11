@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { HeroComponent } from './hero/hero.component';
 import { AboutComponent } from './about/about.component';
-import { ServicesComponent } from './services/services.component';
+import { ServicesComponent } from './ourServices/services.component';
 import { SpecializationComponent } from './specialization/specialization.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HeroComponent } from './hero/hero.component';
 import { AboutComponent } from './about/about.component';
-import { ServicesComponent } from './services/services.component';
+import { ServicesComponent } from './ourServices/services.component';
 import { SpecializationComponent } from './specialization/specialization.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorComponent } from './error/error.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DoctorComponent } from './doctor/doctor.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
