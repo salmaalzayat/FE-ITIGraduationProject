@@ -18,6 +18,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

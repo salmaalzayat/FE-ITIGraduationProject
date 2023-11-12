@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { DoctorService } from '../services/doctor.service';
 import { GetAllSpecializationsDto } from '../Types/GetAllSpecializationsDto';
 import { SpecializationService } from '../services/specialization.service';
+import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializations';
+
 
 @Component({
   selector: 'app-hero',
@@ -10,6 +12,7 @@ import { SpecializationService } from '../services/specialization.service';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
+
   doctors?: GetAllDoctorsDto[];
   specializations?: GetAllSpecializationsDto[];
 constructor(private doctorService : DoctorService , private specializationService: SpecializationService){}
@@ -24,7 +27,6 @@ this.doctorService.getDoctors().subscribe({
 });
 this.specializationService.GetAllSpecializations().subscribe({
   next:(specializations) => {
-    console.log(specializations);
     this.specializations = specializations;
   },
   error: (error) => {
@@ -33,10 +35,20 @@ this.specializationService.GetAllSpecializations().subscribe({
 })
 }
 id: number = 0;
-doctorss = [];
+doctorss? : Array<string>;
+spa? : DoctorsForAllSpecializations[];
 
 selected(e: Event):void{
   this.id = (e.target as any).value;
+  this.doctorss = (e.target as any).doctorss;
+  this.doctorss = (e.target as any).DoctorsOfSpecialization;
   console.log(this.id);
+  for(let sp of this.specializations!)
+  {
+    if(sp.id == this.id){
+      this.spa = sp.doctorsForAllSpecializations!;
+      console.log(sp.doctorsForAllSpecializations);
+    }
+  }
 }
 }

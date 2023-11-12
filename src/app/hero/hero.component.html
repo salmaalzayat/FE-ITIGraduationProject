@@ -12,11 +12,11 @@
       <div class="row justify-content-center pt-2">
         <select (change)="selected($event)" class=" col form-select border-2 py-3 mx-3">
           <option disabled selected="">Specialization</option>
-          <option  *ngFor="let Specialization of specializations" [value]="Specialization.id"> {{ Specialization.doctorsForAllSpecializations }}</option>
-         </select>
+          <option  *ngFor="let Specialization of specializations" [value]="Specialization.id "> {{ Specialization.name }}</option>
+          </select>
          <select class=" col form-select border-2 py-3">
         <option  disabled selected="">Doctor</option>
-        <!-- <option *ngFor="let doctor of doctors" value="1"> {{doctor.name}}</option> -->
+        <option *ngFor="let doctor of spa" value="1"> {{doctor.name}}</option>
         <!-- <option *ngFor="let doctor of Specialization.doctorsForAllSpecializations" value="1"></option> -->
       </select>
       <button class=" col-md-2 btn appointment-btn scrollto btn-lg me-4 text-dark-50 fw-bold mb-0 ">Search</button>
