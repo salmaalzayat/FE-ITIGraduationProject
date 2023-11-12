@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { GetDoctorsBySpecializationDto } from '../Types/GetDoctorsBySpecializationDto';
 import { Observable } from 'rxjs';
+import { GetAllSpecializationsDto } from '../Types/GetAllSpecializationsDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpecializationService {
 
-  constructor(private client: HttpClient) 
-  {
-    // public getSpecializations(): Observable<GetDoctorsBySpecializationDto[]>{
-    //   return this.client.get<GetDoctorsBySpecializationDto[]>()
-    // }
-   }
+  constructor(private client: HttpClient) {}
+    public GetAllSpecializations(): Observable<GetAllSpecializationsDto[]>{
+      return this.client.get<GetAllSpecializationsDto[]>('https://localhost:7267/api/Doctor/GetAllSpecialization');
+    }
 }
