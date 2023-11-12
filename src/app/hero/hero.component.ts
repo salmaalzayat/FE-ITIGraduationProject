@@ -35,19 +35,14 @@ this.specializationService.GetAllSpecializations().subscribe({
 })
 }
 id: number = 0;
-doctorss? : Array<string>;
-spa? : DoctorsForAllSpecializations[];
+Doctors? : DoctorsForAllSpecializations[];
 
 selected(e: Event):void{
   this.id = (e.target as any).value;
-  this.doctorss = (e.target as any).doctorss;
-  this.doctorss = (e.target as any).DoctorsOfSpecialization;
-  console.log(this.id);
   for(let sp of this.specializations!)
   {
     if(sp.id == this.id){
-      this.spa = sp.doctorsForAllSpecializations!;
-      console.log(sp.doctorsForAllSpecializations);
+      this.Doctors = sp.doctorsForAllSpecializations!;
     }
   }
 }
