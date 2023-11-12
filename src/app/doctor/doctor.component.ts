@@ -14,6 +14,7 @@ ngOnInit():void{
 this.doctorService.getDoctors().subscribe({
   next:(doctors) => {
     this.doctors = doctors;
+    
   },
   error: (error) => {
     console.log('calling api failed', error);

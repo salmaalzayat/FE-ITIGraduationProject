@@ -11,12 +11,12 @@
        <div class="custom-container container p-3 ">
       <div class="row justify-content-center pt-2">
         <select class=" col form-select border-2 py-3 mx-3">
-          <option selected="">Specialization</option>
+          <option disabled selected="">Specialization</option>
           <option value="1"> 1</option>
           <option value="2"> 2</option>
          </select>
          <select class=" col form-select border-2 py-3">
-        <option selected="">Doctor</option>
+        <option  disabled selected="">Doctor</option>
         <option *ngFor="let doctor of doctors" value="1"> {{doctor.name}}</option>
         <!-- <option value="2"> 2</option> -->
 
