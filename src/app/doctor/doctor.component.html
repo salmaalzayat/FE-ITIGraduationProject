@@ -9,13 +9,44 @@
   
           <div class="row">
   
-            <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
+            <!-- <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
                 <div class="member-img">
                   <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
                 
                 </div>
                 <div class="member-info">
+                  <h3>{{doctor.name}}</h3>
+                  <h4>{{doctor.title}}</h4>
+                  <span>{{doctor.description}}</span>
+                  <div *ngFor="let schedule of doctor.weekSchadual">
+                   
+                    <span>{{schedule.dayOfWeek}}</span>
+                    <span *ngIf="schedule.isAvailable">
+                      <span>{{schedule.startTime}}</span>
+                      <span>{{schedule.endTime}}</span>
+                      <span>me7ataga a check el visit count</span>
+                      <button>Book</button>
+                    </span>
+                    
+                    <span *ngIf="!schedule.isAvailable">
+                      <span>Day off</span>
+                      <button [disabled]="true">Book</button>
+                    </span>
+                  </div>
+                  
+                  
+           </div>
+              </div>
+            </div> -->
+            
+            <div *ngFor="let spec of doctorsBySpecialization" class="cardDoctor card d-flex align-items-stretch">
+              <div class="member" data-aos="fade-up" data-aos-delay="100">
+                <div class="member-img">
+                  <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                
+                </div>
+                <div *ngFor="let doctor of spec.childDoctorOfSpecializations" class="member-info">
                   <h3>{{doctor.name}}</h3>
                   <h4>{{doctor.title}}</h4>
                   <!-- <span>{{doctor.specializationName}}</span> -->
@@ -39,8 +70,8 @@
                   
            </div>
               </div>
-            </div>
-  
+            </div>  
+
           </div>
   
         </div>
