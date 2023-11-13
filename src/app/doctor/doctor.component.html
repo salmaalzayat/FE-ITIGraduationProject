@@ -40,13 +40,14 @@
               </div>
             </div> -->
             
-            <div *ngFor="let spec of doctorsBySpecialization" class="cardDoctor card d-flex align-items-stretch">
-              <div class="member" data-aos="fade-up" data-aos-delay="100">
-                <div class="member-img">
-                  <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
-                
-                </div>
-                <div *ngFor="let doctor of spec.childDoctorOfSpecializations" class="member-info">
+            <div *ngFor="let spec of doctorsBySpecialization" >
+            <div *ngFor="let doctor of spec.childDoctorOfSpecializations"  class="cardDoctor card d-flex align-items-stretch">
+                <div class="member-info">
+                  <div class="member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-img">
+                      <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                    
+                    </div>
                   <h3>{{doctor.name}}</h3>
                   <h4>{{doctor.title}}</h4>
                   <!-- <span>{{doctor.specializationName}}</span> -->
@@ -69,7 +70,7 @@
                   
                   
            </div>
-              </div>
+              </div></div>
             </div>  
 
           </div>

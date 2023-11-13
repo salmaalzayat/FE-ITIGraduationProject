@@ -4,7 +4,8 @@ import { DoctorService } from '../services/doctor.service';
 import { GetAllSpecializationsDto } from '../Types/GetAllSpecializationsDto';
 import { SpecializationService } from '../services/specialization.service';
 import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializations';
-
+import { Router, RouterModule, Routes } from '@angular/router';
+import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 
 @Component({
   selector: 'app-hero',
@@ -15,8 +16,10 @@ export class HeroComponent implements OnInit {
 
   doctors?: GetAllDoctorsDto[];
   specializations?: GetAllSpecializationsDto[];
-constructor(private doctorService : DoctorService , private specializationService: SpecializationService){}
+  sId : number =0;
+constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService){}
 ngOnInit():void{
+this.data.currentId.subscribe(sId => this.sId = sId)
 this.doctorService.getDoctors().subscribe({
   next:(doctors) => {
     this.doctors = doctors;
@@ -45,5 +48,17 @@ selected(e: Event):void{
     this.isSpecializationSelected = false;
   }
   this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
+}
+
+onSearch(event : Event): void {
+
+  if(this.isSpecializationSelected)
+  {
+    // this.data.currentId=this.id
+    this.data.changeSpecializationId(this.id)
+
+    this.router.navigate(['/doctor'])
+  }
+
 }
 }

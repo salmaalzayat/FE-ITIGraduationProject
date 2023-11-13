@@ -8,8 +8,10 @@ import { GetDoctorsBySpecializationDto } from '../Types/GetDoctorsBySpecializati
 export class DoctorsBySpecializationService {
   
   constructor(private client: HttpClient) { }
-  public getDoctorsBySpecialization(): Observable<GetDoctorsBySpecializationDto[]>{
-    return this.client.get<GetDoctorsBySpecializationDto[]>('https://localhost:7267/api/Doctor/doctors/specialization/${id}');
+  public getDoctorsBySpecialization(id : number): Observable<GetDoctorsBySpecializationDto[]>{
+    return this.client.get<GetDoctorsBySpecializationDto[]>(`https://localhost:7267/api/Doctor/doctors/specialization/${id}`);
+
+
   }
 
 }
