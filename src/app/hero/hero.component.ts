@@ -34,16 +34,16 @@ this.specializationService.GetAllSpecializations().subscribe({
   },
 })
 }
-id: number = 0;
+id: any;
 Doctors? : DoctorsForAllSpecializations[];
+isSpecializationSelected: boolean = false;
 
 selected(e: Event):void{
+  this.isSpecializationSelected = true;
   this.id = (e.target as any).value;
-  for(let sp of this.specializations!)
-  {
-    if(sp.id == this.id){
-      this.Doctors = sp.doctorsForAllSpecializations!;
-    }
+  if(this.id === "All"){
+    this.isSpecializationSelected = false;
   }
+  this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
 }
 }

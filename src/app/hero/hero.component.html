@@ -10,13 +10,19 @@
       <!-- ======= Search Section ======= -->
        <div class="custom-container container p-3 ">
       <div class="row justify-content-center pt-2">
-        <select (change)="selected($event)" class=" col form-select border-2 py-3 mx-3">
-          <option disabled selected="">Specialization</option>
+        <select (change)="selected($event)" class="col form-select border-2 py-3 mx-3">
+          <option selected="" value="All" id="All">All Specialization</option>
           <option  *ngFor="let Specialization of specializations" [value]="Specialization.id "> {{ Specialization.name }}</option>
           </select>
         <select  class=" col form-select border-2 py-3">
         <option  disabled selected="">Doctor</option>
-        <option *ngFor="let doctor of Doctors" [value]="doctor.id"> {{doctor.name}}</option>
+        <ng-container *ngIf="isSpecializationSelected" >
+          <option *ngFor="let doctor of Doctors"  [value]="doctor.id"> {{doctor.name}} </option>
+        </ng-container>
+        <ng-container *ngIf="!isSpecializationSelected" >
+          <option *ngFor="let doctor of doctors" [value]="doctor.id"> {{doctor.name}}</option>
+        </ng-container>
+       
       </select>
       <button class=" col-md-2 btn appointment-btn scrollto btn-lg me-4 text-dark-50 fw-bold mb-0 ">Search</button>
       </div>
