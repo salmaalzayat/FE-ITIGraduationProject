@@ -20,12 +20,12 @@ export class HeroComponent implements OnInit {
   specializations?: GetAllSpecializationsDto[];
   sId : number =0;
   dId! : string;
-
   doctorById?: GetDoctorByIDDto;
-  doctorId: string = "0";
+  doctorId: string = '0';
 
 constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService, private doctorByIdService : GetDoctorByIdService){}
 ngOnInit():void{
+
 this.data.currentId.subscribe(sId => this.sId = sId)
 this.data.currentDoctorId.subscribe(dId => this.dId = dId)
 this.doctorService.getDoctors().subscribe({
@@ -33,25 +33,15 @@ this.doctorService.getDoctors().subscribe({
     this.doctors = doctors;
   },
   error: (error) => {
-    console.log('calling api failed', error);
+    console.log('calling All doctors api failed', error);
   },
 });
-
-this.doctorByIdService.getDoctorById(this.doctorId).subscribe({
-  next:(doctorById) => {
-    this.doctorById = doctorById;
-  },
-  error: (error) => {
-    console.log('calling api failed', error);
-  },
-});
-
 this.specializationService.GetAllSpecializations().subscribe({
   next:(specializations) => {
     this.specializations = specializations;
   },
   error: (error) => {
-    console.log('calling api failed', error);
+    console.log('calling All specializations api failed', error);
   },
 })
 }
@@ -68,6 +58,20 @@ selected(e: Event):void{
   this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
 }
 
+
+isDoctorSelected : boolean =false;
+
+
+doctorSelected(event: Event):void{
+
+
+this.doctorId = (event.target as HTMLSelectElement).value;
+this.isDoctorSelected = true;
+if(this.doctorId == "allDoctors"){
+  this.isDoctorSelected = false;
+}
+
+}
 onSearch(event : Event): void {
 
   if(this.isSpecializationSelected)
@@ -80,16 +84,7 @@ onSearch(event : Event): void {
     this.data.changeDoctorId(this.doctorId)
   }
 
+  
   this.router.navigate(['/doctor'])
-}
-isDoctorSelected : boolean =false;
-
-
-doctorSelected(event: Event):void{
-this.isDoctorSelected = true;
-this.doctorId = (event.target as HTMLSelectElement).value;
-if(this.doctorId == "allDoctors"){
-  this.isDoctorSelected = false;
-}
 }
 }

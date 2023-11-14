@@ -6,7 +6,8 @@
             <h2>Doctors</h2>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
           </div>
-        <ng-container *ngIf="sId==0">
+          
+        <ng-container *ngIf="sId==0 && dId =='0'">
           <div class="row">
             <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -39,7 +40,7 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="dId == '0'">
+        <ng-container *ngIf="dId !='0' ">
           <div class="row">
             <div class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
