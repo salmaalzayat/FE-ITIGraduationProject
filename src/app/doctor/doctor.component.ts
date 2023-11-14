@@ -6,6 +6,8 @@ import { DoctorsBySpecializationService } from '../services/doctors-by-specializ
 import { ChildDoctorOfSpecializationDto } from '../Types/ChildDoctorOfSpecializationDto';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
+import { GetDoctorByIdService } from '../services/get-doctor-by-id.service';
+import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 
 @Component({
   selector: 'app-doctor',
@@ -17,13 +19,15 @@ export class DoctorComponent implements OnInit{
 
   doctors?: GetAllDoctorsDto[];
   doctorsBySpecialization?: GetDoctorsBySpecializationDto[];
+  doctorById!: GetDoctorByIDDto;
   sId : number =0;
-
-constructor(private doctorService : DoctorService , private doctorsBySpecializationService : DoctorsBySpecializationService,private data : DataBetweenDoctorCompHeroCompService){}
+  dId: string = "0";
+constructor(private doctorService : DoctorService , private doctorsBySpecializationService : DoctorsBySpecializationService,private data : DataBetweenDoctorCompHeroCompService , private doctorIdService :GetDoctorByIdService){}
 
 ngOnInit():void{
 
 this.data.currentId.subscribe(sId => this.sId = sId)
+this.data.currentDoctorId.subscribe(dId => this.dId = dId)
 this.doctorService.getDoctors().subscribe({
   next:(doctors) => {
     this.doctors = doctors;
@@ -39,14 +43,24 @@ this.doctorsBySpecializationService.getDoctorsBySpecialization(this.sId).subscri
 
   next:(doctorsBySpecialization) => {
     this.doctorsBySpecialization = doctorsBySpecialization;
-    console.log("in dr comp " + this.sId)
+  },
+  error: (error) => {
+    console.log('calling api failed', error);
+  },
+});
 
+//#endregion
+//#region doctor by id
+this.doctorIdService?.getDoctorById(this.dId).subscribe({
 
+  next:(doctorById) => {
+    this.doctorById = doctorById;
   },
   error: (error) => {
     console.log('calling api failed', error);
   },
 });
 }
-//#endregion
 }
+//#endregion
+

@@ -6,6 +6,8 @@ import { SpecializationService } from '../services/specialization.service';
 import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializations';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
+import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
+import { GetDoctorByIdService } from '../services/get-doctor-by-id.service';
 
 @Component({
   selector: 'app-hero',
@@ -17,9 +19,15 @@ export class HeroComponent implements OnInit {
   doctors?: GetAllDoctorsDto[];
   specializations?: GetAllSpecializationsDto[];
   sId : number =0;
-constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService){}
+  dId! : string;
+
+  doctorById?: GetDoctorByIDDto;
+  doctorId: string = "0";
+
+constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService, private doctorByIdService : GetDoctorByIdService){}
 ngOnInit():void{
 this.data.currentId.subscribe(sId => this.sId = sId)
+this.data.currentDoctorId.subscribe(dId => this.dId = dId)
 this.doctorService.getDoctors().subscribe({
   next:(doctors) => {
     this.doctors = doctors;
@@ -28,6 +36,16 @@ this.doctorService.getDoctors().subscribe({
     console.log('calling api failed', error);
   },
 });
+
+this.doctorByIdService.getDoctorById(this.doctorId).subscribe({
+  next:(doctorById) => {
+    this.doctorById = doctorById;
+  },
+  error: (error) => {
+    console.log('calling api failed', error);
+  },
+});
+
 this.specializationService.GetAllSpecializations().subscribe({
   next:(specializations) => {
     this.specializations = specializations;
@@ -58,6 +76,20 @@ onSearch(event : Event): void {
    
   }
 
+  if(this.isDoctorSelected){
+    this.data.changeDoctorId(this.doctorId)
+  }
+
   this.router.navigate(['/doctor'])
+}
+isDoctorSelected : boolean =false;
+
+
+doctorSelected(event: Event):void{
+this.isDoctorSelected = true;
+this.doctorId = (event.target as HTMLSelectElement).value;
+if(this.doctorId == "allDoctors"){
+  this.isDoctorSelected = false;
+}
 }
 }

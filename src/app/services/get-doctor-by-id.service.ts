@@ -10,7 +10,7 @@ export class GetDoctorByIdService {
 
   constructor(private client : HttpClient) { }
 
-  public getDoctorById(id : string): Observable<GetDoctorByIDDto[]>{
-    return this.client.get<GetDoctorByIDDto[]>(`https://localhost:7267/api/Doctor/doctors/${id}`);
+  public getDoctorById(id: string): Observable<GetDoctorByIDDto>{
+    return this.client.get<GetDoctorByIDDto>(`https://localhost:7267/api/Doctor/doctors/${id}`);
  }
 }
