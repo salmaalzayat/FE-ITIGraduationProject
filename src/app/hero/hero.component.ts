@@ -83,7 +83,12 @@ onSearch(event : Event): void {
   if(this.isDoctorSelected){
     this.data.changeDoctorId(this.doctorId)
   }
+if(!this.isDoctorSelected){
+  this.data.changeDoctorId('0')
 
+}
+if(!this.isSpecializationSelected){
+  this.data.changeSpecializationId(0)}
   
   this.router.navigate(['/doctor'])
 }

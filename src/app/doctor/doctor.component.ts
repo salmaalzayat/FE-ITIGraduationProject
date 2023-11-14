@@ -19,7 +19,7 @@ export class DoctorComponent implements OnInit{
 
   doctors?: GetAllDoctorsDto[];
   doctorsBySpecialization?: GetDoctorsBySpecializationDto[];
-  doctorById!: GetDoctorByIDDto;
+  doctorById? : GetDoctorByIDDto;
   sId : number =0;
   dId: string = '0';
  constructor(private doctorService : DoctorService , private doctorsBySpecializationService : DoctorsBySpecializationService,private data : DataBetweenDoctorCompHeroCompService , private doctorIdService :GetDoctorByIdService){}
@@ -40,11 +40,13 @@ this.doctorService.getDoctors().subscribe({
 });
 }
 //#region doctor by specialization
+
 if(this.sId !=0 && this.dId=='0'){
 this.doctorsBySpecializationService.getDoctorsBySpecialization(this.sId).subscribe({
 
   next:(doctorsBySpecialization) => {
     this.doctorsBySpecialization = doctorsBySpecialization;
+
   },
   error: (error) => {
     console.log('calling get drs by specialization api failed', error);
@@ -58,11 +60,13 @@ this.doctorIdService.getDoctorById(this.dId).subscribe({
 
   next:(doctorById) => {
     this.doctorById = doctorById;
+   
   },
   error: (error) => {
     console.log('calling dr by id api failed', error);
   },
 });}
+
 }
 
 

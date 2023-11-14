@@ -7,7 +7,7 @@
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
           </div>
           
-        <ng-container *ngIf="sId==0 && dId =='0'">
+        <ng-container *ngIf="sId==0 && !doctorById">
           <div class="row">
             <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -40,7 +40,43 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="dId !='0' ">
+        <ng-container *ngIf="sId != 0 && !doctorById">
+          <div class="row">
+             <div *ngFor="let spec of doctorsBySpecialization" >
+             <div *ngFor="let doctor of spec.childDoctorOfSpecializations"  class="cardDoctor card d-flex align-items-stretch">
+                 <div class="member-info">
+                   <div class="member" data-aos="fade-up" data-aos-delay="100">
+                     <div class="member-img">
+                       <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                     
+                     </div>
+                   <h3>{{doctor.name}}</h3>
+                   <h4>{{doctor.title}}</h4>
+                   <!-- <span>{{doctor.specializationName}}</span> -->
+                   <span>{{doctor.description}}</span>
+                   <div *ngFor="let schedule of doctor.weekSchadual">
+                    
+                     <span>{{schedule.dayOfWeek}}</span>
+                     <span *ngIf="schedule.isAvailable">
+                       <span>{{schedule.startTime}}</span>
+                       <span>{{schedule.endTime}}</span>
+                       <span>me7ataga a check el visit count</span>
+                       <button>Book</button>
+                     </span>
+                     
+                     <span *ngIf="!schedule.isAvailable">
+                       <span>Day off</span>
+                       <button [disabled]="true">Book</button>
+                     </span>
+                   </div>
+                   
+                   
+            </div>
+               </div></div>
+             </div>  
+          </div>
+         </ng-container>
+        <ng-container *ngIf="doctorById">
           <div class="row">
             <div class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -49,6 +85,7 @@
                 
                 </div>
                 <div class="member-info">
+                  <h2>{{doctorById.id}}</h2>
                   <h3>{{doctorById.name}}</h3>
                   <h4>{{doctorById.title}}</h4>
                   <span>{{doctorById.description}}</span>
@@ -73,42 +110,7 @@
           </div>
         </ng-container>
           
-        <ng-container *ngIf="sId != 0 && dId == '0'">
-         <div class="row">
-            <div *ngFor="let spec of doctorsBySpecialization" >
-            <div *ngFor="let doctor of spec.childDoctorOfSpecializations"  class="cardDoctor card d-flex align-items-stretch">
-                <div class="member-info">
-                  <div class="member" data-aos="fade-up" data-aos-delay="100">
-                    <div class="member-img">
-                      <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
-                    
-                    </div>
-                  <h3>{{doctor.name}}</h3>
-                  <h4>{{doctor.title}}</h4>
-                  <!-- <span>{{doctor.specializationName}}</span> -->
-                  <span>{{doctor.description}}</span>
-                  <div *ngFor="let schedule of doctor.weekSchadual">
-                   
-                    <span>{{schedule.dayOfWeek}}</span>
-                    <span *ngIf="schedule.isAvailable">
-                      <span>{{schedule.startTime}}</span>
-                      <span>{{schedule.endTime}}</span>
-                      <span>me7ataga a check el visit count</span>
-                      <button>Book</button>
-                    </span>
-                    
-                    <span *ngIf="!schedule.isAvailable">
-                      <span>Day off</span>
-                      <button [disabled]="true">Book</button>
-                    </span>
-                  </div>
-                  
-                  
-           </div>
-              </div></div>
-            </div>  
-         </div>
-        </ng-container>
+      
          
           </div>
   
