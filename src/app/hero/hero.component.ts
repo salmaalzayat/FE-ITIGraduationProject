@@ -54,11 +54,10 @@ onSearch(event : Event): void {
 
   if(this.isSpecializationSelected)
   {
-    // this.data.currentId=this.id
     this.data.changeSpecializationId(this.id)
-
-    this.router.navigate(['/doctor'])
+   
   }
 
+  this.router.navigate(['/doctor'])
 }
 }

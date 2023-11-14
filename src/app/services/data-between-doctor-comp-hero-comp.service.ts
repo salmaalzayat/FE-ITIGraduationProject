@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class DataBetweenDoctorCompHeroCompService {
 
   private specializationId =  new BehaviorSubject<number>(0);
+  // private docotrId = new BehaviorSubject<string>("0");
   currentId = this.specializationId.asObservable();
   constructor() { }
 
