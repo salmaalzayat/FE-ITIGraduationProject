@@ -4,7 +4,10 @@ import { DoctorService } from '../services/doctor.service';
 import { GetAllSpecializationsDto } from '../Types/GetAllSpecializationsDto';
 import { SpecializationService } from '../services/specialization.service';
 import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializations';
-
+import { Router, RouterModule, Routes } from '@angular/router';
+import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
+import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
+import { GetDoctorByIdService } from '../services/get-doctor-by-id.service';
 
 @Component({
   selector: 'app-hero',
@@ -15,35 +18,80 @@ export class HeroComponent implements OnInit {
 
   doctors?: GetAllDoctorsDto[];
   specializations?: GetAllSpecializationsDto[];
-constructor(private doctorService : DoctorService , private specializationService: SpecializationService){}
-ngOnInit():void{
-this.doctorService.getDoctors().subscribe({
-  next:(doctors) => {
-    this.doctors = doctors;
-  },
-  error: (error) => {
-    console.log('calling api failed', error);
-  },
-});
-this.specializationService.GetAllSpecializations().subscribe({
-  next:(specializations) => {
-    this.specializations = specializations;
-  },
-  error: (error) => {
-    console.log('calling api failed', error);
-  },
-})
-}
-id: any;
-Doctors? : DoctorsForAllSpecializations[];
-isSpecializationSelected: boolean = false;
+  Doctors? : DoctorsForAllSpecializations[];
+  doctorById?: GetDoctorByIDDto;
 
-selected(e: Event):void{
-  this.isSpecializationSelected = true;
-  this.id = (e.target as any).value;
-  if(this.id === "All"){
-    this.isSpecializationSelected = false;
+  sId : number =0;
+  id: any;
+  dId! : string;
+  doctorId: string = '0';
+
+  isDoctorSelected : boolean =false;
+  isSpecializationSelected: boolean = false;
+
+constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService, private doctorByIdService : GetDoctorByIdService){}
+  ngOnInit():void{
+
+    this.data.currentId.subscribe(sId => this.sId = sId)
+    this.data.currentDoctorId.subscribe(dId => this.dId = dId)
+    this.doctorService.getDoctors().subscribe({
+      next:(doctors) => {
+        this.doctors = doctors;
+      },
+      error: (error) => {
+        console.log('calling All doctors api failed', error);
+      },
+    });
+    this.specializationService.GetAllSpecializations().subscribe({
+      next:(specializations) => {
+        this.specializations = specializations;
+      },
+      error: (error) => {
+        console.log('calling All specializations api failed', error);
+      },
+    })
   }
-  this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
-}
+
+
+  selected(e: Event):void{
+
+      this.isSpecializationSelected = true;
+      this.id = (e.target as any).value;
+
+      if(this.id === "All"){
+        this.isSpecializationSelected = false;
+      }
+      this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
+    }
+
+
+  doctorSelected(event: Event):void{
+
+    this.doctorId = (event.target as HTMLSelectElement).value;
+    this.isDoctorSelected = true;
+    if(this.doctorId == "allDoctors"){
+      this.isDoctorSelected = false;
+    }
+
+  }
+  onSearch(event : Event): void {
+
+    if(this.isSpecializationSelected)
+    {
+      this.data.changeSpecializationId(this.id)
+    
+    }
+
+    if(this.isDoctorSelected){
+      this.data.changeDoctorId(this.doctorId)
+    }
+    if(!this.isDoctorSelected){
+      this.data.changeDoctorId('0')
+
+    }
+    if(!this.isSpecializationSelected){
+      this.data.changeSpecializationId(0)}
+      
+      this.router.navigate(['/doctor'])
+    }
 }
