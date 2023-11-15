@@ -1,6 +1,6 @@
 export interface WeekScheduleForDoctorsDto {
     int : number ;
-    dayOfWeek: string | null;
+    dayOfWeek: number;
     startTime: string;
     endTime: string;
     isAvailable: boolean;

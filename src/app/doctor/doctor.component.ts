@@ -71,6 +71,11 @@ export class DoctorComponent implements OnInit{
       });}
       //#endregion
       
+
+      //#region DayOfWeek convert to days
+
+      
+      //#endregion
     }
 
 
