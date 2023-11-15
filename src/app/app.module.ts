@@ -47,6 +47,7 @@ import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
     ReactiveFormsModule,
     MatDialogModule, 
     MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -32,7 +32,6 @@ export class DoctorComponent implements OnInit{
       this.doctorService.getDoctors().subscribe({
         next:(doctors) => {
           this.doctors = doctors;
-          
         },
         error: (error) => {
           console.log('calling  all doctors api failed', error);

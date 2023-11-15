@@ -1,5 +1,9 @@
 <h1 mat-dialog-title>Hello {{data.id}}</h1>
-<mat-dialog-content>This is my dialog content!</mat-dialog-content>
+<form [formGroup]="Form" (submit)="handleSubmit($event)">
+  <input (change)="getPhoneNumber($event)" formControlName="phoneNumber" type="text" placeholder="Phone number">
+  <button mat-button mat-dialog-actions>Continue</button>
+</form>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
+
 </mat-dialog-actions>
