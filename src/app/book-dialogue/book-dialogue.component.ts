@@ -33,13 +33,20 @@ export class BookDialogueComponent implements OnInit{
   //   dateOfVisit : this.data.date,
   //   doctorId : this.data.date,
   //   patientId : this.PatientByPhoneNumber!.id,
-  //   weekSchedule : this.data.weekSchedule
   // }
 
   handleSubmit(e: Event){
     e.preventDefault;
-    
-   
+    console.log(this.PatientByPhoneNumber?.id)
+    // const patientVisit :AddPatientVisitDto =  {
+    //   dateOfVisit : this.data.date,
+    //   doctorId : this.data.date,
+    //   patientId : this.PatientByPhoneNumber!.id,
+    // }
+    // this.PatientService.addPatientVisit()
+  }
+  getPhoneNumber(e: Event){
+    this.PatientPhoneNumber = (e.target as HTMLInputElement).value;
     this.PatientService.getPatientByPhoneNumber(this.PatientPhoneNumber!).subscribe({
       next:(PatientByPhoneNumber) => {
         this.PatientByPhoneNumber = PatientByPhoneNumber;
@@ -48,10 +55,5 @@ export class BookDialogueComponent implements OnInit{
         console.log('calling Patient api failed', error);
       },
     }); 
-    // this.PatientService.addPatientVisit()
-
-  }
-  getPhoneNumber(e: Event){
-    this.PatientPhoneNumber = (e.target as HTMLInputElement).value;
   }
 }
