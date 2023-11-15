@@ -6,6 +6,7 @@ import { ChildDoctorOfSpecializationDto } from '../Types/ChildDoctorOfSpecializa
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
+import { DoctorDialogueService } from '../services/doctor-dialogue.service';
 
 @Component({
   selector: 'app-doctor',
@@ -21,7 +22,7 @@ export class DoctorComponent implements OnInit{
       sId : number =0;
       dId: string = '0';
 
- constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService ){}
+ constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
 
     ngOnInit():void{
 
@@ -69,7 +70,13 @@ export class DoctorComponent implements OnInit{
       //#endregion
       
     }
-
+    book(bookDoctor : GetDoctorByIDDto){
+      //open the dialog
+      console.log("mayar")
+      var ref = this._dialog.open({D:bookDoctor});
+      console.log(bookDoctor)
+      //close the dialog
+    }
 
 }
 

@@ -32,7 +32,7 @@
                       <span>{{schedule.startTime}}</span>
                       <span>{{schedule.endTime}}</span>
                       <span>me7ataga a check el visit count</span>
-                      <button>Book</button>
+                      <button (click)="book(doctor)">Book</button>
                     </span>
                     
                     <span *ngIf="!schedule.isAvailable">
@@ -73,7 +73,7 @@
                        <span>{{schedule.startTime}}</span>
                        <span>{{schedule.endTime}}</span>
                        <span>me7ataga a check el visit count</span>
-                       <button>Book</button>
+                       <button >Book</button>
                      </span>
                      
                      <span *ngIf="!schedule.isAvailable">
@@ -114,7 +114,7 @@
                       <span>{{schedule.startTime}}</span>
                       <span>{{schedule.endTime}}</span>
                       <span>me7ataga a check el visit count</span>
-                      <button>Book</button>
+                      <button (click)="book(doctorById)">Book</button>
                     </span>
                     
                     <span *ngIf="!schedule.isAvailable">
