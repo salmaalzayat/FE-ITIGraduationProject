@@ -15,12 +15,11 @@ import { BookDialogueComponent  } from '../book-dialogue/book-dialogue.component
 })
 export class DoctorComponent implements OnInit{
  
-
-      doctors?: GetAllDoctorsDto[];
-      doctorsBySpecialization?: GetDoctorsBySpecializationDto[];
-      doctorById? : GetDoctorByIDDto;
-      sId : number =0;
-      dId: string = '0';
+  doctors?: GetAllDoctorsDto[];
+  doctorsBySpecialization?: GetDoctorsBySpecializationDto[];
+  doctorById? : GetDoctorByIDDto;
+  sId : number =0;
+  dId: string = '0';
 
  constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
 
@@ -61,7 +60,6 @@ export class DoctorComponent implements OnInit{
 
         next:(doctorById) => {
           this.doctorById = doctorById;
-        
         },
         error: (error) => {
           console.log('calling dr by id api failed', error);
@@ -70,11 +68,9 @@ export class DoctorComponent implements OnInit{
       //#endregion
       
     }
-    book(bookDoctor : GetDoctorByIDDto){
-      //open the dialog
+    
+    book(bookDoctor : any){
       var ref = this._dialog.open(bookDoctor);
-      //close the dialog
-   
     }
 
 }
