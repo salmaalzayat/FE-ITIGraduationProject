@@ -7,7 +7,7 @@ import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializati
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
-import { GetDoctorByIdService } from '../services/get-doctor-by-id.service';
+
 
 @Component({
   selector: 'app-hero',
@@ -29,7 +29,7 @@ export class HeroComponent implements OnInit {
   isDoctorSelected : boolean =false;
   isSpecializationSelected: boolean = false;
 
-constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService, private doctorByIdService : GetDoctorByIdService){}
+constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService){}
   ngOnInit():void{
 
     this.data.currentId.subscribe(sId => this.sId = sId)
@@ -42,7 +42,7 @@ constructor(private doctorService : DoctorService , private specializationServic
         console.log('calling All doctors api failed', error);
       },
     });
-    this.specializationService.GetAllSpecializations().subscribe({
+    this.doctorService.GetAllSpecializations().subscribe({
       next:(specializations) => {
         this.specializations = specializations;
       },
