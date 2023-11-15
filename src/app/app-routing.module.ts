@@ -9,15 +9,20 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuestioinsComponent } from './questioins/questioins.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './authentication/register/register.component';
 import { ErrorComponent } from './error/error.component';
 import { DoctorComponent } from './doctor/doctor.component';
 
 
-
-
 const routes: Routes = [
   {path:'',component:HeroComponent},
+  {
+    path: 'authentication',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
   {path:'header', component:HeaderComponent},
   {path: 'login', component:LoginComponent },
   {path:'register',component:RegisterComponent},

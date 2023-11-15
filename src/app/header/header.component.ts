@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authService.service';
 
 
 @Component({
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  navBarIsRegistered = false;
+  constructor(private authenticationService:AuthenticationService){}
+  ngOnInit(): void {
+    // this.authenticationService.isRegistered$.subscribe((isRegistered) => {
+    //   this.navBarIsRegistered = isRegistered;
+    // });
 
+}
 }

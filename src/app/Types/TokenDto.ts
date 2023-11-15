@@ -1,3 +1,3 @@
-export default interface TokenDto {
-  token: string;
+export class TokenDto {
+  token: string = '';
 }
