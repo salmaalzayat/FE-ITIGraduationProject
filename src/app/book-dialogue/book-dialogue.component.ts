@@ -14,10 +14,10 @@ export class BookDialogueComponent implements OnInit{
   constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any){}
   doctorById? : GetDoctorByIDDto;
   id? : string ;
-  ngOnInit(): void {
 
-    this.id = this.data.doctorId
-    console.log("dfvzc" +this.data.doctorId) 
+  ngOnInit(): void {
+    //this.id = this.data.doctorId 
+    console.log(`dfvzc  ${this.data.id}`) 
     console.log(this.data)
   }
   

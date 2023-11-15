@@ -72,9 +72,7 @@ export class DoctorComponent implements OnInit{
     }
     book(bookDoctor : GetDoctorByIDDto){
       //open the dialog
-      var ref = this._dialog.open({data : {
-      bookDoctor
-      }});
+      var ref = this._dialog.open(bookDoctor);
       //close the dialog
    
     }
