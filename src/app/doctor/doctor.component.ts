@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { GetDoctorsBySpecializationDto } from '../Types/GetDoctorsBySpecializationDto';
-import { DoctorsBySpecializationService } from '../services/doctors-by-specialization.service';
 import { ChildDoctorOfSpecializationDto } from '../Types/ChildDoctorOfSpecializationDto';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
-import { GetDoctorByIdService } from '../services/get-doctor-by-id.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 
 @Component({
@@ -23,7 +21,7 @@ export class DoctorComponent implements OnInit{
       sId : number =0;
       dId: string = '0';
 
- constructor(private doctorService : DoctorService , private doctorsBySpecializationService : DoctorsBySpecializationService,private data : DataBetweenDoctorCompHeroCompService , private doctorIdService :GetDoctorByIdService){}
+ constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService ){}
 
     ngOnInit():void{
 
@@ -45,11 +43,10 @@ export class DoctorComponent implements OnInit{
       //#region doctors by specialization
 
       if(this.sId !=0 && this.dId=='0'){
-      this.doctorsBySpecializationService.getDoctorsBySpecialization(this.sId).subscribe({
+      this.doctorService.getDoctorsBySpecialization(this.sId).subscribe({
 
         next:(doctorsBySpecialization) => {
           this.doctorsBySpecialization = doctorsBySpecialization;
-
         },
         error: (error) => {
           console.log('calling get drs by specialization api failed', error);
@@ -59,7 +56,7 @@ export class DoctorComponent implements OnInit{
       //#endregion
       //#region doctor by id
       if(this.dId!='0'){
-        this.doctorIdService.getDoctorById(this.dId).subscribe({
+        this.doctorService.getDoctorById(this.dId).subscribe({
 
         next:(doctorById) => {
           this.doctorById = doctorById;
