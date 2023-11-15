@@ -7,7 +7,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { DoctorDialogueService } from '../services/doctor-dialogue.service';
-
+import { BookDialogueComponent  } from '../book-dialogue/book-dialogue.component';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
@@ -72,10 +72,11 @@ export class DoctorComponent implements OnInit{
     }
     book(bookDoctor : GetDoctorByIDDto){
       //open the dialog
-      console.log("mayar")
-      var ref = this._dialog.open({D:bookDoctor});
-      console.log(bookDoctor)
+      var ref = this._dialog.open({data : {
+      bookDoctor
+      }});
       //close the dialog
+   
     }
 
 }
