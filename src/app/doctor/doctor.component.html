@@ -21,8 +21,14 @@
                   <span>{{doctor.description}}</span>
                   <div *ngFor="let schedule of doctor.weekSchadual">
                    
-                    <span>{{schedule.dayOfWeek}}</span>
-                    <span *ngIf="schedule.isAvailable">
+
+                    <span *ngIf="schedule.dayOfWeek==3">Wednesday</span>
+                    <span *ngIf="schedule.dayOfWeek==4">Thursday</span>
+                    <span *ngIf="schedule.dayOfWeek==5">Friday</span>
+                    <span *ngIf="schedule.dayOfWeek==6">Saturday</span>
+                    <span *ngIf="schedule.dayOfWeek==0">Sunday</span>
+                    <span *ngIf="schedule.dayOfWeek==1">Monday</span>
+                    <span *ngIf="schedule.dayOfWeek==2">Tuesday</span>                    <span *ngIf="schedule.isAvailable">
                       <span>{{schedule.startTime}}</span>
                       <span>{{schedule.endTime}}</span>
                       <span>me7ataga a check el visit count</span>
@@ -56,8 +62,14 @@
                    <span>{{doctor.description}}</span>
                    <div *ngFor="let schedule of doctor.weekSchadual">
                     
-                     <span>{{schedule.dayOfWeek}}</span>
-                     <span *ngIf="schedule.isAvailable">
+                    <span *ngIf="schedule.dayOfWeek==3">Wednesday</span>
+                    <span *ngIf="schedule.dayOfWeek==4">Thursday</span>
+                    <span *ngIf="schedule.dayOfWeek==5">Friday</span>
+                    <span *ngIf="schedule.dayOfWeek==6">Saturday</span>
+                    <span *ngIf="schedule.dayOfWeek==0">Sunday</span>
+                    <span *ngIf="schedule.dayOfWeek==1">Monday</span>
+                    <span *ngIf="schedule.dayOfWeek==2">Tuesday</span>          
+                   <span *ngIf="schedule.isAvailable">
                        <span>{{schedule.startTime}}</span>
                        <span>{{schedule.endTime}}</span>
                        <span>me7ataga a check el visit count</span>
@@ -91,8 +103,14 @@
                   <span>{{doctorById.description}}</span>
                   <div *ngFor="let schedule of doctorById.weekSchadual">
                    
-                    <span>{{schedule.dayOfWeek}}</span>
-                    <span *ngIf="schedule.isAvailable">
+
+                    <span *ngIf="schedule.dayOfWeek==3">Wednesday</span>
+                    <span *ngIf="schedule.dayOfWeek==4">Thursday</span>
+                    <span *ngIf="schedule.dayOfWeek==5">Friday</span>
+                    <span *ngIf="schedule.dayOfWeek==6">Saturday</span>
+                    <span *ngIf="schedule.dayOfWeek==0">Sunday</span>
+                    <span *ngIf="schedule.dayOfWeek==1">Monday</span>
+                    <span *ngIf="schedule.dayOfWeek==2">Tuesday</span>                    <span *ngIf="schedule.isAvailable">
                       <span>{{schedule.startTime}}</span>
                       <span>{{schedule.endTime}}</span>
                       <span>me7ataga a check el visit count</span>
