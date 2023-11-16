@@ -20,7 +20,7 @@ export class DoctorComponent implements OnInit{
   doctorById? : GetDoctorByIDDto;
   sId : number =0;
   dId: string = '0';
-
+   bookingDate :  {day : string, dateOfBooking: string}[] = [];
  constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
 
     ngOnInit():void{
@@ -59,6 +59,28 @@ export class DoctorComponent implements OnInit{
 
         next:(doctorById) => {
           this.doctorById = doctorById;
+          let currentDate = new Date();
+          let tomorrow = new Date()
+          currentDate.setHours(0,0,0,0)
+          console.log(currentDate)
+          console.log("tom date "+ tomorrow.setDate(currentDate.getDate()+1))
+          this.doctorById.weekSchadual?.forEach((record)=>{
+            const year : number = tomorrow.getFullYear()
+            const month : number = tomorrow.getMonth()+1
+            const day : number = tomorrow.getDate()
+            const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+              if(record.dayOfWeek == currentDate.getDay()){ 
+                console.log("day "+ record.dayOfWeek)
+              this.bookingDate.push({day : 'Thursday', dateOfBooking : formattedDate })
+               console.log(year)
+               console.log(month)
+               console.log(day)  
+               console.log(formattedDate)
+              
+                console.log(this.bookingDate)
+              }
+
+          })
         },
         error: (error) => {
           console.log('calling dr by id api failed', error);

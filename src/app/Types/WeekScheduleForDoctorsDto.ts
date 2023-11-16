@@ -1,5 +1,5 @@
 export interface WeekScheduleForDoctorsDto {
-    int : number ;
+    id : number ;
     dayOfWeek: number;
     startTime: string;
     endTime: string;

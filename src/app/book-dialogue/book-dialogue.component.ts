@@ -17,8 +17,6 @@ import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
   styleUrls: ['./book-dialogue.component.css']
 })
 export class BookDialogueComponent implements OnInit{
-
-  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
   doctorById? : GetDoctorByIDDto;
   id? : string ;
   visitCount? : VisitCountDto;
@@ -26,19 +24,25 @@ export class BookDialogueComponent implements OnInit{
   PatientPhoneNumber? : string;
   getAllPatientsWithDate?: GetAllPatientsWithDateDto[];
   patientAlreadyBooked : boolean = false;
-  
+  patient? : GetAllPatientsWithDateDto;
+  patientRegistered? : boolean = false;
+  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
+ 
   ngOnInit(): void {
-    this.doctorService.GetVisitCount("2023-11-16",this.data.id).subscribe({
+   
+ //#region  visit count
+        this.doctorService.GetVisitCount("2023-11-16",this.data.id).subscribe({
       next:(visitCount) => {
         this.visitCount = visitCount;
-        console.log(visitCount)
+      //  console.log(visitCount)
       },
       error: (error) => {
        
         console.log('calling visitCount api failed', error);
       },
     });  }
-  
+  //#endregion
+
   Form = new FormGroup({
     phoneNumber : new FormControl<string>('')
   });
@@ -51,7 +55,6 @@ export class BookDialogueComponent implements OnInit{
 
   handleSubmit(e: Event){
     e.preventDefault;
-    console.log(this.PatientByPhoneNumber?.id)
     // const patientVisit :AddPatientVisitDto =  {
     //   dateOfVisit : this.data.date,
     //   doctorId : this.data.date,
@@ -60,26 +63,49 @@ export class BookDialogueComponent implements OnInit{
     // this.PatientService.addPatientVisit()
 
   }
+
   getPhoneNumber(e: Event){
+    this.patientAlreadyBooked = false;
+    this.patientRegistered= false;
+
     this.PatientPhoneNumber = (e.target as HTMLInputElement).value;
+    
     this.PatientService.getPatientByPhoneNumber(this.PatientPhoneNumber!).subscribe({
       next:(PatientByPhoneNumber) => {
         this.PatientByPhoneNumber = PatientByPhoneNumber;
-        
+        this.patientRegistered = true;
       },
       error: (error) => {
-        console.log('calling Patient api failed', error);
+       console.log('calling Patient api failed', error);
+       this.PatientByPhoneNumber = {
+        id : ' ',
+        name : ' ',
+        phoneNumber: ' ',
+        dateOfBirth : ' ',
+        gender : ' '
+
+      }
       },
     }); 
-    this.PatientService.GetAllPatientWithVisitDate("2023-11-16",this.PatientPhoneNumber!).subscribe({
+
+    this.PatientService.GetAllPatientWithVisitDate("2023-11-16",this.data.id).subscribe({
       next:(getAllPatientsWithDate) => {
         this.getAllPatientsWithDate = getAllPatientsWithDate;
-        this.patientAlreadyBooked = true;
-        console.log(" patient already booked" + this.getAllPatientsWithDate)
+        this.getAllPatientsWithDate?.forEach((patient)=>{
+          if(patient.patientId==this.PatientByPhoneNumber?.id){
+            this.patientAlreadyBooked = true;
+            console.log("ana gowa ")
+            console.log(this.PatientByPhoneNumber.id)
+
+          }
+        })
       },
       error: (error) => {
+       
         console.log('calling get patients with date api failed', error);
       },
     }); 
+
+   
   }
 }

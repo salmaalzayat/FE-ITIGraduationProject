@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Hello {{data.id}}</h1>
+<h1 mat-dialog-title>Hello  <span *ngIf="patientRegistered">{{PatientByPhoneNumber?.name}}</span></h1>
 <form [formGroup]="Form" (submit)="handleSubmit($event)">
-  <input (change)="getPhoneNumber($event)" formControlName="phoneNumber" type="text" placeholder="Phone number">
-  <button mat-button mat-dialog-actions>Continue</button>
+  <input id="formInput" (change)="getPhoneNumber($event)" formControlName="phoneNumber" type="text" placeholder="Phone number">
+  <span mat-dialog-content *ngIf="patientAlreadyBooked">Patient already has an appointment with Dr {{this.data.name}} on han7ot hena el date</span>
+  <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked">Continue</button>
 </form>
-<h5 *ngIf="patientAlreadyBooked">Patient already has an appointment with Dr {{this.data.name}} on han7ot hena el date</h5>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
 
