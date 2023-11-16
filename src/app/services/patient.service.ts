@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 import { Observable } from 'rxjs';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
+import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class PatientService {
 
   public addPatientVisit(patientVisit : AddPatientVisitDto): void{
     this.client.post<void>(`https://localhost:7267/addpatientVisit`, patientVisit);
+  }
+
+  public GetAllPatientWithVisitDate(date : string, drId : string ):Observable<GetAllPatientsWithDateDto[]>{
+    return this.client.get<GetAllPatientsWithDateDto[]>(`https://localhost:7267/api/Doctor/dailySchedule/${date}?DoctorId=${drId}`);
   }
 }
