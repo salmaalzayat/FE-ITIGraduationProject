@@ -28,14 +28,23 @@
           <li><a class="nav-link scrollto" [routerLink]="['/doctor']">Doctors</a></li>
           <li><a class="nav-link scrollto" [routerLink]="['/Specializations']">Specializations</a></li>
           <li><a class="nav-link scrollto" [routerLink]="['/contact']">Contact</a></li>
-          <li><a class="nav-link scrollto" [routerLink]="['/register']">Register</a></li>
-          <li><a class="nav-link scrollto" [routerLink]="['/login']">Login</a></li>
+          <li><a *ngIf="!navBarisLoggedIn" class="nav-link scrollto" [routerLink]="['/register']">Register</a></li>
+          <li><a *ngIf="!navBarisLoggedIn" class="nav-link scrollto" [routerLink]="['/login']">Login</a></li>
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-      <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a> -->
-
+      </nav>
+      <div *ngIf="navBarisLoggedIn"  class="dropdown">
+        <button class="btn appointment-btn scrollto dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Welcome
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" >Profile</a>
+          <a class="dropdown-item">Medical History</a>
+          <a class="dropdown-item">Appointments</a>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" (click)="logout()" href="#">Logout</a></li>
+        </div>
+      </div>
     </div>
   </header><!-- End Header -->

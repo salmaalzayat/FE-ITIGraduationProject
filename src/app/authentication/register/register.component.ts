@@ -42,7 +42,7 @@ export class RegisterComponent {
 
   onlyNumbersValidator(control:any) {
     const numericInputValue = control.value;
-    const isValid = /^\d+$/.test(numericInputValue); // Use a regular expression to check for numeric input
+    const isValid = /^\d+$/.test(numericInputValue); 
 
     return isValid ? null : { 'invalidNumber': true };
   }
@@ -106,39 +106,7 @@ export class RegisterComponent {
   }
   
   }
-  // register() {
-  //   console.log(this.RegisterPatientDto);
-  //   this.registrationService.register(this.RegisterPatientDto).subscribe(
-  //     (response: TokenDto) => {
-  //       console.log('Registration successful', response);
-  //       // Handle success, e.g., redirect to another page
-  //       const token = response.token;
-  //       console.log(token);
-  //       // Do something with the token, such as storing it in local storage
-  //     },
-  //     (error) => {
-  //       console.error('Registration failed', error);
-  //       console.log(this.RegisterPatientDto.Name)
-  //           console.log(this.RegisterPatientDto.password)
-  //           console.log(this.RegisterPatientDto.date)
-  //           console.log(this.RegisterPatientDto.gender)
-  //           console.log(this.RegisterPatientDto.phoneNumber)
 
-  //       // Handle error, e.g., display an error message
-  //     }
-  //   );
-  // }
-
-  //   var credentials = new this.RegisterPatientDto();
-  //   credentials.userName = this.form.controls.username.value ?? '';
-  //   credentials.password = this.form.controls.password.value ?? '';
-
-  //   this.authService.login(credentials).subscribe((TokenDto) => {
-  //     console.log(TokenDto);
-  //     this.router.navigateByUrl('/');
-  //   });
-  // }
- 
 
 
 

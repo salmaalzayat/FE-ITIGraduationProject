@@ -8,12 +8,19 @@ import { AuthenticationService } from '../services/authService.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  navBarIsRegistered = false;
+  navBarisLoggedIn = false;
   constructor(private authenticationService:AuthenticationService){}
+
+  logout(): void {
+    this.authenticationService.logout();
+  }
   ngOnInit(): void {
-    // this.authenticationService.isRegistered$.subscribe((isRegistered) => {
-    //   this.navBarIsRegistered = isRegistered;
-    // });
+    this.authenticationService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.navBarisLoggedIn = isLoggedIn;
+    });
+  
 
 }
 }
+
+
