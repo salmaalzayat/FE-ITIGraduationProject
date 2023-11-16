@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  // RegisterPatientDto: any = {}; 
+  // RegisterPatientDto: any = {};
 
   constructor(
     private authService : AuthenticationService ,
@@ -42,7 +42,7 @@ export class RegisterComponent {
 
   onlyNumbersValidator(control:any) {
     const numericInputValue = control.value;
-    const isValid = /^\d+$/.test(numericInputValue); 
+    const isValid = /^\d+$/.test(numericInputValue);
 
     return isValid ? null : { 'invalidNumber': true };
   }
@@ -93,18 +93,26 @@ export class RegisterComponent {
     var credentials= new RegisterPatientDto();
       credentials.phoneNumber= this.form.controls.phoneNumber.value ?? '',
       credentials.username= this.form.controls.username.value ?? '',
+      // new Name credrntial
+      credentials.Name= this.form.controls.username.value ?? '',
       credentials.gender= this.form.controls.gender.value ?? '',
-      credentials. date= this.form.controls.date.value ?? '',
-      credentials. password= this.form.controls.password.value ?? '',
-       
+      // credentials. date= this.form.controls.date.value ?? '',
+      //new DateOfBirth
+      credentials.DateOfBirth= this.form.controls.date.value ?? '',
+      credentials.password= this.form.controls.password.value ?? '',
+
     this.authService.register(credentials).subscribe((tokenDto) => {
       console.log(tokenDto);
       // console.log(credentials.phoneNumber);
       console.log('credentials.gender'+ credentials.gender);
+      console.log('credname'+ credentials.username);
+      console.log('inputvalue'+this.form.controls.username.value)
+      console.log('Form Value:', this.form.value);
+      console.log('Username Value:', this.form.controls.username.value);
       this.router.navigateByUrl('/');
     });
   }
-  
+
   }
 
 
