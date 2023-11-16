@@ -30,7 +30,8 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe((tokenDto) => {
       console.log(tokenDto);
       this.router.navigateByUrl('/');
-      this.authService.isLoggedIn$.next(true);
+      // this.authService.isLoggedIn$.next(true);
+      // localStorage.setItem('token',tokenDto.token);
     });
   }
 }
