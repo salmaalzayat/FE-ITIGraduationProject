@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { passwordValidators } from '../services/Password.service';
-import {phoneNumberLengthValidator} from '../services/RegisterPhoneNumber.service';
-import { AuthenticationService } from '../services/authService.service';
-import  TokenDto  from '../Types/TokenDto';
-import RegisterPatientDto from '../Types/PatientRegisterDto';
+import { passwordValidators } from '../../services/Password.service';
+import {phoneNumberLengthValidator} from '../../services/RegisterPhoneNumber.service';
+import { AuthenticationService } from '../../services/authService.service';
+import {TokenDto}  from '../../Types/TokenDto';
+import {RegisterPatientDto }from '../../Types/PatientRegisterDto';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  RegisterPatientDto: any = {}; // Use the appropriate type for your registration data
+  // RegisterPatientDto: any = {}; 
 
-  constructor(private authService : AuthenticationService , private router:Router) {
-
+  constructor(
+    private authService : AuthenticationService ,
+     private router:Router) {
   }
 
   form = new FormGroup({
@@ -41,7 +42,7 @@ export class RegisterComponent {
 
   onlyNumbersValidator(control:any) {
     const numericInputValue = control.value;
-    const isValid = /^\d+$/.test(numericInputValue); // Use a regular expression to check for numeric input
+    const isValid = /^\d+$/.test(numericInputValue); 
 
     return isValid ? null : { 'invalidNumber': true };
   }
@@ -86,43 +87,27 @@ export class RegisterComponent {
       I.style.color = "#3fbbc0"
     }
   }
-
-  // register() {
-  //   console.log(this.RegisterPatientDto);
-  //   this.registrationService.register(this.RegisterPatientDto).subscribe(
-  //     (response: TokenDto) => {
-  //       console.log('Registration successful', response);
-  //       // Handle success, e.g., redirect to another page
-  //       const token = response.token;
-  //       console.log(token);
-  //       // Do something with the token, such as storing it in local storage
-  //     },
-  //     (error) => {
-  //       console.error('Registration failed', error);
-  //       console.log(this.RegisterPatientDto.Name)
-  //           console.log(this.RegisterPatientDto.password)
-  //           console.log(this.RegisterPatientDto.date)
-  //           console.log(this.RegisterPatientDto.gender)
-  //           console.log(this.RegisterPatientDto.phoneNumber)
-
-  //       // Handle error, e.g., display an error message
-  //     }
-  //   );
-  // }
   handleSubmit(e: Event) {
     e.preventDefault();
 
-    var credentials = new this.RegisterPatientDto();
-    credentials.userName = this.form.controls.username.value ?? '';
-    credentials.password = this.form.controls.password.value ?? '';
-
-    this.authService.login(credentials).subscribe((TokenDto) => {
-      console.log(TokenDto);
+    var credentials= new RegisterPatientDto();
+      credentials.phoneNumber= this.form.controls.phoneNumber.value ?? '',
+      credentials.username= this.form.controls.username.value ?? '',
+      credentials.gender= this.form.controls.gender.value ?? '',
+      credentials. date= this.form.controls.date.value ?? '',
+      credentials. password= this.form.controls.password.value ?? '',
+       
+    this.authService.register(credentials).subscribe((tokenDto) => {
+      console.log(tokenDto);
+      // console.log(credentials.phoneNumber);
+      console.log('credentials.gender'+ credentials.gender);
       this.router.navigateByUrl('/');
     });
   }
+  
+  }
 
-}
+
 
 
 

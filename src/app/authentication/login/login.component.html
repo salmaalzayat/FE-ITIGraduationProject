@@ -1,4 +1,4 @@
-
+<form [formGroup]="form">
 <section class="vh-3 radient-custom ">
     <div class="container h-80">
       <div class="row d-flex justify-content-center align-items-center h-80">
@@ -10,15 +10,15 @@
                 <h2 class="fw-bold mb-2 text-uppercase mb-4">Login</h2>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form" class="form-control"
-                      placeholder="Username" />
+                    <input type="text" formControlName="phoneNumber" class="form-control"
+                      placeholder="phoneNumber" />
                   </div>
 
                   <div class="form-outline mb-2">
-                    <input type="password" id="form" class="form-control"  placeholder="Password"/>
+                    <input type="text" formControlName="password"class="form-control"  placeholder="Password"/>
                   </div>  
                 <p class="small mb-4 "><a class="text-dark-50" href="#!">Forgot password?</a></p>
-                <button class="btn appointment-btn scrollto btn-lg px-5 me-4 text-dark-50 fw-bold mb-0 " type="submit">Login</button>
+                <button class="btn appointment-btn scrollto btn-lg px-5 me-4 text-dark-50 fw-bold mb-0 " type="submit" (click)="handleSubmit($event)">Login</button>
               </div>
                 <p class="mb-0">Don't have an account? <a href="#!" class="text-dark-50 fw-bold" [routerLink]="['/register']">Register</a> </p>
             </div>
@@ -27,4 +27,5 @@
       </div>
     </div>
   </section>
+  <form>
   
