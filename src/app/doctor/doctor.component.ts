@@ -107,18 +107,7 @@ Visits : {drId? : string , visitrecord: any}[]=[];
       
     }
     
-    // book(bookDoctor : any,date:string){
-    //   this.visitCountsDrById.forEach((count)=>{
-    //     if (count.date==date ){
-    //         this.bookDoctorVisitCount = true
-    //         this.visitCount=count
-    //     }
-        
-    //   })
-    //   if(this.bookDoctorVisitCount)
-    //     {var ref = this._dialog.open(bookDoctor,this.visitCount);}
-      
-    // }
+    
     book(bookDoctor:any, date:string){
       let i =0
       this.Visits.forEach((v)=>
@@ -130,53 +119,6 @@ Visits : {drId? : string , visitrecord: any}[]=[];
       })
       var ref = this._dialog.open(bookDoctor,date);
     }
-
-    // getDateDrById(doctorById : GetDoctorByIDDto){
-    //   let currentDate = new Date();
-          
-    //   currentDate.setHours(0,0,0,0)
-    //   let tomorrow = new Date()
-    //   tomorrow.setHours(0,0,0,0)
-    //   let tomorrowDays = new Date()
-    //   tomorrowDays.setHours(0,0,0,0)
-    //   this.doctorById?.weekSchadual?.forEach((record)=>{
-
-
-    //     const year : number = tomorrow.getFullYear()
-    //     const month : number = tomorrow.getMonth()+1
-    //     const day : number = tomorrow.getDate()
-    //     const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
-    //     this.dates.push({ date : formattedDate})
-    //       this.sort = formattedDate
-    //     tomorrow.setDate(tomorrow.getDate()+1)
-    //   })
-       
-    //   for (let i = 0; i< 7;i++)
-    //   {
-    //   let date = new Date(this.dates[i].date)
-    //   this.startDate = this.dates[0].date
-    //   console.log(date.getDay())
-    //   if(date.getDay()==4)
-    //     { this.bookingDate.push({day : 'Thursday', dateOfBooking : this.dates[i].date })}
-
-    //     if(date.getDay()==5)
-    //     { this.bookingDate.push({day : 'Friday', dateOfBooking : this.dates[i].date })}
-    //     if(date.getDay()==6)
-    //     { this.bookingDate.push({day : 'Saturday', dateOfBooking : this.dates[i].date })}
-    //     if(date.getDay()==0)
-    //     { this.bookingDate.push({day : 'Sunday', dateOfBooking : this.dates[i].date })}
-    //     if(date.getDay()==1)
-    //     { this.bookingDate.push({day : 'Monday', dateOfBooking : this.dates[i].date })}
-    //     if(date.getDay()==2)
-    //     { this.bookingDate.push({day : 'Tuesday', dateOfBooking : this.dates[i].date })}
-    //     if(date.getDay()==3)
-    //     { this.bookingDate.push({day : 'Wednesday', dateOfBooking : this.dates[i].date })}
-    //   }
-    
-
-    // console.log(this.bookingDate)
-        
-    // }
 
     getDate(doctorById : GetDoctorByIDDto){
 
@@ -200,71 +142,24 @@ Visits : {drId? : string , visitrecord: any}[]=[];
         this.doctorService.GetVisitCount(formattedDate,doctorById.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
-            //  console.log(formattedDate)
-            // console.log(this.doctorById?.weekSchadual)
-             //console.log(doctorById?.id)
+           
              visitCountsDrById?.push(visitCount)
            
           },
           error: (error) => {
-           console.log(doctorById?.id)
             console.log('calling visitCount api failed', error);
           },
           
         });  
       }   
       
-      console.log("dfansdlfkmasd")
       this.Visits.push({drId: doctorById.id,visitrecord:visitCountsDrById})
-      console.log(visitCountsDrById)
-      console.log(this.Visits)
+    
       this.visitCountsDrById =visitCountsDrById
         
     }
 
-    // getDateBySpecialization(doctorById : GetDoctorsBySpecializationDto){
-
-    //   let visitCountsDrById : 
-    //    {id: number;
-    //     date: string;
-    //     limitOfPatients: number;
-    //     actualNoOfPatients: number;
-    //     doctorId: string | null;
-    //     weekScheduleId : number;
-    //     day : number;
-    //   }[] = [];
-    //    for(let i = 0 ; i < 7 ; i++){
-         
-    //      let currentDate = new Date();
-    //      const year : number = currentDate.getFullYear()
-    //      const month : number = currentDate.getMonth()+1
-    //      const day : number = currentDate.getDate()+i
-    //      const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
-        
-    //      this.doctorService.GetVisitCount(formattedDate,doctorById.childDoctorOfSpecializations?.).subscribe({
-    //        next:(visitCount) => {
-    //          this.visitCount = visitCount;
-    //          //  console.log(formattedDate)
-    //          // console.log(this.doctorById?.weekSchadual)
-    //           //console.log(doctorById?.id)
-    //           visitCountsDrById?.push(visitCount)
-            
-    //        },
-    //        error: (error) => {
-    //         console.log(doctorById?.id)
-    //          console.log('calling visitCount api failed', error);
-    //        },
-           
-    //      });  
-    //    }   
-       
-    //    console.log("dfansdlfkmasd")
-    //    this.Visits.push({drId: doctorById.id,visitrecord:visitCountsDrById})
-    //    console.log(visitCountsDrById)
-    //    console.log(this.Visits)
-    //    this.visitCountsDrById =visitCountsDrById
-         
-    //  }
+  
 }
 
 

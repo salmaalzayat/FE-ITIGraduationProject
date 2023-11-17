@@ -48,17 +48,7 @@ export class BookDialogueComponent implements OnInit{
   constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
  
   ngOnInit(): void {
- //#region  visit count
-    //     this.doctorService.GetVisitCount("2023-11-16",this.data.id).subscribe({
-    //   next:(visitCount) => {
-    //     this.visitCount = visitCount;
-    //    console.log(visitCount)
-    //   },
-    //   error: (error) => {
-       
-    //     console.log('calling visitCount api failed', error);
-    //   },
-    // });  
+
     
     for(let i = 0 ; i < 7 ; i++){
       let currentDate = new Date();
@@ -72,7 +62,6 @@ export class BookDialogueComponent implements OnInit{
           this.visitCount = visitCount;
            console.log(formattedDate)
           console.log(this.doctorById?.weekSchadual)
-          // console.log(this.doctorById?.id)
 
            console.log(visitCount)
            this.visitCountsDrById?.push(visitCount)
@@ -95,20 +84,10 @@ export class BookDialogueComponent implements OnInit{
     phoneNumber : new FormControl<string>('')
   });
 
-  // patientVisit :AddPatientVisitDto =  {
-  //   dateOfVisit : this.data.date,
-  //   doctorId : this.data.date,
-  //   patientId : this.PatientByPhoneNumber!.id,
-  // }
 
   handleSubmit(e: Event){
     e.preventDefault;
-    // const patientVisit :AddPatientVisitDto =  {
-    //   dateOfVisit : this.data.date,
-    //   doctorId : this.data.date,
-    //   patientId : this.PatientByPhoneNumber!.id,
-    // }
-    // this.PatientService.addPatientVisit()
+  
 
   }
 
@@ -143,7 +122,6 @@ export class BookDialogueComponent implements OnInit{
           if(patient.patientId==this.PatientByPhoneNumber?.id){
             this.patientAlreadyBooked = true;
             
-            console.log("ana gowa ")
             console.log(this.PatientByPhoneNumber.id)
 
           }

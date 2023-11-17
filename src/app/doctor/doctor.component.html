@@ -34,8 +34,9 @@
                          <span *ngIf="schedule.isAvailable ">
                          <span>{{schedule.startTime}}</span>
                          <span>{{schedule.endTime}}</span>
-                         <span>me7ataga a check el visit count</span>
-                         <button (click)="book(doctor,c.date)">Book</button>
+                         <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
+                          <button (click)="book(doctorById,c.date)" [disabled]="true" >Book</button></span>
+                          <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctorById,c.date)">Book</button>
                        </span>
                        </span>
                        <span *ngIf="!schedule.isAvailable && c.weekScheduleId==schedule.id">
@@ -86,13 +87,14 @@
                          <span *ngIf="schedule.isAvailable ">
                          <span>{{schedule.startTime}}</span>
                          <span>{{schedule.endTime}}</span>
-                         <span>me7ataga a check el visit count</span>
-                         <button (click)="book(doctor,c.date)">Book</button>
-                       </span>
-                       </span>
+                         <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
+                          <button (click)="book(doctorById,c.date)" [disabled]="true" >Book</button></span>
+                          <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctorById,c.date)">Book</button>
+                                                
+                       </span> </span>
                        <span *ngIf="!schedule.isAvailable && c.weekScheduleId==schedule.id">
                          <span>Day off</span>
-                         <button [disabled]="true">Book</button>
+                         <button [disabled]="true" >Book</button>
                        </span>
                      </div>
                 </span>
@@ -133,14 +135,17 @@
                       <span *ngIf="schedule.isAvailable ">
                       <span>{{schedule.startTime}}</span>
                       <span>{{schedule.endTime}}</span>
-                      <span>me7ataga a check el visit count</span>
-                      <button (click)="book(doctorById,record.date)">Book</button>
+                      <span *ngIf="record.limitOfPatients==record.actualNoOfPatients" >No Available Appointments
+                      <button (click)="book(doctorById,record.date)" [disabled]="true" >Book</button></span>
+                      <button *ngIf="record.limitOfPatients>record.actualNoOfPatients"(click)="book(doctorById,record.date)">Book</button>
+                    
                     </span>
                     </span>
                     <span *ngIf="!schedule.isAvailable && record.weekScheduleId==schedule.id">
-                      <span>Day off</span>
-                      <button [disabled]="true">Book</button>
+                      <span>Day Off</span>
+                      <button [disabled]="true" >Book</button>
                     </span>
+                   
                   </div>
                  </div>
            </div>
