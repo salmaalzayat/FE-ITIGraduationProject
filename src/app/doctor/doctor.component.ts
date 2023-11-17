@@ -29,6 +29,7 @@ export class DoctorComponent implements OnInit{
    days : {day : number }[]=[]
    visitCount? : VisitCountDto;
   bookDoctorVisitCount : boolean = false;
+  i : number = 0
 //   visitCountsDrById : 
 //   {id: number;
 //    date: string;
@@ -44,9 +45,7 @@ Visits : {drId? : string , visitrecord: any}[]=[];
   
  constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
 
-    ngOnInit():void{
-
-      
+    ngOnInit():void{ 
       this.data.currentId.subscribe(sId => this.sId = sId)
       this.data.currentDoctorId.subscribe(dId => this.dId = dId)
       //#region get all doctors
@@ -97,6 +96,7 @@ Visits : {drId? : string , visitrecord: any}[]=[];
         this.doctorService.getDoctorById(this.dId).subscribe({
         next:(doctorById) => {
           this.doctorById = doctorById;
+         
           this.getDate(this.doctorById)
          },
         error: (error) => {
@@ -109,19 +109,19 @@ Visits : {drId? : string , visitrecord: any}[]=[];
     
     
     book(bookDoctor:any, date:string){
-      let i =0
+      let j =0
       this.Visits.forEach((v)=>
       {
-        if(this.Visits[i].drId==bookDoctor.id){
-          console.log(this.Visits[i])
-          i++
+        if(this.Visits[j].drId==bookDoctor.id){
+        //  console.log(this.Visits[i])
+          j++
         }
       })
       var ref = this._dialog.open(bookDoctor,date);
     }
 
     getDate(doctorById : GetDoctorByIDDto){
-
+   // let i = 0
      let visitCountsDrById : 
       {id: number;
        date: string;
@@ -131,33 +131,40 @@ Visits : {drId? : string , visitrecord: any}[]=[];
        weekScheduleId : number;
        day : number;
      }[] = [];
-      for(let i = 0 ; i < 7 ; i++){
+
+      for(let i =0 ; i < 7 ; i+2)
+      {
         
         let currentDate = new Date();
         const year : number = currentDate.getFullYear()
         const month : number = currentDate.getMonth()+1
         const day : number = currentDate.getDate()+i
-        const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
-       
-        this.doctorService.GetVisitCount(formattedDate,doctorById.id).subscribe({
+         let formattedDate  = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+
+         this.doctorService.GetVisitCount(formattedDate,doctorById.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
-           
+           console.log(formattedDate)
+           console.log(i)
              visitCountsDrById?.push(this.visitCount)
-             visitCountsDrById.sort()
-           
+            // this.visitCountsDrById.sort()
+             
           },
           error: (error) => {
             console.log('calling visitCount api failed', error);
           },
           
         });  
-      }   
+      
+        
+      }  
       
       this.Visits.push({drId: doctorById.id,visitrecord:visitCountsDrById})
-    this.Visits.sort()
-      this.visitCountsDrById =visitCountsDrById
-        this.visitCountsDrById.sort()
+        // this.Visits.sort()
+       this.visitCountsDrById =visitCountsDrById
+        //  this.visitCountsDrById.sort()
+         console.log(this.visitCountsDrById)
+        // console.log(this.Visits)
     }
 
   

@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
+import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
     ErrorComponent,
     DoctorComponent,
     BookDialogueComponent,
+    BookDialog2Component,
   ],
   imports: [
     BrowserModule,

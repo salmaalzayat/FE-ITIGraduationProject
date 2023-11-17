@@ -3,8 +3,8 @@
   <input id="formInput" (change)="getPhoneNumber($event)" formControlName="phoneNumber" type="text" placeholder="Phone number">
   <ng-container mat-dialog-content *ngIf="patientAlreadyBooked">
  
-   <span> Patient already has an appointment with Dr {{this.data.data.name}} on {{bookedDate}}</span></ng-container>
-  <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked">Continue</button>
+   <span>Patient already has an appointment with Dr {{this.data.data.name}} on {{bookedDate}}</span></ng-container>
+  <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked" >Continue</button>
 </form>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

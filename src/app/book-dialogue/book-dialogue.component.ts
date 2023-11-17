@@ -10,6 +10,7 @@ import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
+import { BookDialogue2Service } from '../services/book-dialogue-2.service';
 
 @Component({
   selector: 'app-book-dialogue',
@@ -50,31 +51,31 @@ export class BookDialogueComponent implements OnInit{
   ngOnInit(): void {
 
     
-    for(let i = 0 ; i < 7 ; i++){
-      let currentDate = new Date();
-      const year : number = currentDate.getFullYear()
-      const month : number = currentDate.getMonth()+1
-      const day : number = currentDate.getDate()+i
-      const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+    // for(let i = 0 ; i < 7 ; i++){
+    //   let currentDate = new Date();
+    //   const year : number = currentDate.getFullYear()
+    //   const month : number = currentDate.getMonth()+1
+    //   const day : number = currentDate.getDate()+i
+    //   const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
      
-      this.doctorService.GetVisitCount(formattedDate,this.data.data.id).subscribe({
-        next:(visitCount) => {
-          this.visitCount = visitCount;
-           console.log(formattedDate)
-          console.log(this.doctorById?.weekSchadual)
+    //   this.doctorService.GetVisitCount(formattedDate,this.data.data.id).subscribe({
+    //     next:(visitCount) => {
+    //       this.visitCount = visitCount;
+    //        console.log(formattedDate)
+    //       console.log(this.doctorById?.weekSchadual)
 
-           console.log(visitCount)
-           this.visitCountsDrById?.push(visitCount)
-           console.log(this.visitCountsDrById)
+    //        console.log(visitCount)
+    //        this.visitCountsDrById?.push(visitCount)
+    //        console.log(this.visitCountsDrById)
            
-        },
-        error: (error) => {
+    //     },
+    //     error: (error) => {
          
-          console.log('calling visitCount api failed', error);
-        },
-      });}
-   console.log( "dfgdfg")
-   console.log(this.data.visitCount)
+    //       console.log('calling visitCount api failed', error);
+    //     },
+    //   });}
+  
+  //  console.log(this.data.visitCount)
 
   
   }
@@ -135,4 +136,7 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
+  // onContinue($){
+  //   var ref = this.dialog2.open()
+  // }
 }

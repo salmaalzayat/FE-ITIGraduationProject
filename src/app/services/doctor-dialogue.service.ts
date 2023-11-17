@@ -9,9 +9,6 @@ import { BookDialogueComponent } from '../book-dialogue/book-dialogue.component'
 })
 export class DoctorDialogueService {
   data?:any;
-  
-
-
   constructor(private dialog : MatDialog, private doctorService : DoctorService) { }
   open(data: any,date:any){
    return this.dialog.open(BookDialogueComponent,{
