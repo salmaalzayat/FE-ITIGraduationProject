@@ -13,9 +13,9 @@ export class DoctorDialogueService {
 
 
   constructor(private dialog : MatDialog, private doctorService : DoctorService) { }
-  open(data: any){
+  open(data: any,date:any){
    return this.dialog.open(BookDialogueComponent,{
-    data:data
+    data:{data,date}
    });
   }
 }

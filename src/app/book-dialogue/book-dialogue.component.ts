@@ -26,21 +26,69 @@ export class BookDialogueComponent implements OnInit{
   patientAlreadyBooked : boolean = false;
   patient? : GetAllPatientsWithDateDto;
   patientRegistered? : boolean = false;
+  visitCountsModal : 
+  {id: number;
+   date: string;
+   limitOfPatients: number;
+   actualNoOfPatients: number;
+   doctorId: string | null;
+   weekScheduleId : number;
+   day : number;
+ }[] = [];
+ visitCountsDrById : 
+ {id: number;
+  date: string;
+  limitOfPatients: number;
+  actualNoOfPatients: number;
+  doctorId: string | null;
+  weekScheduleId : number;
+  day : number;
+}[] = [];
+ bookedDate : string = ' '
   constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
  
   ngOnInit(): void {
-   
  //#region  visit count
-        this.doctorService.GetVisitCount("2023-11-16",this.data.id).subscribe({
-      next:(visitCount) => {
-        this.visitCount = visitCount;
-      //  console.log(visitCount)
-      },
-      error: (error) => {
+    //     this.doctorService.GetVisitCount("2023-11-16",this.data.id).subscribe({
+    //   next:(visitCount) => {
+    //     this.visitCount = visitCount;
+    //    console.log(visitCount)
+    //   },
+    //   error: (error) => {
        
-        console.log('calling visitCount api failed', error);
-      },
-    });  }
+    //     console.log('calling visitCount api failed', error);
+    //   },
+    // });  
+    
+    for(let i = 0 ; i < 7 ; i++){
+      let currentDate = new Date();
+      const year : number = currentDate.getFullYear()
+      const month : number = currentDate.getMonth()+1
+      const day : number = currentDate.getDate()+i
+      const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+     
+      this.doctorService.GetVisitCount(formattedDate,this.data.data.id).subscribe({
+        next:(visitCount) => {
+          this.visitCount = visitCount;
+           console.log(formattedDate)
+          console.log(this.doctorById?.weekSchadual)
+          // console.log(this.doctorById?.id)
+
+           console.log(visitCount)
+           this.visitCountsDrById?.push(visitCount)
+           console.log(this.visitCountsDrById)
+           
+        },
+        error: (error) => {
+         
+          console.log('calling visitCount api failed', error);
+        },
+      });}
+   console.log( "dfgdfg")
+   console.log(this.data.visitCount)
+
+  
+  }
   //#endregion
 
   Form = new FormGroup({
@@ -88,12 +136,13 @@ export class BookDialogueComponent implements OnInit{
       },
     }); 
 
-    this.PatientService.GetAllPatientWithVisitDate("2023-11-16",this.data.id).subscribe({
+    this.PatientService.GetAllPatientWithVisitDate(this.data.date,this.data.data.id).subscribe({
       next:(getAllPatientsWithDate) => {
         this.getAllPatientsWithDate = getAllPatientsWithDate;
         this.getAllPatientsWithDate?.forEach((patient)=>{
           if(patient.patientId==this.PatientByPhoneNumber?.id){
             this.patientAlreadyBooked = true;
+            
             console.log("ana gowa ")
             console.log(this.PatientByPhoneNumber.id)
 

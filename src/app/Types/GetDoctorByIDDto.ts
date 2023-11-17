@@ -5,6 +5,6 @@ export interface GetDoctorByIDDto {
     name: string;
     title: string | null;
     description: string | null;
-    specializationName: string;
+    specializationName: string |null;
     weekSchadual: WeekScheduleForDoctorsDto[] | null;
 }

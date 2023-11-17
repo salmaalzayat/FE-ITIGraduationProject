@@ -22,11 +22,14 @@ export class DoctorService {
     return this.client.get<GetDoctorByIDDto>(`https://localhost:7267/api/Doctor/doctors/${id}`);
   }
   public GetAllSpecializations(): Observable<GetAllSpecializationsDto[]>{
-    return this.client.get<GetAllSpecializationsDto[]>('https://localhost:7267/api/Doctor/GetAllSpecialization');
-  }
+    return this.client.get<GetAllSpecializationsDto[]>('https://localhost:7267/api/Doctor/GetAllSpecialization');}
+
   public GetVisitCount(date : string, drId : string ):Observable<VisitCountDto>{
     return this.client.get<VisitCountDto>(`https://localhost:7267/api/Doctor/visitCount/${date}?DoctorId=${drId}`);
   }
+  // public AddVisitCountRecords(date : string ):Observable<VisitCountDto>{
+  //   return this.client.get<VisitCountDto>(`https://localhost:7267/api/Doctor/addVisitCount/${date}`);
+  // }
   
   }
 

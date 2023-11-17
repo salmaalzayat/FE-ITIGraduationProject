@@ -4,4 +4,7 @@ export interface VisitCountDto {
     limitOfPatients: number;
     actualNoOfPatients: number;
     doctorId: string | null;
+    weekScheduleId : number;
+
+    day : number;
 }
