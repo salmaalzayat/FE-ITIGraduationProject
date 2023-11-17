@@ -143,7 +143,8 @@ Visits : {drId? : string , visitrecord: any}[]=[];
           next:(visitCount) => {
             this.visitCount = visitCount;
            
-             visitCountsDrById?.push(visitCount)
+             visitCountsDrById?.push(this.visitCount)
+             visitCountsDrById.sort()
            
           },
           error: (error) => {
@@ -154,9 +155,9 @@ Visits : {drId? : string , visitrecord: any}[]=[];
       }   
       
       this.Visits.push({drId: doctorById.id,visitrecord:visitCountsDrById})
-    
+    this.Visits.sort()
       this.visitCountsDrById =visitCountsDrById
-        
+        this.visitCountsDrById.sort()
     }
 
   
