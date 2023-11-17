@@ -21,6 +21,9 @@
                                       <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
 
                                       <div>
+                                        <div *ngIf="form.get('phoneNumber')?.hasError('phoneNumberExists')" class="text-danger text-start ErrorFont">
+                                          *Phone number already exists!
+                                        </div>
                                         <div *ngIf="form.controls.phoneNumber.dirty && form.controls.phoneNumber.errors?.['required']" class="text-danger text-start ErrorFont">*Phone Number is required</div>
                                         <div *ngIf="form.controls.phoneNumber.touched && form.controls.phoneNumber.errors?.['phoneNumberLength']" class="text-danger text-start ErrorFont">*Phone Number must be at least 11 characters</div>
                                         <div *ngIf=" form.controls.phoneNumber.dirty&& form.get('phoneNumber')?.hasError('invalidNumber')" class="text-danger text-start ErrorFont">

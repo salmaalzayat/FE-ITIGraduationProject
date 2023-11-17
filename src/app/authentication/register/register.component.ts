@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authService.service';
 import {TokenDto}  from '../../Types/TokenDto';
 import {RegisterPatientDto }from '../../Types/PatientRegisterDto';
 import { Router } from '@angular/router';
+import {CheckingPhoneNumber} from '../../services/checkingPhoneNumber.service'
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent {
 
   constructor(
     private authService : AuthenticationService ,
-     private router:Router) {
+     private router:Router,
+     private checkingPhoneNumber : CheckingPhoneNumber) {
   }
 
   form = new FormGroup({
@@ -28,7 +30,7 @@ export class RegisterComponent {
       passwordValidators['PasswordTooShort'],
       passwordValidators['PasswordRequiresNonAlphanumeric'],
       passwordValidators['PasswordRequiresDigit'],
-      passwordValidators['PasswordRequiresUpper']
+      passwordValidators['PasswordRequiresUpper'],
     ]),
     confirmPassword: new FormControl<string>('', [Validators.required]),
     gender: new FormControl<any> ('', [Validators.required]),
@@ -87,33 +89,85 @@ export class RegisterComponent {
       I.style.color = "#3fbbc0"
     }
   }
+
   handleSubmit(e: Event) {
     e.preventDefault();
 
-    var credentials= new RegisterPatientDto();
-      credentials.phoneNumber= this.form.controls.phoneNumber.value ?? '',
-      credentials.username= this.form.controls.username.value ?? '',
-      // new Name credrntial
-      credentials.Name= this.form.controls.username.value ?? '',
-      credentials.gender= this.form.controls.gender.value ?? '',
-      // credentials. date= this.form.controls.date.value ?? '',
-      //new DateOfBirth
-      credentials.DateOfBirth= this.form.controls.date.value ?? '',
-      credentials.password= this.form.controls.password.value ?? '',
+    const phoneNumber = this.form.get('phoneNumber')?.value ?? '';
+    console.log(phoneNumber);
 
-    this.authService.register(credentials).subscribe((tokenDto) => {
-      console.log(tokenDto);
-      // console.log(credentials.phoneNumber);
-      console.log('credentials.gender'+ credentials.gender);
-      console.log('credname'+ credentials.username);
-      console.log('inputvalue'+this.form.controls.username.value)
-      console.log('Form Value:', this.form.value);
-      console.log('Username Value:', this.form.controls.username.value);
-      this.router.navigateByUrl('/');
+    this.checkingPhoneNumber.checkPhoneNumberExists(phoneNumber).subscribe((exists) => {
+      if (exists) {
+        // Phone number already exists, handle accordingly (e.g., show error)
+        console.log("phone exist")
+        this.form.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
+        // this.form.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
+      } else if(!exists){
+        console.log("not exist")
+        const credentials = new RegisterPatientDto();
+        credentials.phoneNumber = this.form.controls.phoneNumber.value ?? '';
+        credentials.username = this.form.controls.username.value ?? '';
+        // Assuming Name is the user's full name
+        credentials.Name = this.form.controls.username.value ?? '';
+        credentials.gender = this.form.controls.gender.value ?? '';
+        // Assuming DateOfBirth is the user's date of birth
+        credentials.DateOfBirth = this.form.controls.date.value ?? '';
+        credentials.password = this.form.controls.password.value ?? '';
+
+        this.authService.register(credentials).subscribe((tokenDto) => {
+          // Registration successful, you can navigate or perform other actions
+          this.router.navigateByUrl('/');
+        });
+      }
     });
   }
 
+
+
+
+
+
+/////////////////////////////// draft
+
+  // handleSubmit(e: Event) {
+  //   e.preventDefault();
+
+  //   const phoneNumber = this.form.get('phoneNumber')?.value;
+
+  //   this.checkingPhoneNumber.checkPhoneNumberExists(phoneNumber).subscribe((exists) => {
+  //     if (exists) {
+  //       // Phone number already exists, handle accordingly (e.g., show error)
+  //       this.checkingPhoneNumber.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
+  //     } else {
+
+  //     }
+  //   });
+
+    // var credentials= new RegisterPatientDto();
+    //   credentials.phoneNumber= this.form.controls.phoneNumber.value ?? '',
+    //   credentials.username= this.form.controls.username.value ?? '',
+    //   // new Name credrntial
+    //   credentials.Name= this.form.controls.username.value ?? '',
+    //   credentials.gender= this.form.controls.gender.value ?? '',
+    //   // credentials. date= this.form.controls.date.value ?? '',
+    //   //new DateOfBirth
+    //   credentials.DateOfBirth= this.form.controls.date.value ?? '',
+    //   credentials.password= this.form.controls.password.value ?? '',
+
+    // this.authService.register(credentials).subscribe((tokenDto) => {
+    //   // console.log(tokenDto);
+    //   // console.log(credentials.phoneNumber);
+    //   // console.log('credentials.gender'+ credentials.gender);
+    //   // console.log('credname'+ credentials.username);
+    //   // console.log('inputvalue'+this.form.controls.username.value)
+    //   // console.log('Form Value:', this.form.value);
+    //   // console.log('Username Value:', this.form.controls.username.value);
+    //   this.router.navigateByUrl('/');
+    // });
   }
+
+
+
 
 
 
