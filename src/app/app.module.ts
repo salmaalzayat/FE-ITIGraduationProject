@@ -18,6 +18,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     ErrorComponent,
     DoctorComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

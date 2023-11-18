@@ -12,6 +12,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { ErrorComponent } from './error/error.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,9 @@ const routes: Routes = [
   {path:'contact',component:ContactComponent},
   {path:'footer',component:FooterComponent},
   {path:'doctor',component:DoctorComponent},
+  {path:'profile',component:ProfileComponent},
   {path:'**',component:ErrorComponent},
+
 ];
 
 @NgModule({
