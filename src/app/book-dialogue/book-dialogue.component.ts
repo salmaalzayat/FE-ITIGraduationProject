@@ -4,13 +4,13 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { createInjectableType } from '@angular/compiler';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
+import { GetPatientByPhoneDto } from '../Types/GetPatientByPhoneDto';
 import { PatientService } from '../services/patient.service';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
-import { BookDialogue2Service } from '../services/book-dialogue-2.service';
+import { ContinueBookingService } from '../services/continue-booking.service';
 
 @Component({
   selector: 'app-book-dialogue',
@@ -21,7 +21,7 @@ export class BookDialogueComponent implements OnInit{
   doctorById? : GetDoctorByIDDto;
   id? : string ;
   visitCount? : VisitCountDto;
-  PatientByPhoneNumber? : GetPatientByPhoneDTO;
+  PatientByPhoneNumber? : GetPatientByPhoneDto;
   PatientPhoneNumber? : string;
   getAllPatientsWithDate?: GetAllPatientsWithDateDto[];
   patientAlreadyBooked : boolean = false;
@@ -46,7 +46,8 @@ export class BookDialogueComponent implements OnInit{
   day : number;
 }[] = [];
  bookedDate : string = ' '
-  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
+  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService
+  , private ContinueBookingService : ContinueBookingService){}
  
   ngOnInit(): void {
 
@@ -144,7 +145,7 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
-  // onContinue($){
-  //   var ref = this.dialog2.open()
-  // }
+  onContinue(data:any , patient? : string){
+    var ref = this.ContinueBookingService.open(data,patient)
+  }
 }

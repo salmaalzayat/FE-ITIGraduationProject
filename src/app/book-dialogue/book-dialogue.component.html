@@ -4,7 +4,7 @@
   <ng-container mat-dialog-content *ngIf="patientAlreadyBooked">
  
    <span>Patient already has an appointment with Dr {{this.data.data.name}} on {{bookedDate}}</span></ng-container>
-  <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked" >Continue</button>
+  <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked" (click)="onContinue(data,PatientPhoneNumber)">Continue</button>
 </form>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

@@ -14,5 +14,7 @@ export class DoctorDialogueService {
    return this.dialog.open(BookDialogueComponent,{
     data:{data,date}
    });
+ 
   }
+ 
 }
