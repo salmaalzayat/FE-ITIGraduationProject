@@ -130,6 +130,8 @@ export class BookDialogueComponent implements OnInit{
             this.patientAlreadyBooked = true;
             
             console.log(this.PatientByPhoneNumber.id)
+            this.bookedDate=formattedDate
+            console.log(this.bookedDate)
 
           }
         })

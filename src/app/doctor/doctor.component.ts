@@ -144,8 +144,7 @@ Visits : {drId? : string , visitrecord: any}[]=[];
          this.doctorService.GetVisitCount(formattedDate,doctorById.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
-           console.log(formattedDate)
-           console.log(i)
+          //
              visitCountsDrById?.push(this.visitCount)
             // this.visitCountsDrById.sort()
              
