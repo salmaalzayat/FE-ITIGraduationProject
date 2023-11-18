@@ -20,9 +20,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.isLoggedIn$.subscribe((isLoggedIn) => {
       this.navBarisLoggedIn = isLoggedIn;
+      this.username = localStorage.getItem('username') ?? '';
       if (isLoggedIn) {
-        this.username = this.authenticationService.getUsername(); // Replace with your actual method to get the username
-      console.log("comp:" + this.username)
+        // this.username = this.authenticationService.getUsername(); // Replace with your actual method to get the username
+        this.username = localStorage.getItem('username') ?? '';
       }
     });
 
