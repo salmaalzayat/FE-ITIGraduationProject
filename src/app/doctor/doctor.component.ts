@@ -37,7 +37,8 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
   
  constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
 
-    ngOnInit():void{ 
+    ngOnInit():void
+    { 
       this.data.currentId.subscribe(sId => this.sId = sId)
       this.data.currentDoctorId.subscribe(dId => this.dId = dId)
       //#region get all doctors
@@ -46,7 +47,6 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         next:(doctors) => {
           this.doctors = doctors;
           this.doctors.forEach((doctor)=>{
-            
             this.getDate(doctor)
           })
         },
@@ -96,12 +96,6 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         },
       });}
       //#endregion
-      
-
-      //#region DayOfWeek convert to days
-
-      
-      //#endregion
     }
     
     
@@ -118,25 +112,12 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
     }
 
     getDate(doctorById : GetDoctorByIDDto){
-   // let i = 0
-    //  let visitCountsDrById : 
-    //   { 
-    //     id: number;
-    //    date: string;
-    //    limitOfPatients: number;
-    //    actualNoOfPatients: number;
-    //    doctorId: string | null;
-    //    weekScheduleId : number;
-    //    day : number;
-    //  }[] = [];
-
      
-        
         let currentDate = new Date();
         const year : number = currentDate.getFullYear()
         const month : number = currentDate.getMonth()+1
         const day : number = currentDate.getDate()+0
-         let startDate  = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+        let startDate  = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
 
          const endDay : number = currentDate.getDate()+7
 
@@ -145,22 +126,15 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
          this.doctorService.GetVisitCountForWeek(startDate,endDate,doctorById.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
-          
-            console.log(this.visitCount)
 
             this.Visits.push({drId: doctorById.id,visitrecord:this.visitCount})
             
-              console.log(this.Visits[0].visitrecord)
           },
           error: (error) => {
             console.log('calling visitCount api failed', error);
           },
           
-        });  
-      
-        
-      
-      
+        });   
     }
 
   
