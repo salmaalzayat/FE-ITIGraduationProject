@@ -35,7 +35,9 @@ visitCountsDrById : any
 
 Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
   
- constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
+ constructor(private doctorService : DoctorService ,
+  private data : DataBetweenDoctorCompHeroCompService, 
+  private _dialog: DoctorDialogueService ){}
 
     ngOnInit():void
     { 

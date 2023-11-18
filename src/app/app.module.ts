@@ -21,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
-import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
+import { ContinueBookComponent } from './continue-book/continue-book.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContinueBookingComponent } from './continue-booking/continue-booking.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
     ErrorComponent,
     DoctorComponent,
     BookDialogueComponent,
-    BookDialog2Component,
+    ContinueBookComponent,
+    ContinueBookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +53,11 @@ import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
     ReactiveFormsModule,
     MatDialogModule, 
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

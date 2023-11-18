@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 import { Observable } from 'rxjs';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
+import { GetPatientByPhoneDto } from '../Types/GetPatientByPhoneDto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 export class PatientService {
 
   constructor(private client : HttpClient) { }
-  public getPatientByPhoneNumber(PhoneNumber: string): Observable<GetPatientByPhoneDTO>{
-    return this.client.get<GetPatientByPhoneDTO>(`https://localhost:7267/api/Patient/patient/${PhoneNumber}`);
+  public getPatientByPhoneNumber(PhoneNumber: string): Observable<GetPatientByPhoneDto>{
+    return this.client.get<GetPatientByPhoneDto>(`https://localhost:7267/api/Patient/patient/${PhoneNumber}`);
   }
 
   public addPatientVisit(patientVisit : AddPatientVisitDto): void{
