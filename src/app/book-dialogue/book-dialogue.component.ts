@@ -11,6 +11,7 @@ import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { BookDialogue2Service } from '../services/book-dialogue-2.service';
+import { BookDialog2Component } from '../book-dialog2/book-dialog2.component';
 
 @Component({
   selector: 'app-book-dialogue',
@@ -46,7 +47,11 @@ export class BookDialogueComponent implements OnInit{
   day : number;
 }[] = [];
  bookedDate : string = ' '
-  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
+  constructor(private dialog : DoctorDialogueService,
+     @Inject(MAT_DIALOG_DATA) public data : any ,
+      private PatientService : PatientService, 
+      private doctorService : DoctorService,
+      private _dialog2: BookDialogue2Service){}
  
   ngOnInit(): void {
 
@@ -88,8 +93,11 @@ export class BookDialogueComponent implements OnInit{
 
   handleSubmit(e: Event){
     e.preventDefault;
-  
+  }
 
+  confirm(e: Event , doctorDataAndDate: any){
+    console.log(this.data)
+    var ref = this._dialog2.open(doctorDataAndDate)
   }
 
   getPhoneNumber(e: Event){
@@ -144,6 +152,7 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
+
   // onContinue($){
   //   var ref = this.dialog2.open()
   // }

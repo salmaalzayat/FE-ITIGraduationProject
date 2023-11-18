@@ -159,8 +159,6 @@ Visits : {drId? : string , visitrecord: any}[]=[];
           },
           
         });  
-      
-        
       }  
       
       this.Visits.push({drId: doctorById.id,visitrecord:visitCountsDrById})

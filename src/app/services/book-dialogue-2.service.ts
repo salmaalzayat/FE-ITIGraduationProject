@@ -11,7 +11,9 @@ import { BookDialog2Component } from '../book-dialog2/book-dialog2.component';
 })
 export class BookDialogue2Service {
 
-  constructor(private dialog : MatDialog, private bookComponent : BookDialog2Component, @Inject(MAT_DIALOG_DATA) public data : any ) { }
+  constructor(private dialog : MatDialog, 
+    private bookComponent : BookDialog2Component, 
+    ) { }
 open(data:any){
   return this.dialog.open(BookDialog2Component,{
     data:data
