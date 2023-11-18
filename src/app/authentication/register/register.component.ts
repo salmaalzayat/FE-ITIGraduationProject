@@ -31,6 +31,7 @@ export class RegisterComponent {
       passwordValidators['PasswordRequiresNonAlphanumeric'],
       passwordValidators['PasswordRequiresDigit'],
       passwordValidators['PasswordRequiresUpper'],
+      passwordValidators['PasswordRequiresLower']
     ]),
     confirmPassword: new FormControl<string>('', [Validators.required]),
     gender: new FormControl<any> ('', [Validators.required]),

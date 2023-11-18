@@ -50,7 +50,9 @@
                                           <div *ngIf="f.password.errors?.['PasswordRequiresUpper']" class="text-danger text-start ErrorFont">
                                             *Password must contain at least one uppercase letter
                                           </div>
-
+                                          <div *ngIf="f.password.errors?.['PasswordRequiresLower']" class="text-danger text-start ErrorFont">
+                                            *Password must contain at least one Lowercase letter
+                                          </div>
                                         </div>
                                     </div>
 
