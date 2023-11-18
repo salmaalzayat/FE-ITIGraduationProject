@@ -105,6 +105,11 @@ Visits : {drId? : string , visitrecord: any}[]=[];
       });}
       //#endregion
       
+
+      //#region DayOfWeek convert to days
+
+      
+      //#endregion
     }
     
     
