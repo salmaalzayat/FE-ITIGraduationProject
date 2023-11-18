@@ -19,6 +19,11 @@ export const passwordValidators: { [key: string]: ValidatorFn } = {
     const value: string = control.value;
     const regex = /[A-Z]/; // checks for at least one uppercase letter
     return value && regex.test(value) ? null : { PasswordRequiresUpper: true };
+  },
+  PasswordRequiresLower: (control: AbstractControl): ValidationErrors | null => {
+    const value: string = control.value;
+    const regex = /[a-z]/; // checks for at least one lowercase letter
+    return value && regex.test(value) ? null : { PasswordRequiresLower: true };
   }
 };
 

@@ -1,8 +1,9 @@
-export default interface RegisterPatientDto {
-  // id: string | null;
-  phoneNumber: string;
-  username: string;
-  gender: string;
-  date: string;
-  password: string;
+export class RegisterPatientDto {
+  phoneNumber: string='';
+  username: string='';
+  Name: string = '';
+  gender: string='';
+  // date: string='';
+  DateOfBirth:string='';
+  password: string='';
 }
