@@ -96,6 +96,12 @@ export class BookDialogueComponent implements OnInit{
     this.patientAlreadyBooked = false;
     this.patientRegistered= false;
 
+    let day = this.data.date.split('/')[1]
+    let month = this.data.date.split('/')[0]
+    let year = this.data.date.split('/')[2]
+    console.log(day)
+    let formattedDate  = `${year}-${month}-${day}`
+
     this.PatientPhoneNumber = (e.target as HTMLInputElement).value;
     
     this.PatientService.getPatientByPhoneNumber(this.PatientPhoneNumber!).subscribe({
@@ -116,7 +122,7 @@ export class BookDialogueComponent implements OnInit{
       },
     }); 
 
-    this.PatientService.GetAllPatientWithVisitDate(this.data.date,this.data.data.id).subscribe({
+    this.PatientService.GetAllPatientWithVisitDate(formattedDate,this.data.data.id).subscribe({
       next:(getAllPatientsWithDate) => {
         this.getAllPatientsWithDate = getAllPatientsWithDate;
         this.getAllPatientsWithDate?.forEach((patient)=>{

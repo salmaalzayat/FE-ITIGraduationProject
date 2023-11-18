@@ -132,7 +132,7 @@ Visits : {drId? : string , visitrecord: any}[]=[];
        day : number;
      }[] = [];
 
-      for(let i =0 ; i < 7 ; i+2)
+      for(let i =0 ; i < 7 ; i++)
       {
         
         let currentDate = new Date();
