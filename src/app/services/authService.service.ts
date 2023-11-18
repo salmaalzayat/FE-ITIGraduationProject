@@ -1,106 +1,173 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-//   private apiUrl = 'https://your-api-base-url'; // Replace with your actual API base URL
-
-//   constructor(private http: HttpClient) { }
-
-//   register(registerData: any): Observable<any> {
-//     return this.http.post<any>(`${this.apiUrl}/register`, registerData);
-//   }
-// }
-/////////////////////////////////////////////////
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class RegistrationService {
-//   private apiUrl = 'https://localhost:7267/api/Patient'; // Replace with your API URL
-
-//   constructor(private http: HttpClient) {}
-
-//   register(RegisterPatientDto: any): Observable<any> {
-//     const headers = new HttpHeaders({
-//       'Content-Type': 'application/json',
-//     });
-
-//     return this.http.post<any>(`${this.apiUrl}/register`, RegisterPatientDto, {
-//       headers: headers,
-//     });
-//   }
-// }
-
-////////////////////////////////////
-
-// It looks like you're trying to register a new patient and receive a token in the response. Since you want to receive a token, you need to update your Angular service to handle the response appropriately. Here's how you can modify your service and component:
-
-// Update the RegistrationService in your Angular application to handle the response and return an AuthResponseDto. Also, adjust the register method to return Observable<AuthResponseDto>:
-// typescript
-// Copy code
-// registration.service.ts
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable , BehaviorSubject , tap} from 'rxjs';
-// import  TokenDto  from '../Types/TokenDto'; // Adjust the import path
-// import RegisterPatientDto from '../Types/PatientRegisterDto';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class RegistrationService {
-//   // private apiUrl = 'https://localhost:7267/api/Patient'; // Update the base URL
-
-//   constructor(private http: HttpClient) {}
-
-//   public getData():Observable<string[]>{
-//     return this.http.get<string[]>{
-//       `https://localhost:7267/api/Patient/register`
-//     }
-//   };
-
-  // register(registerDto: any): Observable<TokenDto> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //   });
-
-    // return this.http.post<TokenDto>(`https://localhost:7267/api/Patient/register`, registerDto, {
-    //   headers: headers,
-    // });
-  // }
-// }
 
 import { Injectable } from '@angular/core';
-import  patientRegisterDto  from '../Types/PatientRegisterDto';
+import {RegisterPatientDto }from '../Types/PatientRegisterDto';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import  TokenDto  from '../Types/TokenDto';
+import {TokenDto}   from '../Types/TokenDto';
 import { HttpClient } from '@angular/common/http';
+import { PatientLoginDto } from '../Types/PatientLoginDto';
+import { Router } from '@angular/router';
+import{PatientDataService} from '../services/PatientDataService';
+import { switchMap, catchError } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthenticationService {
-  public isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  constructor(private client: HttpClient ,private router:Router, private  atientDataService: PatientDataService) {}
+  private username: string = '';
 
-  constructor(private client: HttpClient) {}
 
-  public login(credentials: patientRegisterDto): Observable<TokenDto> {
+  public register(credentials: RegisterPatientDto): Observable<TokenDto> {
+    console.log('Credentials:', credentials);
+    this.username = credentials.Name;
+    localStorage.setItem('username', this.username);
     return this.client
       .post<TokenDto>('https://localhost:7267/api/Patient/register', credentials)
       .pipe(
         tap((tokenDto) => {
           this.isLoggedIn$.next(true);
           localStorage.setItem('token', tokenDto.token);
+
+          // console.log('Credentials:', credentials);
+        })
+      );
+
+  }
+  public isLoggedIn$ = new BehaviorSubject<boolean>(false);
+
+  public login(credentials: PatientLoginDto): Observable<TokenDto> {
+    console.log('Credentials:', credentials);
+
+    return this.client
+      .post<TokenDto>('https://localhost:7267/api/Patient/login', credentials)
+      .pipe(
+        switchMap((tokenDto) => {
+          return this.fetchUserData(credentials.phoneNumber).pipe(
+            map((userData) => {
+
+              this.username = userData.name;
+              localStorage.setItem('username', this.username);
+              // console.log('saved username from local storage:', this.username);
+              localStorage.setItem('token', tokenDto.token);
+              return tokenDto;
+            })
+          );
+        }),
+        tap(() => {
+          this.isLoggedIn$.next(true);
+
+          const storedUsername = localStorage.getItem('username');
+          // console.log('Retrieved username from local storage:', storedUsername);
+
         })
       );
   }
+
+  private fetchUserData(phoneNumber: string): Observable<any> {
+    return this.client.get(`https://localhost:7267/api/Patient/patient/${phoneNumber}`);
+  }
+
+
+  public logout(): void {
+    this.username = '';
+    this.isLoggedIn$.next(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('username')
+  }
+  public getUsername(): string {
+    console.log('us:'+this.username)
+    return this.username;
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////   Draft /////////////////////////////////
+
+///1st
+
+  // public login(credentials: PatientLoginDto): Observable<TokenDto> {
+  //   console.log('Credentials:', credentials);
+  //   // this.username = credentials.Name;
+  //   return this.client
+  //     .post<TokenDto>('https://localhost:7267/api/Patient/login', credentials)
+  //     .pipe(
+  //       tap(() => {
+  //       const x = this.fetchUserData(credentials.phoneNumber)
+  //       console.log("returnthe fetch: " + x );
+  //     }),
+  //       tap((tokenDto) => {
+  //         this.isLoggedIn$.next(true);
+  //         localStorage.setItem('token', tokenDto.token);
+  //         // this.fetchUserData(credentials.phoneNumber);
+  //       })
+  //     );
+  // }
+
+  // private fetchUserData(phoneNumber:string): void {
+  //   // Assuming there is an API endpoint to fetch user data including the name
+  //   this.client.get(`https://localhost:7267/api/Patient/patient/${phoneNumber}`).subscribe(
+  //     (userData: any) => {
+  //       // Assuming the server response includes a 'name' property
+  //       this.username = userData.name;
+  //       console.log("loginfetch:"+userData.name)
+  //       return this.username
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching user data:', error);
+  //     }
+  //   );
+  // }
+
+//////////////////////////////////////////////////////
+
+
+  ///////2nd
+  // public login(credentials: PatientLoginDto): Observable<TokenDto> {
+  //   console.log('Credentials:', credentials);
+
+  //   return this.client
+  //     .post<TokenDto>('https://localhost:7267/api/Patient/login', credentials)
+  //     .pipe(
+  //       switchMap((tokenDto) => {
+  //         return this.fetchUserData(credentials.phoneNumber).pipe(
+  //           tap(() => {
+  //             console.log("return the fetch: " + this.username);
+  //           })
+  //         );
+  //       }),
+  //       tap(() => {
+  //         this.isLoggedIn$.next(true);
+  //         localStorage.setItem('token', TokenDto.token);
+  //         // Rest of your login logic...
+  //       })
+  //     );
+  // }
+  /////////////////////
+
+    ///2nd
+  // fetchUserData(phoneNumber: string): Observable<string> {
+  //   return this.client.get(`https://localhost:7267/api/Patient/patient/${phoneNumber}`).pipe(
+  //     map((userData: any) => {
+  //       this.username = userData.name;
+  //       console.log("loginfetch:" + userData.name);
+  //       return this.username;
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Error fetching user data:', error);
+  //       // You can handle the error here, e.g., return a default value or re-throw the error.
+  //       return throwError('Error fetching user data');
+  //     })
+  //   );
+  // }

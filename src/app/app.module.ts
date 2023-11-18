@@ -11,8 +11,8 @@ import { SpecializationComponent } from './specialization/specialization.compone
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuestioinsComponent } from './questioins/questioins.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
 import { ErrorComponent } from './error/error.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
 import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
+
 
 @NgModule({
   declarations: [
