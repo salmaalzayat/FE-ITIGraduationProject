@@ -14,6 +14,7 @@ import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service'
 })
 export class LoginComponent implements OnInit{
   errorMessage: string = '';
+  
   constructor(
     private authService: AuthenticationService,
     private router: Router,
@@ -73,6 +74,7 @@ export class LoginComponent implements OnInit{
       console.log(tokenDto);
        if(this.bookDialog.booked){
         this.router.navigate(['/doctor'])
+        this.bookDialog.open(this.bookDialog.dataa , this.bookDialog.dataa.date)
         }else{
           this.router.navigateByUrl('/');
         }

@@ -25,7 +25,7 @@ export class DoctorDialogueService {
   booked?: boolean = false;
   dataa?:any;
   openLogin(data:any , booked : boolean){
-    this.dataa=data;
-    this.booked = booked
+    this.dataa = data;
+    this.booked = booked;
   }
 }

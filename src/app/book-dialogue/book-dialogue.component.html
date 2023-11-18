@@ -7,6 +7,7 @@
   <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked" >Continue</button>
 </form>
 <a [routerLink]="['/login']" (click)="login(data , isBooking)" *ngIf="patientRegistered"> Please Login </a>
+<a [routerLink]="['/register']" (click)="login(data , isBooking)" *ngIf="!patientRegistered"> Please Register </a>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
 
