@@ -18,6 +18,10 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatButtonModule} from '@angular/material/button';
+import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
+import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 
 
 @NgModule({
@@ -35,6 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     ErrorComponent,
     DoctorComponent,
+    BookDialogueComponent,
+    BookDialog2Component,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule, 
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
