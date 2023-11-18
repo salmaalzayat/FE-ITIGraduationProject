@@ -4,13 +4,13 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { createInjectableType } from '@angular/compiler';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 import { PatientService } from '../services/patient.service';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { BookDialogue2Service } from '../services/book-dialogue-2.service';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 
 @Component({
   selector: 'app-book-dialogue',
@@ -49,37 +49,7 @@ export class BookDialogueComponent implements OnInit{
   constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService){}
  
   ngOnInit(): void {
-
-    
-    // for(let i = 0 ; i < 7 ; i++){
-    //   let currentDate = new Date();
-    //   const year : number = currentDate.getFullYear()
-    //   const month : number = currentDate.getMonth()+1
-    //   const day : number = currentDate.getDate()+i
-    //   const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
-     
-    //   this.doctorService.GetVisitCount(formattedDate,this.data.data.id).subscribe({
-    //     next:(visitCount) => {
-    //       this.visitCount = visitCount;
-    //        console.log(formattedDate)
-    //       console.log(this.doctorById?.weekSchadual)
-
-    //        console.log(visitCount)
-    //        this.visitCountsDrById?.push(visitCount)
-    //        console.log(this.visitCountsDrById)
-           
-    //     },
-    //     error: (error) => {
-         
-    //       console.log('calling visitCount api failed', error);
-    //     },
-    //   });}
-  
-  //  console.log(this.data.visitCount)
-
-  
   }
-  //#endregion
 
   Form = new FormGroup({
     phoneNumber : new FormControl<string>('')
@@ -143,6 +113,12 @@ export class BookDialogueComponent implements OnInit{
     }); 
 
    
+  }
+  isBooking: boolean = true;
+  BookedData: any;
+  login(data: any , isBooking: boolean){
+    this.BookedData = data;
+    this.dialog.openLogin(data , true)
   }
   // onContinue($){
   //   var ref = this.dialog2.open()

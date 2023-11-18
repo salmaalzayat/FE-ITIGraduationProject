@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup , Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {phoneNumberLengthValidator} from '../../services/RegisterPhoneNumber.service';
 import { AuthenticationService } from '../../services/authService.service';
 import {PatientLoginDto} from '../../Types/PatientLoginDto';
+import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 
 
 @Component({
@@ -11,12 +12,20 @@ import {PatientLoginDto} from '../../Types/PatientLoginDto';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   errorMessage: string = '';
   constructor(
     private authService: AuthenticationService,
-    private router: Router 
+    private router: Router,
+    private bookDialog : DoctorDialogueService
   ) {}
+  ngOnInit(): void {
+    if(this.bookDialog.booked){
+      console.log(this.bookDialog.booked)
+      this.bookDialog.close()
+      console.log(this.bookDialog.dataa)
+    }
+  }
   form = new FormGroup({
     phoneNumber: new FormControl<string>('', [Validators.required, phoneNumberLengthValidator , this.onlyNumbersValidator]),
     password: new FormControl<string>('', [Validators.required]),
@@ -62,7 +71,12 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe((tokenDto) => {
       console.log(tokenDto);
-      this.router.navigateByUrl('/');
+       if(this.bookDialog.booked){
+        this.router.navigate(['/doctor'])
+        }else{
+          this.router.navigateByUrl('/');
+        }
+      
     },
     (error) => {
       //unauthorized
@@ -75,6 +89,10 @@ export class LoginComponent {
         console.log('Some other error occurred:', error);
       }
     }
+
   );
-}
+    //if(this.bookDialog.booked){
+      this.router.navigate(['/doctor'])
+    //}
+  }
 }

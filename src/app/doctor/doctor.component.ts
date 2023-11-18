@@ -119,7 +119,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         const day : number = currentDate.getDate()+0
         let startDate  = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
 
-         const endDay : number = currentDate.getDate()+7
+         const endDay : number = currentDate.getDate()+6
 
          let endDate = `${year}-${month.toString().padStart(2,'0')}-${endDay.toString().padStart(2,'0')}`
 
@@ -128,6 +128,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
             this.visitCount = visitCount;
 
             this.Visits.push({drId: doctorById.id,visitrecord:this.visitCount})
+            console.log(this.visitCount)
             
           },
           error: (error) => {

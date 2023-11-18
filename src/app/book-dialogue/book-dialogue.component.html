@@ -6,6 +6,7 @@
    <span>Patient already has an appointment with Dr {{this.data.data.name}} on {{bookedDate}}</span></ng-container>
   <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked" >Continue</button>
 </form>
+<a [routerLink]="['/login']" (click)="login(data , isBooking)" *ngIf="patientRegistered"> Please Login </a>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
 
