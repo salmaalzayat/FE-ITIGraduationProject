@@ -81,13 +81,13 @@
   transform: scaleX(1); /* ScaleX to 1 on hover */
 }
 .data{
-  background-color: #3fbbc0;
+  background-color: #ecefef;
   /* border: solid 2px #3fbbc0; */
   display: flex;
   width:30%;
   font-size: 20px;
   /* padding: 5px; */
-  color: #fff;
+  color: #000000;
   padding-left: 5px;
   height: 100%;
 }

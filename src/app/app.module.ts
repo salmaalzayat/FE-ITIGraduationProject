@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ProfileComponent } from './profile/profile.component';
     ErrorComponent,
     DoctorComponent,
     ProfileComponent,
+    AppointmentsComponent,
   ],
   imports: [
     BrowserModule,

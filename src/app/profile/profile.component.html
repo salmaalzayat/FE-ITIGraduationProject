@@ -4,7 +4,7 @@
   </div>
   <div class="profileContent">
     <div class="profileImage">
-        <img src="assets/img/userbw.png" alt="">
+        <img src="assets/img/userB.png" alt="">
     </div>
     <div class="profileInfo" *ngIf="userData">
       <div class="maindata">
@@ -19,7 +19,8 @@
       <div class="maindata">
       <div class="data">Date of birth </div><div class="outputdata"> {{userData.dateOfBirth && dob}}</div>
     </div>
-
+    <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']" >Midical History</button></div>
+    <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/appointments']">Appointments</button></div>
     </div>
   </div>
 </div>
