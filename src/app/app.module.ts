@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
 import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
+import { ContinueBookingComponent } from './continue-booking/continue-booking.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
     DoctorComponent,
     BookDialogueComponent,
     BookDialog2Component,
+    ContinueBookingComponent,
   ],
   imports: [
     BrowserModule,

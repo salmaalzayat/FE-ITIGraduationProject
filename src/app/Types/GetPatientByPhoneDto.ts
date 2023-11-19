@@ -1,6 +1,7 @@
-export class GetPatientByPhoneDto {
-    name: string='';
-    gender: string='';
-    dateOfBirth: string='';
-    phoneNumber: string='';
+export interface GetPatientByPhoneDto {
+    id: string;
+    name: string | null;
+    gender: string | null;
+    dateOfBirth: string;
+    phoneNumber: string | null;
 }
