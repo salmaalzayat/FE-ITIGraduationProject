@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { patientProfile } from '../services/patientProfile.service';
 import { AuthenticationService } from '../services/authService.service';
 import { PatientLoginDto } from '../Types/PatientLoginDto';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  providers: [DatePipe],
 })
 export class ProfileComponent implements OnInit {
   userData: any; // Change the type according to your API response structure
   phoneNumber:string = '';
-  dob: any ;
+  // dob: any ;
   constructor(private patientProfile: patientProfile , private authService: AuthenticationService) {}
 
   ngOnInit() {
@@ -24,13 +26,13 @@ export class ProfileComponent implements OnInit {
 
        // Retrieve user data from localStorage
       const storedUserData = localStorage.getItem('userData');
-      const dob = localStorage.getItem('dob');
+      // const dob = localStorage.getItem('dob');
       if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
-        if(dob){
-          this.dob = dob;
-        }
-      } else {
+      //   if(dob){
+      //     this.dob = dob;
+      //   }
+      // } else {
          // If user data is not available in localStorage, fetch it from the server
         this.patientProfile.getUserData(this.phoneNumber).subscribe(
           (data) => {

@@ -17,10 +17,10 @@
       <div class="data">Gender </div><div class="outputdata"> {{userData.gender}}</div>
     </div>
       <div class="maindata">
-      <div class="data">Date of birth </div><div class="outputdata"> {{userData.dateOfBirth && dob}}</div>
+      <div class="data">Date of birth </div><div class="outputdata">{{ userData.dateOfBirth | date:'dd/MM/yyyy':'en-US' }}</div>
+      <!-- <div class="outputdata"> {{userData.dateOfBirth && dob}}</div> -->
     </div>
     <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']" >Midical History</button></div>
     <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/appointments']">Appointments</button></div>
-    </div>
   </div>
 </div>
