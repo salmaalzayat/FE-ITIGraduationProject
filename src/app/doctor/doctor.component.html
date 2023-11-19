@@ -22,6 +22,7 @@
                     <ng-container *ngFor="let record of Visits">
                     <span *ngIf="doctor.id==record.drId"> 
                    <span *ngFor="let c of record.visitrecord"> 
+                    <ng-container *ngIf="c">
                       <span *ngIf="c.day==3"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4"> Thursday {{c.date}}</span>
                       <span *ngIf="c.day==5"> Friday {{c.date}}</span>
@@ -29,6 +30,7 @@
                       <span *ngIf="c.day==0"> Sunday {{c.date}}</span>
                       <span *ngIf="c.day==1"> Monday {{c.date}}</span>
                       <span *ngIf="c.day==2"> Tuesday {{c.date}}</span>
+                    </ng-container>
                   <div *ngFor="let schedule of doctor.weekSchadual"> 
                     <span *ngIf="schedule.id== c.weekScheduleId">
                          <span *ngIf="schedule.isAvailable ">
@@ -75,6 +77,7 @@
                    <ng-container *ngFor="let record of Visits">
                     <span *ngIf="doctor.id==record.drId"> 
                    <span *ngFor="let c of record.visitrecord"> 
+                      <ng-container *ngIf="c">
                       <span *ngIf="c.day==3"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4"> Thursday {{c.date}}</span>
                       <span *ngIf="c.day==5"> Friday {{c.date}}</span>
@@ -82,6 +85,7 @@
                       <span *ngIf="c.day==0"> Sunday {{c.date}}</span>
                       <span *ngIf="c.day==1"> Monday {{c.date}}</span>
                       <span *ngIf="c.day==2"> Tuesday {{c.date}}</span>
+                    </ng-container>
                   <div *ngFor="let schedule of doctor.weekSchadual"> 
                     <span *ngIf="schedule.id== c.weekScheduleId">
                          <span *ngIf="schedule.isAvailable ">

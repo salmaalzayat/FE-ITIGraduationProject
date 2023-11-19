@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import {phoneNumberLengthValidator} from '../../services/RegisterPhoneNumber.service';
 import { AuthenticationService } from '../../services/authService.service';
 import {PatientLoginDto} from '../../Types/PatientLoginDto';
+import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
+import { ContinueBookingService } from 'src/app/services/continue-booking.service';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
+import { PatientService } from 'src/app/services/patient.service';
 
 
 @Component({
@@ -13,9 +17,14 @@ import {PatientLoginDto} from '../../Types/PatientLoginDto';
 })
 export class LoginComponent {
   errorMessage: string = '';
+  patient? : GetPatientByPhoneDTO;
+  patientNumber : string = ''
   constructor(
     private authService: AuthenticationService,
-    private router: Router 
+    private router: Router,
+    private dialog : DoctorDialogueService,
+    private confirmationDialog : ContinueBookingService,
+    private patientService : PatientService
   ) {}
   form = new FormGroup({
     phoneNumber: new FormControl<string>('', [Validators.required, phoneNumberLengthValidator , this.onlyNumbersValidator]),
@@ -62,7 +71,13 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe((tokenDto) => {
       console.log(tokenDto);
+      if(this.dialog.isBooking){
+        this.router.navigate(['/doctor'])
+        this.patientNumber = this.form.controls.phoneNumber.value!
+        this.getPatient(this.patientNumber)
+      }
       this.router.navigateByUrl('/');
+
     },
     (error) => {
       //unauthorized
@@ -76,5 +91,23 @@ export class LoginComponent {
       }
     }
   );
+}
+
+
+getPatient(patientNumber : string){
+  this.patientService.getPatientByPhoneNumber(patientNumber!).subscribe({
+    next:(patient) => {
+      this.patient = patient 
+      this.router.navigate(['/doctor'])
+
+      this.confirmationDialog.open(this.dialog.dataForLoginRegister.data, this.dialog.dataForLoginRegister.date,this.patient)
+
+    },
+    error: (error) => {
+   
+     console.log('calling Patient api failed', error)
+     },
+  }); 
+
 }
 }

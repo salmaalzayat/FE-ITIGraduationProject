@@ -8,6 +8,8 @@ import { PatientService } from '../services/patient.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { AppointmentsComponent } from '../appointments/appointments.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-continue-booking',
   templateUrl: './continue-booking.component.html',
@@ -20,13 +22,15 @@ export class ContinueBookingComponent  implements OnInit{
   constructor(@Inject(MAT_DIALOG_DATA) public data : any, 
   private dialog : ContinueBookingService,
   private firstDialog : DoctorDialogueService,
-  private patientService : PatientService){
+  private patientService : PatientService,
+  private router : Router){
    
   }
   ngOnInit(): void {
-    console.log(this.data.patient.name )  
+    // console.log(this.dialog.patient.name )  
   }
   bookVisit(doctor: GetDoctorByIDDto, patient : GetPatientByPhoneDTO, date : string){
+
     let day  = date.split('/')[1]
     let month = date.split('/')[0]
     let year = date.split('/')[2]
@@ -40,6 +44,9 @@ export class ContinueBookingComponent  implements OnInit{
     this.patientService.addPatientVisit(addPatientVisit).subscribe({
       next :  ()=>{
         console.log("done")
+        this.router.navigate(['/appointments'])
+        
+        this.dialog.close()
       },
 
       error:(error)=>{
