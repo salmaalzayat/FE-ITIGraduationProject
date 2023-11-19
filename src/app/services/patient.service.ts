@@ -15,12 +15,14 @@ export class PatientService {
     return this.client.get<GetPatientByPhoneDto>(`https://localhost:7267/api/Patient/patient/${PhoneNumber}`);
   }
 
-  public addPatientVisit(patientVisit : AddPatientVisitDto): void{
-    this.client.post<void>(`https://localhost:7267/addpatientVisit`, patientVisit);
+
+  public addPatientVisit(patientVisit? : AddPatientVisitDto): Observable<object>{
+    return this.client.post(`https://localhost:7267/addpatientVisit`, patientVisit);
   }
 
   public GetAllPatientWithVisitDate(date : string, drId : string ):Observable<GetAllPatientsWithDateDto[]>{
     return this.client.get<GetAllPatientsWithDateDto[]>(`https://localhost:7267/api/Doctor/dailySchedule/${date}?DoctorId=${drId}`);
   }
+  
 
 }

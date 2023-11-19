@@ -52,31 +52,7 @@ export class BookDialogueComponent implements OnInit{
   ngOnInit(): void {
 
     
-    // for(let i = 0 ; i < 7 ; i++){
-    //   let currentDate = new Date();
-    //   const year : number = currentDate.getFullYear()
-    //   const month : number = currentDate.getMonth()+1
-    //   const day : number = currentDate.getDate()+i
-    //   const formattedDate : string = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
-     
-    //   this.doctorService.GetVisitCount(formattedDate,this.data.data.id).subscribe({
-    //     next:(visitCount) => {
-    //       this.visitCount = visitCount;
-    //        console.log(formattedDate)
-    //       console.log(this.doctorById?.weekSchadual)
 
-    //        console.log(visitCount)
-    //        this.visitCountsDrById?.push(visitCount)
-    //        console.log(this.visitCountsDrById)
-           
-    //     },
-    //     error: (error) => {
-         
-    //       console.log('calling visitCount api failed', error);
-    //     },
-    //   });}
-  
-  //  console.log(this.data.visitCount)
 
   
   }
@@ -145,7 +121,7 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
-  onContinue(data:any , patient? : string){
-    var ref = this.ContinueBookingService.open(data,patient)
+  onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDto){
+    var ref = this.ContinueBookingService.open(doctor,date,patient)
   }
 }

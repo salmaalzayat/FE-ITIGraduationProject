@@ -1,7 +1,13 @@
 <h1 mat-dialog-title>Hello  </h1>
+    <h5>Doctor:  {{this.data.doctor.name}}</h5>
+    <h5>Appointment Date:  {{this.data.date}}</h5>
+    <h5>Patient Name : {{this.data.patient.name}}</h5>
 
 <mat-dialog-actions>
     
+
+
   <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
 
 </mat-dialog-actions>
