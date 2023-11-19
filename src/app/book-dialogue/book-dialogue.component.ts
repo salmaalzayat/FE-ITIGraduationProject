@@ -4,13 +4,14 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { createInjectableType } from '@angular/compiler';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetPatientByPhoneDto } from '../Types/GetPatientByPhoneDto';
+import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { PatientService } from '../services/patient.service';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
+import { GetPatientByPhoneDto } from '../Types/GetPatientByPhoneDto';
 
 @Component({
   selector: 'app-book-dialogue',
