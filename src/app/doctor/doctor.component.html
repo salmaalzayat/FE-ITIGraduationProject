@@ -11,39 +11,44 @@
           <div class="row">
             <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
+                <div class="doctorinfo">
                 <div class="member-img">
                   <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
-                
                 </div>
+                
                 <div class="member-info">
-                  <h3>{{doctor.name}}</h3>
-                  <h4>{{doctor.title}}</h4>
-                  <span>{{doctor.description}}</span>
+                  <h3 class="doctorName">{{doctor.name}}</h3>
+                  <h4 class="doctorTitle">{{doctor.title}}</h4>
+                  <span class="doctorDes">{{doctor.description}}</span>
+                </div>
+                </div>
+                
                     <ng-container *ngFor="let record of Visits">
-                    <span *ngIf="doctor.id==record.drId"> 
-                   <span *ngFor="let c of record.visitrecord"> 
-                    <ng-container *ngIf="c">
-                      <span *ngIf="c.day==3"> Wednesday {{c.date}}</span>
-                      <span *ngIf="c.day==4"> Thursday {{c.date}}</span>
-                      <span *ngIf="c.day==5"> Friday {{c.date}}</span>
-                      <span *ngIf="c.day==6"> Saturday {{c.date}}</span>
-                      <span *ngIf="c.day==0"> Sunday {{c.date}}</span>
-                      <span *ngIf="c.day==1"> Monday {{c.date}}</span>
-                      <span *ngIf="c.day==2"> Tuesday {{c.date}}</span>
+                    <span *ngIf="doctor.id==record.drId" class="appointments" > 
+                   <span  *ngFor="let c of record.visitrecord" class="box"> 
+                    <ng-container *ngIf="c"  >
+                      <span *ngIf="c.day==3" class="divider"> Wednesday {{c.date}}</span>
+                      <span *ngIf="c.day==4" class="divider"> Thursday {{c.date}}</span>
+                      <span *ngIf="c.day==5" class="divider"> Friday {{c.date}}</span>
+                      <span *ngIf="c.day==6" class="divider"> Saturday {{c.date}}</span>
+                      <span *ngIf="c.day==0" class="divider"> Sunday {{c.date}}</span>
+                      <span *ngIf="c.day==1" class="divider"> Monday {{c.date}}</span>
+                      <span *ngIf="c.day==2" class="divider"> Tuesday {{c.date}}</span>
                     </ng-container>
+                    
                   <div *ngFor="let schedule of doctor.weekSchadual"> 
                     <span *ngIf="schedule.id== c.weekScheduleId">
-                         <span *ngIf="schedule.isAvailable ">
-                         <span>{{schedule.startTime}}</span>
-                         <span>{{schedule.endTime}}</span>
+                         <span *ngIf="schedule.isAvailable " class="time">
+                         <span *ngIf="c.limitOfPatients!=c.actualNoOfPatients" >{{schedule.startTime}}</span>
+                         <span *ngIf="c.limitOfPatients!=c.actualNoOfPatients" >{{schedule.endTime}}</span>
                          <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
-                          <button [disabled]="true" >Book</button></span>
-                          <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)">Book</button>
+                          <button [disabled]="true" class="book-disabled">Book</button></span>
+                          <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)" class="book-btn">Book</button>
                        </span>
                        </span>
-                       <span *ngIf="!schedule.isAvailable && c.weekScheduleId==schedule.id">
+                       <span *ngIf="!schedule.isAvailable && c.weekScheduleId==schedule.id" class="disable-btn">
                          <span>Day off</span>
-                         <button [disabled]="true">Book</button>
+                         <button [disabled]="true" class="book-disabled">Book</button>
                        </span>
                      </div>
                 </span>
@@ -52,8 +57,8 @@
                 </span>
           
                   </ng-container>
-         
-               </div>
+                
+               
            </div>
               </div>
             </div>
