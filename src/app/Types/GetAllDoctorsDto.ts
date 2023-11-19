@@ -7,6 +7,6 @@ export interface GetAllDoctorsDto {
     description: string | null;
     specializationName: string;
     performanceRate: number;
-    weekScheduleId : number;
-    weekSchadual: WeekScheduleForDoctorsDto[] | null;
+    weekScheduleId? : number;
+    weekSchadual?: WeekScheduleForDoctorsDto[] | null;
 }
