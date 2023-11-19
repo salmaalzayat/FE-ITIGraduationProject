@@ -32,7 +32,8 @@
                       <span *ngIf="c.day==2"> Tuesday {{c.date}}</span>
                     </ng-container>
                   <div *ngFor="let schedule of doctor.weekSchadual"> 
-                    <span *ngIf="schedule.id== c.weekScheduleId">
+                    <span *ngIf="schedule.id== c.weekScheduleId"> 
+                      <span>{{c.weekScheduleId}}</span>
                          <span *ngIf="schedule.isAvailable ">
                          <span>{{schedule.startTime}}</span>
                          <span>{{schedule.endTime}}</span>

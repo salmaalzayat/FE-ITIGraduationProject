@@ -1,32 +1,28 @@
-<!-- <h1 mat-dialog-title>Hello  </h1>
-    <h5>Doctor:  {{this.data.doctor.name}}</h5>
-    <h5>Appointment Date:  {{this.data.date}}</h5>
-    <h5>Patient Name : {{this.data.patient.name}}</h5> -->
-<table class="table">
-  <body>
-    <tr>
-      <th scope="row"> Name </th>
-      <td>{{this.data.patient.name}}</td>
-    </tr>
-    <tr>
-      <th scope="row"> phone Number </th>
-      <td>{{this.data.patient.phoneNumber}}</td>
-    </tr>
-    <tr>
-      <th scope="row"> Doctor Name </th>
-      <td>{{this.data.doctor.name}}</td>
-    </tr>
-    <tr>
-      <th scope="row"> Date </th>
-      <td>{{this.data.date}}</td>
-    </tr>
-  </body>
-</table>
-<mat-dialog-actions>
-    
-
-
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button mat-dialog-close (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
-
-</mat-dialog-actions>
+<div class="modal-content rounded-4 shadow">
+  <div class="modal-body p-5">
+    <table class="table">
+      <body>
+        <tr>
+          <th scope="row"> Name </th>
+          <td>{{this.data.patient.name}}</td>
+        </tr>
+        <tr>
+          <th scope="row"> phone Number </th>
+          <td>{{this.data.patient.phoneNumber}}</td>
+        </tr>
+        <tr>
+          <th scope="row"> Doctor Name </th>
+          <td>{{this.data.doctor.name}}</td>
+        </tr>
+        <tr>
+          <th scope="row"> Date </th>
+          <td>{{this.data.date}}</td>
+        </tr>
+      </body>
+    </table>
+    <mat-dialog-actions>
+      <button  mat-button mat-dialog-close>Close</button>
+      <button class="appointment-btn" mat-button mat-dialog-actions (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
+    </mat-dialog-actions>
+  </div>
+</div>
