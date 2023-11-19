@@ -84,7 +84,7 @@
   background-color: #ecefef;
   /* border: solid 2px #3fbbc0; */
   display: flex;
-  width:30%;
+  width: 25%;
   font-size: 20px;
   /* padding: 5px; */
   color: #000000;
@@ -102,4 +102,7 @@
   text-align: center;
   z-index: 555;
   transition: background-color 2s ease;
+}
+.buttons{
+  display: flex;
 }

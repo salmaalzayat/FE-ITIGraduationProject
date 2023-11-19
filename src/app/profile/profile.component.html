@@ -1,26 +1,34 @@
 <div class="container">
   <div class="profileHeader">
-    <h3>My Profile</h3>
+    <div class="section-title">
+      <h2>My Profile</h2>
+    </div>
   </div>
-  <div class="profileContent">
+  <div class="profileContent border ">
     <div class="profileImage">
-        <img src="assets/img/userB.png" alt="">
+      <img src="assets/img/userB.png" alt="">
     </div>
     <div class="profileInfo" *ngIf="userData">
       <div class="maindata">
-      <div class="data">Name </div><div class="outputdata">{{userData.name}}</div>
+        <div class="data">Name </div>
+        <div class="outputdata">{{userData.name}}</div>
       </div>
       <div class="maindata">
-      <div class="data">Phone Number</div> <div class="outputdata"> {{userData.phoneNumber}}</div>
+        <div class="data">Phone Number</div>
+        <div class="outputdata"> {{userData.phoneNumber}}</div>
       </div>
       <div class="maindata">
-      <div class="data">Gender </div><div class="outputdata"> {{userData.gender}}</div>
+        <div class="data">Gender </div>
+        <div class="outputdata"> {{userData.gender}}</div>
+      </div>
+      <div class="maindata mb-4">
+        <div class="data">Date of birth </div>
+        <div class="outputdata">{{ userData.dateOfBirth | date:'dd/MM/yyyy':'en-US' }}</div>
+        <!-- <div class="outputdata"> {{userData.dateOfBirth && dob}}</div> -->
+      </div>
+      <div class="buttons">
+        <div><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']">Midical History</button></div>
+        <div><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/appointments']">Appointments</button></div>
+      </div>
     </div>
-      <div class="maindata">
-      <div class="data">Date of birth </div><div class="outputdata">{{ userData.dateOfBirth | date:'dd/MM/yyyy':'en-US' }}</div>
-      <!-- <div class="outputdata"> {{userData.dateOfBirth && dob}}</div> -->
-    </div>
-    <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']" >Midical History</button></div>
-    <div ><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/appointments']">Appointments</button></div>
   </div>
-</div>
