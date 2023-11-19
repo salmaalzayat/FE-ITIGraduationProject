@@ -40,11 +40,11 @@
          Welcome {{username}} !
         </button>
         <div class="dropdown-menu dropMenu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
+          <a class="dropdown-item d-flex justify-content-between" [routerLink]="['/profile']">Profile <i class="bi bi-person-circle "></i></a>
           <!-- <a class="dropdown-item">Medical History</a>
           <a class="dropdown-item">Appointments</a>
           <li><hr class="dropdown-divider"></li> -->
-          <li><a class="dropdown-item" (click)="logout()" href="#">Logout</a></li>
+          <li><a class="dropdown-item d-flex justify-content-between" (click)="logout()" href="#">Logout<i class="bi bi-box-arrow-right"></i></a></li>
         </div>
       </div>
     </div>

@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { CommonModule } from '@angular/common';
+import { MedicalHistoryComponent } from './medical-history/medical-history.component';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
     DoctorComponent,
     ProfileComponent,
     AppointmentsComponent,
+    MedicalHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
