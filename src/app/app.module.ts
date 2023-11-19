@@ -22,6 +22,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { CommonModule } from '@angular/common';
 import { MedicalHistoryComponent } from './medical-history/medical-history.component';
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatButtonModule} from '@angular/material/button';
+import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
+import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 
 
 @NgModule({
@@ -42,6 +46,8 @@ import { MedicalHistoryComponent } from './medical-history/medical-history.compo
     ProfileComponent,
     AppointmentsComponent,
     MedicalHistoryComponent,
+    BookDialogueComponent,
+    BookDialog2Component,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,9 @@ import { MedicalHistoryComponent } from './medical-history/medical-history.compo
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatDialogModule, 
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
