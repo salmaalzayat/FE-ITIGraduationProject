@@ -9,4 +9,8 @@ export interface GetAllDoctorsDto {
     performanceRate: number;
     weekScheduleId? : number;
     weekSchadual?: WeekScheduleForDoctorsDto[] | null;
+    imageFileName? : string
+    imageStoredFileName? :string  
+    imageContentType? :string 
+    imageUrl? : string 
 }

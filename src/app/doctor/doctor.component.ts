@@ -41,54 +41,53 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
     { 
       this.data.currentId.subscribe(sId => this.sId = sId)
       this.data.currentDoctorId.subscribe(dId => this.dId = dId)
-      // //#region get all doctors
-      // if(this.dId == '0' && this.sId==0){
-      // this.doctorService.getDoctors().subscribe({
-      //   next:(doctors) => {
-      //     this.doctors = doctors;
-      //     this.doctors.forEach((doctor)=>{
-      //       this.getDate(doctor)
-      //     })
-      //   },
-      //   error: (error) => {
-      //     console.log('calling  all doctors api failed', error);
-      //   },
-      // });
-      // }
-      // //#endregion
-      // //#region doctors by specialization
+      //#region get all doctors
+      if(this.dId == '0' && this.sId==0){
+      this.doctorService.getDoctors().subscribe({
+        next:(doctors) => {
+          this.doctors = doctors;
+          this.doctors.forEach((doctor)=>{
+            this.getDate(doctor)
+          })
+        },
+        error: (error) => {
+          console.log('calling  all doctors api failed', error);
+        },
+      });
+      }
+      //#endregion
+      //#region doctors by specialization
 
-      // if(this.sId !=0 && this.dId=='0'){
-      // this.doctorService.getDoctorsBySpecialization(this.sId).subscribe({
+      if(this.sId !=0 && this.dId=='0'){
+      this.doctorService.getDoctorsBySpecialization(this.sId).subscribe({
 
-      //   next:(doctorsBySpecialization) => {
-      //     this.doctorsBySpecialization = doctorsBySpecialization;
-      //     this.doctorsBySpecialization.forEach((doctor)=>{
-      //       doctor.childDoctorOfSpecializations?.forEach((item)=>{
-      //         this.doctorBySpecialization= {
-      //           id :item.id,
-      //           name:item.name,
-      //           specializationName : doctor.name,
-      //           description:item.description,
-      //           title:item.title,
-      //           weekSchadual:item.weekSchadual}
-      //           this.getDate(this.doctorBySpecialization)
-      //       })
+        next:(doctorsBySpecialization) => {
+          this.doctorsBySpecialization = doctorsBySpecialization;
+          this.doctorsBySpecialization.forEach((doctor)=>{
+            doctor.childDoctorOfSpecializations?.forEach((item)=>{
+              this.doctorBySpecialization= {
+                id :item.id,
+                name:item.name,
+                specializationName : doctor.name,
+                description:item.description,
+                title:item.title,
+                weekSchadual:item.weekSchadual}
+                this.getDate(this.doctorBySpecialization)
+            })
            
-      //     })
-      //   },
-      //   error: (error) => {
-      //     console.log('calling get drs by specialization api failed', error);
-      //   },
-      // });
-      // }
+          })
+        },
+        error: (error) => {
+          console.log('calling get drs by specialization api failed', error);
+        },
+      });
+      }
       //#endregion
       //#region doctor by id
       if(this.dId!='0'){
         this.doctorService.getDoctorById(this.dId).subscribe({
         next:(doctorById) => {
           this.doctorById = doctorById;
-          console.log(this.doctorById)
           this.getDate(this.doctorById)
          },
         error: (error) => {
