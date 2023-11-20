@@ -7,4 +7,9 @@ export interface GetDoctorByIDDto {
     description: string | null;
     specializationName: string |null;
     weekSchadual?: WeekScheduleForDoctorsDto[] | null;
+    ImageFileName : string
+    ImageStoredFileName :string  
+    ImageContentType :string 
+    ImageUrl : string 
+
 }
