@@ -22,8 +22,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { CommonModule } from '@angular/common';
 import { MedicalHistoryComponent } from './medical-history/medical-history.component';
-// import {MatDialogModule} from '@angular/material/dialog'; 
-// import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
 import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 import { ContinueBookingComponent } from './continue-booking/continue-booking.component';
@@ -58,7 +58,7 @@ import { ContinueBookingComponent } from './continue-booking/continue-booking.co
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatButtonModule,
     ReactiveFormsModule
   ],
