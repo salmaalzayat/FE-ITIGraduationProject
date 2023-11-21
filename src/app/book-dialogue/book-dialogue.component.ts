@@ -11,7 +11,7 @@ import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
-import { GetPatientByPhoneDto } from '../Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 
 @Component({
   selector: 'app-book-dialogue',
@@ -22,7 +22,7 @@ export class BookDialogueComponent implements OnInit{
   doctorById? : GetDoctorByIDDto;
   id? : string ;
   visitCount? : VisitCountDto;
-  PatientByPhoneNumber? : GetPatientByPhoneDto;
+  PatientByPhoneNumber? : GetPatientByPhoneDTO;
   PatientPhoneNumber? : string;
   getAllPatientsWithDate?: GetAllPatientsWithDateDto[];
   patientAlreadyBooked : boolean = false;
@@ -122,7 +122,7 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
-  onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDto){
+  onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDTO){
     var ref = this.ContinueBookingService.open(doctor,date,patient)
   }
 }

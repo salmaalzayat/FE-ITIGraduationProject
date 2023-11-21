@@ -24,7 +24,6 @@ export class MedicalHistoryComponent implements OnInit {
   }
 
   getMedicalHistory() {
-    // Retrieve user data from localStorage
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
