@@ -4,7 +4,6 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { createInjectableType } from '@angular/compiler';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { PatientService } from '../services/patient.service';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';

@@ -8,6 +8,7 @@ import { PatientService } from '../services/patient.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
+
 @Component({
   selector: 'app-continue-booking',
   templateUrl: './continue-booking.component.html',
@@ -30,7 +31,6 @@ export class ContinueBookingComponent  implements OnInit{
     let day  = date.split('/')[1]
     let month = date.split('/')[0]
     let year = date.split('/')[2]
-    console.log("henaaa")
     let formattedDate  = `${year}-${month}-${day}`
     const addPatientVisit : AddPatientVisitDto={
       doctorId : doctor.id,

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 
+
 @Injectable({
   providedIn: 'root'
 })
