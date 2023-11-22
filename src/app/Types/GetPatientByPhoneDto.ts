@@ -4,4 +4,4 @@ export interface GetPatientByPhoneDto {
     gender: string | null;
     dateOfBirth: string;
     phoneNumber: string | null;
-} 
+}
