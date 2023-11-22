@@ -8,13 +8,13 @@
         <h1 class=" h-25 mt-3 text-center mb-5 fw-bold">Our Priority </h1>
       </div>
       <!-- ======= Search Section ======= -->
-       <div class="custom-container container p-3 ">
-      <div class="row justify-content-center pt-2">
-        <select (change)="selected($event)" class="col form-select border-2 py-3 mx-3">
+       <div class="custom-container container ">
+      <div class="row justify-content-center d-flex justify-content-around">
+        <select (change)="selected($event)" class="col-lg-4  ml-md-0 form-select border-2">
           <option selected="" value="All" id="All">All Specialization</option>
           <option  *ngFor="let Specialization of specializations" [value]="Specialization.id "> {{ Specialization.name }}</option>
           </select>
-        <select  (change)="doctorSelected($event)" class=" col form-select border-2 py-3 mx-3">
+        <select  (change)="doctorSelected($event)" class=" col-lg-4  ml-md-0 form-select border-2">
         <option value="allDoctors" selected="">All Doctors</option>
         <ng-container *ngIf="isSpecializationSelected" >
           <option *ngFor="let doctor of Doctors"  [value]="doctor.id"> {{doctor.name}} </option>
@@ -22,9 +22,9 @@
         <ng-container *ngIf="!isSpecializationSelected" >
           <option *ngFor="let doctor of doctors" [value]="doctor.id"> {{doctor.name}}</option>
         </ng-container>
-       
+
       </select>
-      <button class=" col-md-2 btn appointment-btn scrollto btn-lg me-4 text-dark-50 fw-bold mb-0" (click)="onSearch($event)">Search</button>
+      <button class="col-lg-2 btn appointment-btn scrollto btn-lg text-dark-50 fw-bold mx-sm-auto mx-md-auto mx-lg-1 mx-0 " (click)="onSearch($event)">Search</button>
       </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
 
       </div>
     </section><!-- End Featured Services Section -->
-    
+
   <!-- ======= Cta Section ======= -->
   <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
@@ -86,7 +86,7 @@
 
       </div>
     </section><!-- End Cta Section -->
-   
+
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
