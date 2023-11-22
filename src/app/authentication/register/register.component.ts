@@ -10,7 +10,7 @@ import {CheckingPhoneNumber} from '../../services/checkingPhoneNumber.service'
 import { ContinueBookingService } from 'src/app/services/continue-booking.service';
 import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 import { PatientService } from 'src/app/services/patient.service';
-import { GetPatientByPhoneDto } from 'src/app/Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDTO';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ import { GetPatientByPhoneDto } from 'src/app/Types/GetPatientByPhoneDto';
 })
 export class RegisterComponent {
   patientNumber : string = '';
-  patient?: GetPatientByPhoneDto;
+  patient?: GetPatientByPhoneDTO;
   // RegisterPatientDto: any = {};
 
   constructor(

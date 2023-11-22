@@ -6,7 +6,7 @@ import { AuthenticationService } from '../../services/authService.service';
 import {PatientLoginDto} from '../../Types/PatientLoginDto';
 import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 import { ContinueBookingService } from 'src/app/services/continue-booking.service';
-import { GetPatientByPhoneDto } from 'src/app/Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDTO';
 import { PatientService } from 'src/app/services/patient.service';
 
 
@@ -17,7 +17,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class LoginComponent {
   errorMessage: string = '';
-  patient? : GetPatientByPhoneDto;
+  patient? : GetPatientByPhoneDTO;
   patientNumber : string = ''
   constructor(
     private authService: AuthenticationService,
