@@ -11,7 +11,7 @@ import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
 import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 import { TokenDto } from '../Types/TokenDto';
 @Component({
   selector: 'app-book-dialogue',

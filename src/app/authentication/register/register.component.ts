@@ -10,7 +10,7 @@ import {CheckingPhoneNumber} from '../../services/checkingPhoneNumber.service'
 import { ContinueBookingService } from 'src/app/services/continue-booking.service';
 import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 import { PatientService } from 'src/app/services/patient.service';
-import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDTO';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
 
 @Component({
   selector: 'app-register',

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 import { Observable } from 'rxjs';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';

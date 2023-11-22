@@ -6,7 +6,7 @@ import { AuthenticationService } from '../../services/authService.service';
 import {PatientLoginDto} from '../../Types/PatientLoginDto';
 import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 import { ContinueBookingService } from 'src/app/services/continue-booking.service';
-import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDTO';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
 import { PatientService } from 'src/app/services/patient.service';
 
 
