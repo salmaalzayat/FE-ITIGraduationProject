@@ -8,7 +8,7 @@ import { PatientService } from '../services/patient.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 import { AppointmentsComponent } from '../appointments/appointments.component';
 import { Router } from '@angular/router';
 @Component({
