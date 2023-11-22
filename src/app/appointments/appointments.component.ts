@@ -9,6 +9,7 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ReviewService } from '../services/review.service';
 import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
+import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-appointments',
@@ -16,6 +17,7 @@ import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
+  @ViewChild('ratingForm') ratingForm: ElementRef | undefined;
   // appointments: {name:string , patientVisits : GetPatientVisitsChildDto[]}[] = []; // Use the DTO type for appointments
   appointments: any = []; // Use the DTO type for appointments
   phoneNumber: string = '';
@@ -167,20 +169,72 @@ export class AppointmentsComponent implements OnInit {
     this.formSubmitted = true;
   }
 
-  setRating(star: number) {
-    this.form.controls.rate.setValue(star);
-    let stars = Array.from(document.getElementsByClassName("fa-star"));
-    // let starss =
-    console.log("star in fn: " + star)
-    console.log("stars in fn: " +stars)
+  // ... (existing code)
+
+setRating(star: number, appointmentIndex: number) {
+  this.form.controls.rate.setValue(star);
+  console.log("app index= " + appointmentIndex)
+
+  if (this.ratingForm) {
+    // let stars = this.ratingForm.nativeElement.querySelectorAll('.fa-star');
+    let card = document.getElementById(`${appointmentIndex}`)!;
+    let stars = card?.getElementsByClassName("fa-star");
+    console.log("card" + card)
+    console.log("stars: " + stars)
+    // let stars =
+    console.log('stars in fn:', stars);
+
     for (let i = 0; i < stars.length; i++) {
+      const starElement = stars[i] as HTMLElement;
+
+      // Add 'filled-star' class only up to the selected star
       if (i < star) {
-        stars[i].classList.add('filled-star');
+        starElement.classList.add('filled-star');
       } else {
-        stars[i].classList.remove('filled-star');
+        // Remove 'filled-star' class for stars beyond the selected star
+        starElement.classList.remove('filled-star');
       }
     }
   }
+
+  // You can access the appointment ID here and do whatever you need with it
+  const appointmentId = this.appointments[1][appointmentIndex].id;
+  console.log('Appointment ID:', appointmentId);
+}
+
+
+//2nd
+  // setRating(star: number) {
+  //   this.form.controls.rate.setValue(star);
+
+  //   if (this.ratingForm) {
+  //     let stars = this.ratingForm.nativeElement.querySelectorAll('.fa-star');
+  //     console.log('stars in fn:', stars);
+
+  //     for (let i = 0; i < stars.length; i++) {
+  //       if (i < star) {
+  //         stars[i].classList.add('filled-star');
+  //       } else {
+  //         stars[i].classList.remove('filled-star');
+  //       }
+  //     }
+  //   }
+  // }
+  //1st
+  // setRating(star: number) {
+  //   this.form.controls.rate.setValue(star);
+  //   let stars = Array.from(document.getElementsByClassName("fa-star"));
+  //   // let starss =
+  //   console.log("star in fn: " + star)
+  //   console.log("stars in fn: " +stars)
+  //   for (let i = 0; i < stars.length; i++) {
+  //     if (i < star) {
+  //       stars[i].classList.add('filled-star');
+  //     } else {
+  //       stars[i].classList.remove('filled-star');
+  //     }
+  //   }
+  // }
 }
 
 
