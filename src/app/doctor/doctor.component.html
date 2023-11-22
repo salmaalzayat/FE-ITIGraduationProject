@@ -12,8 +12,10 @@
             <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
               <div class="member" data-aos="fade-up" data-aos-delay="100">
                 <div class="doctorinfo">
-                <div class="member-img">
-                  <img src="{{doctor.imageUrl}}" class="img-fluid" alt="">
+                <div class="member-img" >
+                  <img *ngIf="doctor.imageStoredFileName" src="{{doctor.imageUrl}}" class="img-fluid" alt="">
+                  <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
+
                 </div>
                 
                 <div class="member-info">
