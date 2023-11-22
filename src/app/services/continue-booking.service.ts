@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ContinueBookingComponent } from '../continue-booking/continue-booking.component';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 @Injectable({
   providedIn: 'root'
 })

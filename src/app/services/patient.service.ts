@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO'
 import { Observable } from 'rxjs';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 
 @Injectable({
   providedIn: 'root'
