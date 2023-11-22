@@ -39,10 +39,11 @@
                     </ng-container>
                     
                   <div *ngFor="let schedule of doctor.weekSchadual"> 
-                    <span *ngIf="schedule.id== c.weekScheduleId">
-                         <span *ngIf="schedule.isAvailable " class="time">
-                         <span *ngIf="c.limitOfPatients!=c.actualNoOfPatients" >{{schedule.startTime}}</span>
-                         <span *ngIf="c.limitOfPatients!=c.actualNoOfPatients" >{{schedule.endTime}}</span>
+                    <span *ngIf="schedule.id== c.weekScheduleId"> 
+                      <span>{{c.weekScheduleId}}</span>
+                         <span *ngIf="schedule.isAvailable ">
+                         <span>{{schedule.startTime}}</span>
+                         <span>{{schedule.endTime}}</span>
                          <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
                           <button [disabled]="true" class="book-disabled">Book</button></span>
                           <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)" class="book-btn">Book</button>

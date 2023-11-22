@@ -10,8 +10,9 @@ import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
+import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
-
+import { TokenDto } from '../Types/TokenDto';
 @Component({
   selector: 'app-book-dialogue',
   templateUrl: './book-dialogue.component.html',
@@ -27,6 +28,9 @@ export class BookDialogueComponent implements OnInit{
   patientAlreadyBooked : boolean = false;
   patient? : GetAllPatientsWithDateDto;
   patientRegistered? : boolean = false;
+  isLoogedIn? :boolean;
+  token?: string;
+
   visitCountsModal : 
   {id: number;
    date: string;
@@ -53,11 +57,7 @@ export class BookDialogueComponent implements OnInit{
   , private ContinueBookingService : ContinueBookingService,){}
  
   ngOnInit(): void {
-
     
-
-
-  
   }
   //#endregion
 
@@ -124,9 +124,9 @@ export class BookDialogueComponent implements OnInit{
 
    
   }
-  onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDTO){
-    var ref = this.ContinueBookingService.open(doctor,date,patient)
-    
+  onContinue(doctor:any,date : string , patient? : GetPatientByPhoneDTO){
+    // var ref = this.ContinueBookingService.open(doctor,date,patient)
+    console.log(date)
   }
 
   loginAndRegister(data:any){
