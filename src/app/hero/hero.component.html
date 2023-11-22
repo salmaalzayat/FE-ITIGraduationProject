@@ -1,173 +1,187 @@
 <!-- ======= Hero Section ======= -->
-<section id="hero" style="background-image: url('assets/img/1.jpg');  background-size: cover;" >
-  <div >
+<section id="hero" style="background-image: url('assets/img/1.jpg');  background-size: cover;">
+  <div>
     <div style="height: 400px;">
-    <div class="row justify-content-center pt-5 ">
-      <div class=" col-md-6">
-        <h4 class="mt-5 text-center mb-0 fw-light ">Your Health, </h4>
-        <h1 class=" h-25 mt-3 text-center mb-5 fw-bold">Our Priority </h1>
-      </div>
-      <!-- ======= Search Section ======= -->
-       <div class="custom-container container p-3 ">
-      <div class="row justify-content-center pt-2">
-        <select (change)="selected($event)" class="col form-select border-2 py-3 mx-3">
-          <option selected="" value="All" id="All">All Specialization</option>
-          <option  *ngFor="let Specialization of specializations" [value]="Specialization.id "> {{ Specialization.name }}</option>
-          </select>
-        <select  (change)="doctorSelected($event)" class=" col form-select border-2 py-3 mx-3">
-        <option value="allDoctors" selected="">All Doctors</option>
-        <ng-container *ngIf="isSpecializationSelected" >
-          <option *ngFor="let doctor of Doctors"  [value]="doctor.id"> {{doctor.name}} </option>
-        </ng-container>
-        <ng-container *ngIf="!isSpecializationSelected" >
-          <option *ngFor="let doctor of doctors" [value]="doctor.id"> {{doctor.name}}</option>
-        </ng-container>
-       
-      </select>
-      <button class=" col-md-2 btn appointment-btn scrollto btn-lg me-4 text-dark-50 fw-bold mb-0" (click)="onSearch($event)">Search</button>
-      </div>
+      <div class="row justify-content-center pt-5 ">
+        <div class=" col-md-6">
+          <h4 class="mt-5 text-center mb-0 fw-light ">Your Health, </h4>
+          <h1 class=" h-25 mt-3 text-center mb-5 fw-bold">Our Priority </h1>
+        </div>
+        <!-- ======= Search Section ======= -->
+        <div class="custom-container container ">
+          <div class="row justify-content-center ">
+            <select (change)="selected($event)" class="col form-select border-2">
+              <option selected="" value="All" id="All">All Specialization</option>
+              <option *ngFor="let Specialization of specializations" [value]="Specialization.id "> 
+              {{Specialization.name }}</option>
+            </select>
+            <select (change)="doctorSelected($event)" class=" col form-select border-2">
+              <option value="allDoctors" selected="">All Doctors</option>
+              <ng-container *ngIf="isSpecializationSelected">
+                <option *ngFor="let doctor of Doctors" [value]="doctor.id"> {{doctor.name}} </option>
+              </ng-container>
+              <ng-container *ngIf="!isSpecializationSelected">
+                <option *ngFor="let doctor of doctors" [value]="doctor.id"> {{doctor.name}}</option>
+              </ng-container>
+
+            </select>
+            <button class=" col-md-2 mx-auto btn appointment-btn scrollto btn-lg text-dark-50 fw-bold mb-0"
+              (click)="onSearch($event)">Search</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </section>
-    <!-- ======= Search Section ======= -->
-    <!-- ======= Featured Services Section ======= -->
-    <section id="featured-services" class="featured-services">
-      <div class="container" data-aos="fade-up">
+<!-- ======= Search Section ======= -->
+<!-- ======= Featured Services Section ======= -->
+<section id="featured-services" class="featured-services">
+  <div class="container" data-aos="fade-up">
 
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-heartbeat"></i></div>
-              <h4 class="title"><a href="">Healing starts here </a></h4>
-              <p class="description">Effective treatment depends on getting the right diagnosis. Our experts diagnose and treat the toughest medical challenges.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-pills"></i></div>
-              <h4 class="title"><a href="">Expert Care, Personalized Approach</a></h4>
-              <p class="description">Our dedicated team provides individualized care, focusing on your unique health needs for a healthier you.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-thermometer"></i></div>
-              <h4 class="title"><a href="">Innovative Cures, Trusted Medications</a></h4>
-              <p class="description">Discover cutting-edge cures and reliable medications tailored to provide effective and lasting relief for your well-being.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <div class="icon"><i class="fas fa-dna"></i></div>
-              <h4 class="title"><a href="">Minimal Wait Times, Maximum Care</a></h4>
-              <p class="description">Experience prompt service with minimal wait times, ensuring you receive the care you need without delay.</p>
-            </div>
-          </div>
-
+    <div class="row">
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon"><i class="fas fa-heartbeat"></i></div>
+          <h4 class="title"><a href="">Healing starts here </a></h4>
+          <p class="description">Effective treatment depends on getting the right diagnosis. Our experts diagnose and
+            treat the toughest medical challenges.</p>
         </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon"><i class="fas fa-pills"></i></div>
+          <h4 class="title"><a href="">Expert Care, Personalized Approach</a></h4>
+          <p class="description">Our dedicated team provides individualized care, focusing on your unique health needs
+            for a healthier you.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon"><i class="fas fa-thermometer"></i></div>
+          <h4 class="title"><a href="">Innovative Cures, Trusted Medications</a></h4>
+          <p class="description">Discover cutting-edge cures and reliable medications tailored to provide effective and
+            lasting relief for your well-being.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+          <div class="icon"><i class="fas fa-dna"></i></div>
+          <h4 class="title"><a href="">Minimal Wait Times, Maximum Care</a></h4>
+          <p class="description">Experience prompt service with minimal wait times, ensuring you receive the care you
+            need without delay.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Featured Services Section -->
+
+<!-- ======= Cta Section ======= -->
+<section id="cta" class="cta">
+  <div class="container" data-aos="zoom-in">
+
+    <div class="text-center">
+      <h3>In an emergency? Need help now?</h3>
+      <p>Our team is ready to provide immediate assistance. Call <strong>Emergency Services</strong> now.</p>
+      <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
+    </div>
+
+  </div>
+</section><!-- End Cta Section -->
+
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Our Vision</h2>
+      <p>At Medicio, we envision a healthier community through compassionate care, innovative treatments, and a
+        commitment to excellence. Our mission is to provide patient-centered healthcare that exceeds expectations and
+        promotes well-being for all.</p>
+    </div>
+
+    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Leading with a commitment to excellence, we strive to redefine healthcare by providing compassionate and
+              innovative solutions for our community's well-being. Our dedication is reflected in every aspect of care
+              we deliver.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>Ryan Maddison</h3>
+            <h4>Ceo &amp; Founder</h4>
+          </div>
+        </div><!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis
+              quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            <h4>Designer</h4>
+          </div>
+        </div><!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor
+              labore quem eram duis noster aute amet eram fore quis sint minim.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <h3>Jena Karlis</h3>
+            <h4>Store Owner</h4>
+          </div>
+        </div>
+        <!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim
+              dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <h3>Matt Brandon</h3>
+            <h4>Freelancer</h4>
+          </div>
+        </div><!-- End testimonial item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa
+              labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+            <h3>John Larson</h3>
+            <h4>Entrepreneur</h4>
+          </div>
+        </div><!-- End testimonial item -->
 
       </div>
-    </section><!-- End Featured Services Section -->
-    
-  <!-- ======= Cta Section ======= -->
-  <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
+      <div class="swiper-pagination"></div>
+    </div>
 
-        <div class="text-center">
-          <h3>In an emergency? Need help now?</h3>
-          <p>Our team is ready to provide immediate assistance. Call <strong>Emergency Services</strong> now.</p>
-          <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
-        </div>
-
-      </div>
-    </section><!-- End Cta Section -->
-   
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Our Vision</h2>
-          <p>At Medicio, we envision a healthier community through compassionate care, innovative treatments, and a commitment to excellence. Our mission is to provide patient-centered healthcare that exceeds expectations and promotes well-being for all.</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Leading with a commitment to excellence, we strive to redefine healthcare by providing compassionate and innovative solutions for our community's well-being. Our dedication is reflected in every aspect of care we deliver.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Ryan Maddison</h3>
-                <h4>Ceo &amp; Founder</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div>
-            <!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
+  </div>
+</section><!-- End Testimonials Section -->
