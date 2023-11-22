@@ -6,7 +6,7 @@ import { BookDialogueComponent } from '../book-dialogue/book-dialogue.component'
 import { DoctorDialogueService } from '../services/doctor-dialogue.service';
 import { PatientService } from '../services/patient.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 
 @Component({

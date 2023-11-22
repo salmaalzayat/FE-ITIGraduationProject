@@ -23,10 +23,23 @@
         <div class="data">Date of birth </div>
         <div class="outputdata">{{ userData.dateOfBirth | date:'dd/MM/yyyy':'en-US' }}</div>
         <!-- <div class="outputdata"> {{userData.dateOfBirth && dob}}</div> -->
-      </div>
-      <div class="buttons">
-        <div><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']">Medical History</button></div>
-        <div><button class="btn appointment-btn scrollto " type="button" [routerLink]="['/appointments']">Appointments</button></div>
-      </div>
     </div>
   </div>
+</div>
+<div class="buttons pb-2">
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto " disabled type="button" [routerLink]="['/profile']">
+        My Profile
+    </button>
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto "  type="button" [routerLink]="['/medical-history']">
+        My Medical History
+    </button>
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto"  type="button" [routerLink]="['/appointments']">
+        My Appointments
+    </button>
+  </div>
+</div>

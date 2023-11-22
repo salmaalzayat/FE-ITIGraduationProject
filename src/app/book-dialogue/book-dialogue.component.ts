@@ -10,7 +10,7 @@ import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
-import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDTO';
 
 @Component({
   selector: 'app-book-dialogue',

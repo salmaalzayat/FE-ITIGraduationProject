@@ -2,20 +2,21 @@
 <div class="MedicalHeader section-title">
   <h2>Medical History</h2>
 </div>
-    <div class="container justify-content-center">
+    <div class="container d-flex justify-content-center">
       <ng-container *ngIf="!errorLoadingData; else showError">
         <div class="MedicalInfo " *ngIf="MedicalHistoryDto">
-          <div class="table-container ">
+          <div>
+            <!-- class="table-container " -->
             <div class="row">
               <div class="col-12 ">
-                <table class="table ">
+                <table class="table mx-auto my-0 ">
                   <tbody>
                     <tr>
                       <td class="data">Martial Status</td>
                       <td >
-                        <button class="dataButton" [disabled]="true" [ngClass]="{'active': MedicalHistoryDto.martialStatus, 'inactive': !MedicalHistoryDto.diabetes}">Married</button></td>
+                        <button class="dataButton" [disabled]="true" [ngClass]="{'active': MedicalHistoryDto.martialStatus, 'inactive': !MedicalHistoryDto.martialStatus}">Married</button></td>
                       <td >
-                        <button class="dataButton" [disabled]="true" [ngClass]="{'active': !MedicalHistoryDto.martialStatus, 'inactive': MedicalHistoryDto.diabetes}">Single</button></td>
+                        <button class="dataButton" [disabled]="true" [ngClass]="{'active': !MedicalHistoryDto.martialStatus, 'inactive': MedicalHistoryDto.martialStatus}">Single</button></td>
                     </tr>
                     <tr>
                       <td class="data">Pregnancy</td>
@@ -187,7 +188,7 @@
               </div>
             </div>
           </div>
-          <div class="buttons">
+          <div class="buttons pt-4 pb-2">
             <div class="d-flex justify-content-center mb-4">
               <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/profile']">
                   My Profile
@@ -207,12 +208,28 @@
         </div>
       </ng-container>
       <ng-template #showError>
-        <h3 class="text-center mb-4">You don't have a medical history yet.</h3>
+        <div>
+        <h3 class="text-center ">You don't have a medical history yet.</h3>
         <div class="d-flex justify-content-center mb-4">
-          <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/profile']">
-            Back to My Profile
-          </button>
+          <div class="buttons">
+            <div class="d-flex justify-content-center mb-4">
+              <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/profile']">
+                  My Profile
+              </button>
+            </div>
+            <div class="d-flex justify-content-center mb-4">
+              <button class="btn appointment-btn scrollto " disabled type="button" [routerLink]="['/medical-history']">
+                  My Medical History
+              </button>
+            </div>
+            <div class="d-flex justify-content-center mb-4">
+              <button class="btn appointment-btn scrollto"  type="button" [routerLink]="['/appointments']">
+                  My Appointments
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
       </ng-template>
     </div>
 
