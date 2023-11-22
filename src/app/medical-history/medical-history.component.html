@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="MedicalHeader section-title">
+        <h2>Medical History</h2>
+    </div>
+    <div class="MedicalContent">
+        <ng-container *ngIf="!errorLoadingData; else showError">
+        <div class="MedicalInfo" *ngIf="MedicalHistoryDto">
+            <div class="maindata">
+                <div class="data">Martial Status</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.martialStatus || 'Not provided' }}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Pregnancy</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.pregnancy || 'Not provided' }}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Blood Group</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.bloodGroup || 'Not provided' }}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Previous Surgeries</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.previousSurgeries || 'None' }}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Medication</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.medication || 'Not provided' }}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Smoker</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.smoker || 'Not provided'}}</div>
+            </div>
+            <div class="maindata">
+                <div class="data">Diabetes</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.diabetes || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">High Blood Pressure</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.highBloodPressure || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Low Blood Pressure</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.lowBloodPressure || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Asthma</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.asthma || 'Not provided'}}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Hepatitis</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.hepatitis || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Heart Disease</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.heartDisease || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Anxiety or Panic Disorder</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.anxityOrPanicDisorder || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Depression</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.depression || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Allergies</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.allergies || 'Not provided' }}</div>
+            </div>
+
+            <div class="maindata">
+                <div class="data">Other</div>
+                <div class="outputdata">{{ MedicalHistoryDto?.other || 'Not provided' }}</div>
+            </div>
+             <!-- <div>
+                <button class="btn appointment-btn scrollto" type="button" [routerLink]="['/profile']">
+                    Back to My Profile
+                </button>
+            </div>  -->
+        </div>
+    </ng-container>
+    <ng-template #showError>
+      <h3 class="text-center mb-4 ">You don't have a medical history yet.</h3>
+      <div class="d-flex justify-content-center mb-4">
+        <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/profile']">
+            Back to My Profile
+        </button>
+    </div> 
+    </ng-template>
+  </div>
+</div>

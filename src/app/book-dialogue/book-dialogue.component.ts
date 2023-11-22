@@ -4,15 +4,14 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { createInjectableType } from '@angular/compiler';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { PatientService } from '../services/patient.service';
 import { AddPatientVisitDto } from '../Types/AddPatientVisitDto';
 import { DoctorService } from '../services/doctor.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
 import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
+import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
-
 @Component({
   selector: 'app-book-dialogue',
   templateUrl: './book-dialogue.component.html',
@@ -47,8 +46,11 @@ export class BookDialogueComponent implements OnInit{
   day : number;
 }[] = [];
  bookedDate : string = ' '
-  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService
-  , private ContinueBookingService : ContinueBookingService){}
+  constructor(private dialog : DoctorDialogueService, 
+    @Inject(MAT_DIALOG_DATA) public data : any , 
+    private PatientService : PatientService, 
+    private doctorService : DoctorService
+  , private ContinueBookingService : ContinueBookingService,){}
  
   ngOnInit(): void {
 
@@ -124,5 +126,11 @@ export class BookDialogueComponent implements OnInit{
   }
   onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDTO){
     var ref = this.ContinueBookingService.open(doctor,date,patient)
+    
+  }
+
+  loginAndRegister(data:any){
+    this.dialog.sendDataToLoginOrRegister(data,true)
+    this.dialog.close()
   }
 }

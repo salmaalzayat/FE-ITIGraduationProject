@@ -7,6 +7,10 @@ import {TokenDto}  from '../../Types/TokenDto';
 import {RegisterPatientDto }from '../../Types/PatientRegisterDto';
 import { Router } from '@angular/router';
 import {CheckingPhoneNumber} from '../../services/checkingPhoneNumber.service'
+import { ContinueBookingService } from 'src/app/services/continue-booking.service';
+import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
+import { PatientService } from 'src/app/services/patient.service';
+import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
 
 @Component({
   selector: 'app-register',
@@ -14,12 +18,17 @@ import {CheckingPhoneNumber} from '../../services/checkingPhoneNumber.service'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  patientNumber : string = '';
+  patient?: GetPatientByPhoneDTO;
   // RegisterPatientDto: any = {};
 
   constructor(
     private authService : AuthenticationService ,
      private router:Router,
-     private checkingPhoneNumber : CheckingPhoneNumber) {
+     private checkingPhoneNumber : CheckingPhoneNumber,
+     private dialog : DoctorDialogueService,
+     private cofirmDialog : ContinueBookingService,
+     private patientService : PatientService) {
   }
 
   form = new FormGroup({
@@ -117,12 +126,34 @@ export class RegisterComponent {
 
         this.authService.register(credentials).subscribe((tokenDto) => {
           // Registration successful, you can navigate or perform other actions
-          this.router.navigateByUrl('/');
+          if(this.dialog.isBooking){
+            this.router.navigateByUrl('/doctor');
+            this.patientNumber = this.form.controls.phoneNumber.value!
+            this.getPatient(this.patientNumber)
+          }else{
+            this.router.navigateByUrl('/');
+          }
+          
         });
       }
     });
   }
 
+
+getPatient(patientNumber : string){
+  this.patientService.getPatientByPhoneNumber(patientNumber!).subscribe({
+    next:(patient) => {
+      this.patient = patient 
+      this.router.navigate(['/doctor'])
+      this.cofirmDialog.open(this.dialog.dataForLoginRegister.data, this.dialog.dataForLoginRegister.date,this.patient)
+    },
+    error: (error) => {
+   
+     console.log('calling Patient api failed', error)
+     },
+  }); 
+
+}
 
 
 

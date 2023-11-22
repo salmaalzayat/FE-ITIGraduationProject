@@ -27,7 +27,7 @@ export class DoctorService {
   public GetVisitCount(date : string, drId : string ):Observable<VisitCountDto>{
     return this.client.get<VisitCountDto>(`https://localhost:7267/api/Doctor/visitCount/${date}?DoctorId=${drId}`);
   }
-  public GetVisitCountForWeek(date : string , date2 : string ,drId : string):Observable<VisitCountDto[]>{
+  public GetVisitCountForWeek(date: string , date2 : string ,drId : string): Observable<VisitCountDto[]>{
     return this.client.get<VisitCountDto[]>(`https://localhost:7267/api/Doctor/visitCount/${date}/${date2}?DoctorId=${drId}`);
   }
   
