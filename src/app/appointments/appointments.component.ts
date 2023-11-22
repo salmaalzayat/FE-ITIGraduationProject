@@ -1,4 +1,3 @@
-// appointments.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../services/appiontment.service';
 import GetPatientVisitDto from '../Types/GetPatientVisitDto';
@@ -10,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ReviewService } from '../services/review.service';
 import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
 import { ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-appointments',
@@ -18,8 +18,7 @@ import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 })
 export class AppointmentsComponent implements OnInit {
   @ViewChild('ratingForm') ratingForm: ElementRef | undefined;
-  // appointments: {name:string , patientVisits : GetPatientVisitsChildDto[]}[] = []; // Use the DTO type for appointments
-  appointments: any = []; // Use the DTO type for appointments
+  appointments: any = [];
   phoneNumber: string = '';
   doctorID : string = '';
   doctor? : GetDoctorByIDDto;
@@ -28,6 +27,7 @@ export class AppointmentsComponent implements OnInit {
   rate: number = 0 ;
   review: string = '';
   formSubmitted: boolean = false;
+  ratingSet: boolean = false;
 
   constructor(private appointmentService: AppointmentService , private doctorService : DoctorService , private reviewService: ReviewService) {}
 
@@ -51,24 +51,7 @@ export class AppointmentsComponent implements OnInit {
           this.appointments[1].forEach((e:any)=>{
             this.rate = e.rate;
             this.review = e.review;
-          //    const savedRate = localStorage.getItem(`rate_${e.id}`);
-          // if (savedRate) {
-          //   this.setRating(+savedRate);
-          // }
-            // if(this.rate){
-            //   this.setRating(this.rate);
-            //   // console.log("this.rate:"+ this.rate)
-            //   // let stars = Array.from(document.getElementsByClassName("fa-star"));
-            //   // console.log("stars:"+ stars)
-            //   // console.log("stars:"+ document.getElementsByClassName("fa-star"))
-            //   // for (let i = 0; i < stars.length; i++) {
-            //   //   if (i < this.rate) {
-            //   //     stars[i].classList.add('filled-star');
-            //   //   } else {
-            //   //     stars[i].classList.remove('filled-star');
-            //   //   }
-            //   // }
-            // }
+
             this.doctorID = e.doctorId;
             this.doctorService.getDoctorById(this.doctorID).subscribe((d)=>{
               this.doctor = d;
@@ -109,8 +92,6 @@ export class AppointmentsComponent implements OnInit {
   isTodayVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    // console.log(currentDate.toDateString());
-    // console.log(visitDate.toDateString());
     return visitDate.toDateString() === currentDate.toDateString();
   }
 
@@ -137,7 +118,7 @@ export class AppointmentsComponent implements OnInit {
     console.log(this.form.controls)
   }
 
-  clickHandle(e: Event , id:string) {
+  clickHandle(e: Event , id:string , i:number) {
     const rate: number | null = this.form.controls.rate.value;
     const review: string | null = this.form.controls.review.value;
     const appointmentIndex = this.appointments[1].findIndex((appointment: any) => appointment.id === id);
@@ -160,28 +141,48 @@ export class AppointmentsComponent implements OnInit {
       {
         console.log(reviewDto);
       });
-      // Do something with the rate value, if needed
+
     } else {
-      // Handle the case where the rate is null or the form control is not valid
       console.error('Rate is either null or not valid');
     }
 
     this.formSubmitted = true;
+    let btn = e.target as HTMLFormElement
+    let reviewDiv = document.getElementById('i_'+i)
+    let reviewData = document.getElementsByClassName("reviewData");
+    console.log("review div: " + reviewDiv)
+    console.log("review data: " + reviewData)
+    if(this.formSubmitted){
+      console.log("submitted successfully")
+      btn.style.display = "none";
+      if(reviewDiv != null){
+        reviewDiv.style.display = "none"
+      }
+      for (let i = 0; i < reviewData.length; i++) {
+        let element = reviewData[i] as HTMLElement;
+        element.style.display = "block";
+      }
+    }
+    this.ratingSet = false;
   }
-
-  // ... (existing code)
+  getStarsArray(count: number): number[] {
+    return Array.from({ length: count }, (_, index) => index + 1);
+  }
+  getRemainingStarsArray(rate: number): number[] {
+    const remainingStarsCount = 5 - rate;
+    return Array.from({ length: remainingStarsCount }, (_, index) => rate + index + 1);
+  }
 
 setRating(star: number, appointmentIndex: number) {
   this.form.controls.rate.setValue(star);
   console.log("app index= " + appointmentIndex)
 
   if (this.ratingForm) {
-    // let stars = this.ratingForm.nativeElement.querySelectorAll('.fa-star');
     let card = document.getElementById(`${appointmentIndex}`)!;
     let stars = card?.getElementsByClassName("fa-star");
     console.log("card" + card)
     console.log("stars: " + stars)
-    // let stars =
+
     console.log('stars in fn:', stars);
 
     for (let i = 0; i < stars.length; i++) {
@@ -195,47 +196,20 @@ setRating(star: number, appointmentIndex: number) {
         starElement.classList.remove('filled-star');
       }
     }
+    this.ratingSet = true;
+    if (stars && this.ratingSet) {
+      let buttons = card.getElementsByClassName("ButtonItem");
+      for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i] as HTMLElement;
+        button.style.opacity = '1';
+      }
+    }
+
   }
 
-  // You can access the appointment ID here and do whatever you need with it
+  // You can access the appointment ID here
   const appointmentId = this.appointments[1][appointmentIndex].id;
   console.log('Appointment ID:', appointmentId);
 }
 
-
-//2nd
-  // setRating(star: number) {
-  //   this.form.controls.rate.setValue(star);
-
-  //   if (this.ratingForm) {
-  //     let stars = this.ratingForm.nativeElement.querySelectorAll('.fa-star');
-  //     console.log('stars in fn:', stars);
-
-  //     for (let i = 0; i < stars.length; i++) {
-  //       if (i < star) {
-  //         stars[i].classList.add('filled-star');
-  //       } else {
-  //         stars[i].classList.remove('filled-star');
-  //       }
-  //     }
-  //   }
-  // }
-  //1st
-  // setRating(star: number) {
-  //   this.form.controls.rate.setValue(star);
-  //   let stars = Array.from(document.getElementsByClassName("fa-star"));
-  //   // let starss =
-  //   console.log("star in fn: " + star)
-  //   console.log("stars in fn: " +stars)
-  //   for (let i = 0; i < stars.length; i++) {
-  //     if (i < star) {
-  //       stars[i].classList.add('filled-star');
-  //     } else {
-  //       stars[i].classList.remove('filled-star');
-  //     }
-  //   }
-  // }
 }
-
-
-
