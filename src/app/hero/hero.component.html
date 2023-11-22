@@ -14,7 +14,7 @@
           <option selected="" value="All" id="All">All Specialization</option>
           <option  *ngFor="let Specialization of specializations" [value]="Specialization.id "> {{ Specialization.name }}</option>
           </select>
-        <select  (change)="doctorSelected($event)" class=" col form-select border-2 py-3">
+        <select  (change)="doctorSelected($event)" class=" col form-select border-2 py-3 mx-3">
         <option value="allDoctors" selected="">All Doctors</option>
         <ng-container *ngIf="isSpecializationSelected" >
           <option *ngFor="let doctor of Doctors"  [value]="doctor.id"> {{doctor.name}} </option>
