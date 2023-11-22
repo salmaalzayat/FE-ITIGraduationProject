@@ -5,37 +5,37 @@
 </div>
 
 <div *ngIf="appointments[1].length > 0; else noAppointments">
-  <!-- <h2>Appointments for {{ appointments[0] }}</h2> -->
 
   <div>
     <div class="patientVisitsCard" *ngFor="let appointment of sortedAppointments; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.dateOfVisit), 'today-visit': isTodayVisit(appointment.dateOfVisit), 'past-visit': isPastVisit(appointment.dateOfVisit)}">
       <div class="bookmark"></div>
-      <h5 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }} {{appointment.id}}</span></h5>
+      <h5 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }}</span></h5>
       <p><span> Doctor Name: </span>{{ this.doctor?.name }}</p>
-      <!-- <p><span>Date of Visit : </span> {{ appointment.dateOfVisit }}</p> -->
       <p><span>Date of Visit : </span> {{ appointment.dateOfVisit | date:'dd/MM/yyyy':'en-US' }} </p>
       <p *ngIf="appointment.visitStatus == 'done' "><span> Prescription: </span> {{ appointment.prescription }}</p>
-      <p *ngIf="appointment.rate"><span>Your Rate For This Appointment:</span> {{appointment.rate}}/5</p>
-
-      <!-- <div *ngIf="appointment.rate ? setRating(appointment.rate):null"><span>Your Rate For This Appointment:</span> -->
-        <!-- <div class="rating-stars">
-        <span  *ngFor="let star of [1, 2, 3, 4, 5]">
-          <i class="fas fa-star"></i>
-        </span>
-      </div> -->
-      <!-- </div> -->
-      <!-- <p *ngIf="formSubmitted">
-        <span>Your Review For This Appointment:</span> {{ appointment.review }}
-      </p> -->
-      <p>
+      <p *ngIf="formSubmitted || appointment.review" class="reviewData ratingDiv">
         <span>Your Review For This Appointment:</span> {{ appointment.review }}
       </p>
+
+      <div>
+      <div *ngIf="appointment.rate"  class="ratingDiv"><span>Your Rate For This Appointment:</span>
+        <div class="rating-stars">
+        <span  *ngFor="let star of getStarsArray(appointment.rate)" (load)="setRating(star, i)">
+          <i class="fas fa-star fiiled-stars"></i>
+        </span>
+        <span *ngFor="let star of getRemainingStarsArray(appointment.rate)" (load)="setRating(star, i)">
+          <i class="fas fa-star"></i>
+        </span>
+      </div>
+      </div>
+    </div>
+
+
 
       <form [formGroup]="form" [id]="i" #ratingForm *ngIf="appointment.visitStatus == 'done' && appointment.rate == null">
 
         <div class="ratingDiv">
           <label for="rate">Rate This Appointment: </label>
-          <!-- <input type="number" id="rate" formControlName="rate" [(ngModel)]="appointment.rate"> -->
           <div class="rating-stars">
             <span  *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star,i)">
               <i class="fas fa-star"></i>
@@ -43,21 +43,14 @@
           </div>
 
         </div>
-        <div class="ratingDiv">
+        <div class="ratingDiv" [id]="'i_' + i">
           <label for="review">Your Review: </label>
           <textarea id="review" formControlName="review" [(ngModel)]="appointment.review"></textarea>
         </div>
         <div class="ratingDiv buttonDiv">
-          <button (click)="clickHandle($event , appointment.id)">Submit</button>
+          <button class="ButtonItem" (click)="clickHandle($event , appointment.id ,i )" [disabled]="!ratingSet">Submit</button>
         </div>
       </form>
-
-      <!-- <div *ngIf="appointment.rate !== undefined && form.controls.rate.dirty">
-        <p><span> Rated Value: </span> {{ appointment.rate }}</p>
-      </div>
-      <div *ngIf="appointment.review !== undefined && form.controls.review.dirty">
-        <p><span> Review Value: </span> {{ appointment.review }}</p>
-      </div> -->
 
 
     </div>
