@@ -1,4 +1,7 @@
 export interface GetPatientVisitsChildDto {
+  id: number;
+  review: string | null;
+  rate: number | null;
   doctorId: string;
   dateOfVisit: string;
   comments: string | null;

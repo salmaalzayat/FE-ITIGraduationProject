@@ -27,7 +27,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
 import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 import { ContinueBookingComponent } from './continue-booking/continue-booking.component';
-
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { ContinueBookingComponent } from './continue-booking/continue-booking.co
     BookDialogueComponent,
     BookDialog2Component,
     ContinueBookingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -60,6 +61,7 @@ import { ContinueBookingComponent } from './continue-booking/continue-booking.co
     CommonModule,
     MatDialogModule,
     MatButtonModule,
+    MatSliderModule,
     ReactiveFormsModule
   ],
   providers: [],
