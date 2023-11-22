@@ -88,7 +88,6 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         this.doctorService.getDoctorById(this.dId).subscribe({
         next:(doctorById) => {
           this.doctorById = doctorById;
-         
           this.getDate(this.doctorById)
          },
         error: (error) => {
@@ -114,16 +113,21 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
     getDate(doctorById : GetDoctorByIDDto){
      
         let currentDate = new Date();
+        
         const year : number = currentDate.getFullYear()
         const month : number = currentDate.getMonth()+1
         const day : number = currentDate.getDate()+0
         let startDate  = `${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`
+       
+        let endDate =new Date (currentDate.setDate(currentDate.getDate() + 7));
 
-         const endDay : number = currentDate.getDate()+7
-
-         let endDate = `${year}-${month.toString().padStart(2,'0')}-${endDay.toString().padStart(2,'0')}`
-
-         this.doctorService.GetVisitCountForWeek(startDate,endDate,doctorById.id).subscribe({
+        const endyear : number = endDate.getFullYear()
+        const endmonth : number = endDate.getMonth()+1
+        const endDay : number = endDate.getDate()+0
+      
+       let endDate1 = `${endyear}-${endmonth.toString().padStart(2,'0')}-${endDay.toString().padStart(2,'0')}`
+       
+       this.doctorService.GetVisitCountForWeek(startDate,endDate1,doctorById?.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
 

@@ -14,5 +14,9 @@ export class ContinueBookingService {
         data:{doctor,date,patient}
       })
     }
+
+    close(){
+      this.dialog.closeAll()
+    }
    
 }

@@ -46,8 +46,11 @@ export class BookDialogueComponent implements OnInit{
   day : number;
 }[] = [];
  bookedDate : string = ' '
-  constructor(private dialog : DoctorDialogueService, @Inject(MAT_DIALOG_DATA) public data : any , private PatientService : PatientService, private doctorService : DoctorService
-  , private ContinueBookingService : ContinueBookingService){}
+  constructor(private dialog : DoctorDialogueService, 
+    @Inject(MAT_DIALOG_DATA) public data : any , 
+    private PatientService : PatientService, 
+    private doctorService : DoctorService
+  , private ContinueBookingService : ContinueBookingService,){}
  
   ngOnInit(): void {
 
@@ -123,5 +126,11 @@ export class BookDialogueComponent implements OnInit{
   }
   onContinue(doctor:GetDoctorByIDDto,date : string , patient? : GetPatientByPhoneDTO){
     var ref = this.ContinueBookingService.open(doctor,date,patient)
+    
+  }
+
+  loginAndRegister(data:any){
+    this.dialog.sendDataToLoginOrRegister(data,true)
+    this.dialog.close()
   }
 }

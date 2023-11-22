@@ -6,4 +6,8 @@ export interface ChildDoctorOfSpecializationDto {
     title: string | null;
     description: string | null;
     weekSchadual: WeekScheduleForDoctorsDto[] | null;
+    imageFileName? : string
+    imageStoredFileName? :string  
+    imageContentType? :string 
+    imageUrl? : string 
 }
