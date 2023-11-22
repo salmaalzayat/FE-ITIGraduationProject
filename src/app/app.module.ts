@@ -23,10 +23,11 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { CommonModule } from '@angular/common';
 import { MedicalHistoryComponent } from './medical-history/medical-history.component';
  import {MatDialogModule} from '@angular/material/dialog'; 
-import {MatButtonModule} from '@angular/material/button';
+ import {MatButtonModule} from '@angular/material/button';
 import { BookDialogueComponent } from './book-dialogue/book-dialogue.component';
 import { BookDialog2Component } from './book-dialog2/book-dialog2.component';
 import { ContinueBookingComponent } from './continue-booking/continue-booking.component';
+import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -51,6 +52,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BookDialogueComponent,
     BookDialog2Component,
     ContinueBookingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -59,10 +61,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatButtonModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

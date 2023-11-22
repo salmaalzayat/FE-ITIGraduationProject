@@ -29,10 +29,7 @@ export class ProfileComponent implements OnInit {
       // const dob = localStorage.getItem('dob');
       if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
-      //   if(dob){
-      //     this.dob = dob;
-      //   }
-      // } else {
+
          // If user data is not available in localStorage, fetch it from the server
         this.patientProfile.getUserData(this.phoneNumber).subscribe(
           (data) => {
@@ -50,7 +47,12 @@ export class ProfileComponent implements OnInit {
 
 
 
+    //   if(dob){
+      //     this.dob = dob;
+      //   }
+      // } else {
 
+      /////////////////////////////
     // this.patientProfile.getUserData(this.phoneNumber).subscribe(
     //   (data) => {
     //     this.userData = data;
