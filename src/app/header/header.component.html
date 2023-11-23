@@ -33,8 +33,9 @@
           <li><a *ngIf="!navBarisLoggedIn" class="nav-link scrollto" [routerLink]="['/login']">Login</a></li>
 
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav>
+
       <div *ngIf="navBarisLoggedIn" class="dropdown">
         <button class="btn appointment-btn scrollto dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Welcome {{username}} !
@@ -46,6 +47,28 @@
           <li><hr class="dropdown-divider"></li> -->
           <li><a class="dropdown-item d-flex justify-content-between" (click)="logout()" href="#">Logout<i class="bi bi-box-arrow-right"></i></a></li>
         </div>
+      </div>
+      <div class="dropdown d-block d-lg-none mainDropdownList">
+        <button class="btn appointment-btn scrollto dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown-menu dropMenu" aria-labelledby="dropdownMenuButton">
+            <ul>
+              <li><a class="nav-link scrollto" [routerLink]="['/hero']">Home</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="nav-link scrollto" [routerLink]="['/about']">About</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="nav-link scrollto" [routerLink]="['/services']">Services</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="nav-link scrollto" [routerLink]="['/Specializations']">Specializations</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="nav-link scrollto" [routerLink]="['/contact']">Contact</a></li>
+              <li><hr *ngIf="!navBarisLoggedIn" class="dropdown-divider"></li>
+              <li><a *ngIf="!navBarisLoggedIn" class="nav-link scrollto" [routerLink]="['/register']">Register</a></li>
+              <li><hr *ngIf="!navBarisLoggedIn" class="dropdown-divider"></li>
+              <li><a *ngIf="!navBarisLoggedIn" class="nav-link scrollto" [routerLink]="['/login']">Login</a></li>
+
+            </ul>
+          </div>
+        </button>
       </div>
     </div>
   </header><!-- End Header -->
