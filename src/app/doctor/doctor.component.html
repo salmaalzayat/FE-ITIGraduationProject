@@ -1,12 +1,12 @@
     <!-- ======= Doctors Section ======= -->
     <section id="doctors" class="doctors section-bg">
         <div class="container" data-aos="fade-up">
-  
+
           <div class="section-title">
             <h2>Doctors</h2>
             <p>Explore our experienced and dedicated medical professionals. Find the right doctor for your healthcare needs.</p>
           </div>
-          
+
         <ng-container *ngIf="sId==0 && !doctorById">
           <div class="row">
             <div *ngFor="let doctor of doctors" class="cardDoctor card d-flex align-items-stretch">
@@ -17,17 +17,17 @@
                   <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
 
                 </div>
-                
+
                 <div class="member-info">
                   <h3 class="doctorName">{{doctor.name}}</h3>
                   <h4 class="doctorTitle">{{doctor.title}}</h4>
                   <span class="doctorDes">{{doctor.description}}</span>
                 </div>
                 </div>
-                
+
                     <ng-container *ngFor="let record of Visits">
-                    <span *ngIf="doctor.id==record.drId" class="appointments" > 
-                   <span  *ngFor="let c of record.visitrecord" class="box"> 
+                    <span *ngIf="doctor.id==record.drId" class="appointments" >
+                   <span  *ngFor="let c of record.visitrecord" class="box">
                     <ng-container *ngIf="c"  >
                       <span *ngIf="c.day==3" class="divider"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4" class="divider"> Thursday {{c.date}}</span>
@@ -37,9 +37,9 @@
                       <span *ngIf="c.day==1" class="divider"> Monday {{c.date}}</span>
                       <span *ngIf="c.day==2" class="divider"> Tuesday {{c.date}}</span>
                     </ng-container>
-                    
-                  <div *ngFor="let schedule of doctor.weekSchadual"> 
-                    <span *ngIf="schedule.id== c.weekScheduleId"> 
+
+                  <div *ngFor="let schedule of doctor.weekSchadual">
+                    <span *ngIf="schedule.id== c.weekScheduleId">
                       <span>{{c.weekScheduleId}}</span>
                          <span *ngIf="schedule.isAvailable ">
                          <span>{{schedule.startTime}}</span>
@@ -56,17 +56,17 @@
                      </div>
                 </span>
 
-                
+
                 </span>
-          
+
                   </ng-container>
-                
-               
+
+
            </div>
               </div>
             </div>
-          
-        </ng-container> 
+
+        </ng-container>
 
         <ng-container *ngIf="sId != 0 && !doctorById">
           <div class="row">
@@ -77,7 +77,7 @@
                     <div class="doctorinfo">
                      <div class="member-img">
                        <img src="{{doctor.imageUrl}}" class="img-fluid" alt="">
-                     
+                       <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
                      </div>
                      <div class="member-info">
                       <h3 class="doctorName">{{doctor.name}}</h3>
@@ -86,8 +86,8 @@
                     </div>
                   </div>
                    <ng-container *ngFor="let record of Visits">
-                    <span *ngIf="doctor.id==record.drId" class="appointments"> 
-                   <span *ngFor="let c of record.visitrecord"  class="box"> 
+                    <span *ngIf="doctor.id==record.drId" class="appointments">
+                   <span *ngFor="let c of record.visitrecord"  class="box">
                       <ng-container *ngIf="c">
                       <span *ngIf="c.day==3" class="divider"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4" class="divider"> Thursday {{c.date}}</span>
@@ -97,7 +97,7 @@
                       <span *ngIf="c.day==1" class="divider"> Monday {{c.date}}</span>
                       <span *ngIf="c.day==2" class="divider"> Tuesday {{c.date}}</span>
                     </ng-container>
-                  <div *ngFor="let schedule of doctor.weekSchadual"> 
+                  <div *ngFor="let schedule of doctor.weekSchadual">
                     <span *ngIf="schedule.id== c.weekScheduleId">
                          <span *ngIf="schedule.isAvailable " class="time">
                          <span *ngIf="c.limitOfPatients!=c.actualNoOfPatients">{{schedule.startTime}}</span>
@@ -105,7 +105,7 @@
                          <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
                           <button [disabled]="true"  class="book-disabled">Book</button></span>
                           <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)" class="book-btn">Book</button>
-                                                
+
                        </span> </span>
                        <span *ngIf="!schedule.isAvailable && c.weekScheduleId==schedule.id"  class="disable-btn">
                          <span>Day off</span>
@@ -114,18 +114,18 @@
                      </div>
                 </span>
 
-                
+
                 </span>
-          
+
                   </ng-container>
-                   
-                   
+
+
             </div>
                </div>
               </div>
-             </div>  
+             </div>
           </div>
-         </ng-container> 
+         </ng-container>
         <ng-container *ngIf="doctorById">
           <div class="row">
             <div class="cardDoctor card d-flex align-items-stretch">
@@ -133,9 +133,10 @@
                 <div class="doctorinfo">
                 <div class="member-img">
                   <img src="{{doctorById.imageUrl}}" class="img-fluid" alt="">
-                
+                  <img *ngIf="!doctorById.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
+
                 </div>
-                
+
                 <div class="member-info">
                   <h3 class="doctorName">{{doctorById.name}}</h3>
                   <h4 class="doctorTitle">{{doctorById.title}}</h4>
@@ -151,21 +152,21 @@
                       <span *ngIf="record.day==1" class="divider">Monday {{record.date}}</span>
                       <span *ngIf="record.day==2" class="divider">Tuesday {{record.date}}</span>
                 <div *ngFor="let schedule of doctorById.weekSchadual">
-                 <span *ngIf="schedule.id==record.weekScheduleId"> 
+                 <span *ngIf="schedule.id==record.weekScheduleId">
                       <span *ngIf="schedule.isAvailable " class="time">
                       <span *ngIf="record.limitOfPatients!=record.actualNoOfPatients">{{schedule.startTime}}</span>
                       <span *ngIf="record.limitOfPatients!=record.actualNoOfPatients">{{schedule.endTime}}</span>
                       <span *ngIf="record.limitOfPatients==record.actualNoOfPatients" >No Available Appointments
                       <button (click)="book(doctorById,record.date)" [disabled]="true" class="book-disabled">Book</button></span>
                       <button *ngIf="record.limitOfPatients>record.actualNoOfPatients"(click)="book(doctorById,record.date)" class="book-btn">Book</button>
-                    
+
                     </span>
                     </span>
                     <span *ngIf="!schedule.isAvailable && record.weekScheduleId==schedule.id" class="disable-btn">
                       <span>Day Off</span>
                       <button [disabled]="true" class="book-disabled">Book</button>
                     </span>
-                   
+
                   </div>
                  </div>
            </span>
@@ -173,10 +174,9 @@
             </div>
           </div>
         </ng-container>
-          
-      
-         
+
+
+
           </div>
-  
+
       </section><!-- End Doctors Section -->
-  

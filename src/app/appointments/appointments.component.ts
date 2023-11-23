@@ -86,8 +86,9 @@ export class AppointmentsComponent implements OnInit {
   isFutureVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    return visitDate.toDateString() > currentDate.toDateString();
+    return visitDate.toDateString() < currentDate.toDateString();
   }
+
 
   isTodayVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
@@ -98,7 +99,7 @@ export class AppointmentsComponent implements OnInit {
   isPastVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    return visitDate.toDateString() < currentDate.toDateString();
+    return visitDate.toDateString() > currentDate.toDateString();
   }
   get sortedAppointments(): any[] {
     // Assuming appointments[1] is an array of appointments

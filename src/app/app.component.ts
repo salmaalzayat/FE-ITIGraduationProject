@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './services/authService.service';
+import { LoadingService } from './services/loading.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -10,10 +11,10 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   title = 'graduation-project';
-
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    public loadingService:LoadingService
   ) {}
 
   ngOnInit(): void {
