@@ -11,6 +11,7 @@ import { ContinueBookingService } from 'src/app/services/continue-booking.servic
 import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ export class RegisterComponent {
      private checkingPhoneNumber : CheckingPhoneNumber,
      private dialog : DoctorDialogueService,
      private cofirmDialog : ContinueBookingService,
-     private patientService : PatientService) {
+     private patientService : PatientService,
+     private loadingService : LoadingService) {
   }
 
   form = new FormGroup({
@@ -103,7 +105,9 @@ export class RegisterComponent {
   handleSubmit(e: Event) {
     e.preventDefault();
 
-    const phoneNumber = this.form.get('phoneNumber')?.value ?? '';
+
+
+      const phoneNumber = this.form.get('phoneNumber')?.value ?? '';
     console.log(phoneNumber);
 
     this.checkingPhoneNumber.checkPhoneNumberExists(phoneNumber).subscribe((exists) => {
@@ -114,6 +118,9 @@ export class RegisterComponent {
         // this.form.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
       } else if(!exists){
         console.log("not exist")
+        this.loadingService.setLoading(true);
+
+           setTimeout(() => {
         const credentials = new RegisterPatientDto();
         credentials.phoneNumber = this.form.controls.phoneNumber.value ?? '';
         credentials.username = this.form.controls.username.value ?? '';
@@ -126,32 +133,37 @@ export class RegisterComponent {
 
         this.authService.register(credentials).subscribe((tokenDto) => {
           // Registration successful, you can navigate or perform other actions
-          if(this.dialog.isBooking){
-            this.router.navigateByUrl('/doctor');
-            this.patientNumber = this.form.controls.phoneNumber.value!
-            this.getPatient(this.patientNumber)
-          }else{
-            this.router.navigateByUrl('/');
+          if(tokenDto){
+            if(this.dialog.isBooking){
+              this.router.navigateByUrl('/doctor');
+              this.patientNumber = this.form.controls.phoneNumber.value!
+              this.getPatient(this.patientNumber)
+            }else{
+              this.loadingService.setLoading(false);
+              this.router.navigateByUrl('/');
+            }
           }
-          
         });
+        }, 2000);
       }
     });
+
+
   }
 
 
 getPatient(patientNumber : string){
   this.patientService.getPatientByPhoneNumber(patientNumber!).subscribe({
     next:(patient) => {
-      this.patient = patient 
+      this.patient = patient
       this.router.navigate(['/doctor'])
       this.cofirmDialog.open(this.dialog.dataForLoginRegister.data, this.dialog.dataForLoginRegister.date,this.patient)
     },
     error: (error) => {
-   
+
      console.log('calling Patient api failed', error)
      },
-  }); 
+  });
 
 }
 

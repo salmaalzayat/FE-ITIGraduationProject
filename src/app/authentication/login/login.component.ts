@@ -8,7 +8,7 @@ import { DoctorDialogueService } from 'src/app/services/doctor-dialogue.service'
 import { ContinueBookingService } from 'src/app/services/continue-booking.service';
 import { GetPatientByPhoneDTO } from 'src/app/Types/GetPatientByPhoneDto';
 import { PatientService } from 'src/app/services/patient.service';
-
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,8 @@ export class LoginComponent {
     private router: Router,
     private dialog : DoctorDialogueService,
     private confirmationDialog : ContinueBookingService,
-    private patientService : PatientService
+    private patientService : PatientService,
+    private loadingService : LoadingService
   ) {}
   form = new FormGroup({
     phoneNumber: new FormControl<string>('', [Validators.required, phoneNumberLengthValidator , this.onlyNumbersValidator]),
@@ -65,49 +66,63 @@ export class LoginComponent {
   handleSubmit(e: Event) {
     e.preventDefault();
 
-    var credentials = new PatientLoginDto();
-    credentials.phoneNumber = this.form.controls.phoneNumber.value ?? '';
-    credentials.password = this.form.controls.password.value ?? '';
 
-    this.authService.login(credentials).subscribe((tokenDto) => {
-      console.log(tokenDto);
-      if(this.dialog.isBooking){
-        this.router.navigate(['/doctor'])
-        this.patientNumber = this.form.controls.phoneNumber.value!
-        this.getPatient(this.patientNumber)
-      }
-      this.router.navigateByUrl('/');
 
-    },
-    (error) => {
-      //unauthorized
-      if (error.status === 401) {
-        this.errorMessage = 'This password is incorrect. Please double-check your password';
-      //not found
-      }if (error.status === 404) { 
-        this.errorMessage = 'The phone number you entered is not connected to an account.';
-      }else {
-        console.log('Some other error occurred:', error);
+    // setTimeout(()=>{
+      var credentials = new PatientLoginDto();
+      credentials.phoneNumber = this.form.controls.phoneNumber.value ?? '';
+      credentials.password = this.form.controls.password.value ?? '';
+
+      this.authService.login(credentials).subscribe((tokenDto) => {
+          this.loadingService.setLoading(true);
+          console.log(tokenDto);
+          setTimeout(()=>{
+            if(!tokenDto){
+              if(this.dialog.isBooking){
+                this.router.navigate(['/doctor'])
+                this.patientNumber = this.form.controls.phoneNumber.value!
+                this.getPatient(this.patientNumber)
+              }
+            }
+            else if(tokenDto){
+            this.loadingService.setLoading(false);
+            this.router.navigateByUrl('/');
+            }
+          },2000)
+      },
+      (error) => {
+        //unauthorized
+        this.loadingService.setLoading(false);
+        if (error.status === 401) {
+          this.errorMessage = 'This password is incorrect. Please double-check your password';
+
+        //not found
+        }if (error.status === 404) {
+          this.errorMessage = 'The phone number you entered is not connected to an account.';
+        }else {
+          console.log('Some other error occurred:', error);
+        }
       }
-    }
-  );
+    );
+    // },2000)
+
 }
 
 
 getPatient(patientNumber : string){
   this.patientService.getPatientByPhoneNumber(patientNumber!).subscribe({
     next:(patient) => {
-      this.patient = patient 
+      this.patient = patient
       this.router.navigate(['/doctor'])
 
       this.confirmationDialog.open(this.dialog.dataForLoginRegister.data, this.dialog.dataForLoginRegister.date,this.patient)
 
     },
     error: (error) => {
-   
+
      console.log('calling Patient api failed', error)
      },
-  }); 
+  });
 
 }
 }
