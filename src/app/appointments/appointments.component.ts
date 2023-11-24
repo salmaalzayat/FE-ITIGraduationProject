@@ -10,6 +10,7 @@ import { ReviewService } from '../services/review.service';
 import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
 import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-appointments',
@@ -29,7 +30,8 @@ export class AppointmentsComponent implements OnInit {
   formSubmitted: boolean = false;
   ratingSet: boolean = false;
 
-  constructor(private appointmentService: AppointmentService , private doctorService : DoctorService , private reviewService: ReviewService) {}
+  constructor(private appointmentService: AppointmentService ,
+     private doctorService : DoctorService , private reviewService: ReviewService, private loadingService: LoadingService) {}
 
 
   ngOnInit(): void {
@@ -41,6 +43,8 @@ export class AppointmentsComponent implements OnInit {
       this.phoneNumber = userData.phoneNumber;
 
       if (this.phoneNumber) {
+        this.loadingService.setLoading(true);
+        setTimeout(() => {
         this.loadAppointments(this.phoneNumber).subscribe((data) => {
           this.appointments = data;
           console.log(data)
@@ -65,12 +69,14 @@ export class AppointmentsComponent implements OnInit {
 
             // Accessing patient visits of the first appointment
             const patientVisits = this.appointments[1];
-            if (patientVisits.length > 0) {
-              console.log('First patient visit date:', patientVisits[0].dateOfVisit);
-              console.log('First patient visit comments:', patientVisits[0].comments);
+              if (patientVisits.length > 0) {
+                console.log('First patient visit date:', patientVisits[0].dateOfVisit);
+                console.log('First patient visit comments:', patientVisits[0].comments);
+              }
+              this.loadingService.setLoading(false);
             }
-          }
-        });
+          });
+        }, 2000);
       } else {
         console.error('Phone number not found in local storage.');
       }
