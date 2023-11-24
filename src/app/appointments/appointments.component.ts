@@ -11,6 +11,7 @@ import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
 import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppComponent } from '../app.component';
 
+
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
@@ -28,8 +29,12 @@ export class AppointmentsComponent implements OnInit {
   review: string = '';
   formSubmitted: boolean = false;
   ratingSet: boolean = false;
+  dateOfVisit: any;
+  formattedDate: string = '';
 
-  constructor(private appointmentService: AppointmentService , private doctorService : DoctorService , private reviewService: ReviewService) {}
+  constructor(private appointmentService: AppointmentService ,
+     private doctorService : DoctorService ,
+      private reviewService: ReviewService ) {}
 
 
   ngOnInit(): void {
@@ -53,6 +58,14 @@ export class AppointmentsComponent implements OnInit {
             this.review = e.review;
 
             this.doctorID = e.doctorId;
+            // this.dateOfVisit = e.dateOfVisit;
+            // console.log(this.dateOfVisit);
+            // console.log(typeof(this.dateOfVisit));
+            // console.log(typeof(e.dateOfVisit));
+            // console.log(this.isPastVisit(this.dateOfVisit));
+            // console.log(this.isFutureVisit(this.dateOfVisit));
+            // console.log(this.isTodayVisit(this.dateOfVisit));
+
             this.doctorService.getDoctorById(this.doctorID).subscribe((d)=>{
               this.doctor = d;
               console.log(this.doctor.name)
@@ -86,20 +99,28 @@ export class AppointmentsComponent implements OnInit {
   isFutureVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    return visitDate.toDateString() < currentDate.toDateString();
+    return visitDate > currentDate;
+
   }
 
 
   isTodayVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    return visitDate.toDateString() === currentDate.toDateString();
+    if (visitDate.toDateString() == currentDate.toDateString()){
+  console.log("today:" + visitDate.toDateString())
+    console.log("today:" + currentDate.toDateString())
+    console.log("today:" + visitDate)
+    console.log("today:" + currentDate)
+    return true
+    };
+    return false;
   }
 
   isPastVisit(dateOfVisit: string): boolean {
     const visitDate = new Date(dateOfVisit);
     const currentDate = new Date();
-    return visitDate.toDateString() > currentDate.toDateString();
+    return visitDate < currentDate;
   }
   get sortedAppointments(): any[] {
     // Assuming appointments[1] is an array of appointments
