@@ -63,18 +63,22 @@ padding-bottom: 5px;
 }
 .today-visit::before {
   content: 'Today';
-  margin: 15px;
-  height: 90px;
+  margin: 0 auto;
+  height: 40px;
   border: 20px solid var(--todayColor);
   border-left: 25px solid transparent;
   position: absolute;
-  right: -20px;
-  top: -20px;
+  right: 50%;
+  top: 0;
+  transform: translateX(50%);
   background-color: var(--todayColor);
   padding: 5px;
   border-radius: 5px;
   color: white;
   font-size: x-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* //////// */

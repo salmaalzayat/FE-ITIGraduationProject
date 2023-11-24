@@ -9,7 +9,7 @@
   <div>
     <div class="patientVisitsCard" *ngFor="let appointment of sortedAppointments; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.dateOfVisit), 'today-visit': isTodayVisit(appointment.dateOfVisit), 'past-visit': isPastVisit(appointment.dateOfVisit)}">
       <div class="bookmark"></div>
-      <h5 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }}</span></h5>
+      <h3 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }}</span></h3>
       <p><span> Doctor Name: </span>{{ this.doctor?.name }}</p>
       <p><span>Date of Visit : </span> {{ appointment.dateOfVisit | date:'dd/MM/yyyy':'en-US' }} </p>
       <p *ngIf="appointment.visitStatus == 'done' "><span> Prescription: </span> {{ appointment.prescription }}</p>
