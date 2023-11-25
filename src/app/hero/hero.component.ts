@@ -33,7 +33,8 @@ export class HeroComponent implements OnInit {
 constructor(private doctorService : DoctorService , 
   private specializationService: SpecializationService,
    private router:Router,
-    private data : DataBetweenDoctorCompHeroCompService){}
+    private data : DataBetweenDoctorCompHeroCompService,
+    private loadingService: LoadingService){}
   ngOnInit():void{
     this.data.currentId.subscribe(sId => this.sId = sId)
     this.data.currentDoctorId.subscribe(dId => this.dId = dId)
@@ -68,6 +69,7 @@ constructor(private doctorService : DoctorService ,
         this.isSpecializationSelected = false;
       }
       this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
+      console.log(this.Doctors)
     }
 
   doctorSelected(event: Event):void{
