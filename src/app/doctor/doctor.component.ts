@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { GetAllDoctorsDto } from '../Types/GetAllDoctorsDto';
 import { GetDoctorsBySpecializationDto } from '../Types/GetDoctorsBySpecializationDto';
@@ -9,17 +9,22 @@ import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { DoctorDialogueService } from '../services/doctor-dialogue.service';
 import { BookDialogueComponent  } from '../book-dialogue/book-dialogue.component';
 import { VisitCountDto } from '../Types/VisitCountDto';
+import { Token } from '@angular/compiler';
+import { PatientService } from '../services/patient.service';
+import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
+import { ContinueBookingService } from '../services/continue-booking.service';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css']
 })
-export class DoctorComponent implements OnInit{
+export class DoctorComponent implements OnInit , AfterViewInit{
  
   doctors?: GetAllDoctorsDto[];
   doctorsBySpecialization?: GetDoctorsBySpecializationDto[];
   doctorById? : GetDoctorByIDDto;
   doctorBySpecialization? : GetDoctorByIDDto;
+  patient? : GetPatientByPhoneDTO;
   sId : number =0;
   dId: string = '0';
   sort : string = ' '
@@ -33,9 +38,35 @@ export class DoctorComponent implements OnInit{
 
 visitCountsDrById : any
 
+tooken?: string;
+
 Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
   
- constructor(private doctorService : DoctorService ,private data : DataBetweenDoctorCompHeroCompService, private _dialog: DoctorDialogueService ){}
+ constructor(private doctorService : DoctorService ,
+  private data : DataBetweenDoctorCompHeroCompService, 
+  private _dialog: DoctorDialogueService,
+  private patientService : PatientService,
+  private confirmationDialog : ContinueBookingService ){}
+  ngAfterViewInit(): void {
+    //#region get patient info if he is logged in
+    this.tooken = localStorage.getItem('token')!;
+    if(this.tooken){
+      var PatientDataString = localStorage.getItem('userData')
+      var patientData = JSON.parse(PatientDataString!);
+      var patientNumber = patientData.phoneNumber;
+      console.log(patientNumber);
+      this.patientService.getPatientByPhoneNumber(patientNumber!).subscribe({
+        next:(patient) => {
+          this.patient = patient 
+          console.log(this.patient)
+        },
+        error: (error) => {
+         console.log('calling Patient api failed', error)
+         },
+      }); 
+    }
+    //#endregion
+  }
 
     ngOnInit():void
     { 
@@ -97,6 +128,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         },
       });}
       //#endregion
+
     }
     
     
@@ -109,7 +141,12 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
           j++
         }
       })
-      var ref = this._dialog.open(bookDoctor,date);
+      // if(this.tooken){
+      //   // console.log(localStorage.getItem('userData'))
+      //   var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
+      // }else{
+        var ref = this._dialog.open(bookDoctor,date);
+      // }
     }
 
     getDate(doctorById : GetDoctorByIDDto){

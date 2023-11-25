@@ -1,1 +1,80 @@
-<p>appointments works!</p>
+
+<!-- appointments.component.html -->
+<div class="profileHeader section-title">
+  <h2>My Appointments</h2>
+</div>
+
+<div *ngIf="appointments[1].length > 0; else noAppointments">
+
+  <div>
+    <div class="patientVisitsCard" *ngFor="let appointment of sortedAppointments; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.dateOfVisit), 'today-visit': isTodayVisit(appointment.dateOfVisit), 'past-visit': isPastVisit(appointment.dateOfVisit)}">
+      <div class="bookmark"></div>
+      <h3 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }}</span></h3>
+      <p><span> Doctor Name: </span>{{ this.doctor?.name }}</p>
+      <p><span>Date of Visit : </span> {{ appointment.dateOfVisit | date:'dd/MM/yyyy':'en-US' }} </p>
+      <p *ngIf="appointment.visitStatus == 'done' "><span> Prescription: </span> {{ appointment.prescription }}</p>
+      <p *ngIf="formSubmitted || appointment.review" class="reviewData ratingDiv">
+        <span>Your Review For This Appointment:</span> {{ appointment.review }}
+      </p>
+
+      <div>
+      <div *ngIf="appointment.rate"  class="ratingDiv"><span>Your Rate For This Appointment:</span>
+        <div class="rating-stars">
+        <span  *ngFor="let star of getStarsArray(appointment.rate)" (load)="setRating(star, i)">
+          <i class="fas fa-star fiiled-stars"></i>
+        </span>
+        <span *ngFor="let star of getRemainingStarsArray(appointment.rate)" (load)="setRating(star, i)">
+          <i class="fas fa-star"></i>
+        </span>
+      </div>
+      </div>
+    </div>
+
+
+
+      <form [formGroup]="form" [id]="i" #ratingForm *ngIf="appointment.visitStatus == 'done' && appointment.rate == null">
+
+        <div class="ratingDiv">
+          <label for="rate">Rate This Appointment: </label>
+          <div class="rating-stars">
+            <span  *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star,i)">
+              <i class="fas fa-star"></i>
+            </span>
+          </div>
+
+        </div>
+        <div class="ratingDiv" [id]="'i_' + i">
+          <label for="review">Your Review: </label>
+          <textarea id="review" formControlName="review" [(ngModel)]="appointment.review"></textarea>
+        </div>
+        <div class="ratingDiv buttonDiv">
+          <button class="ButtonItem" (click)="clickHandle($event , appointment.id ,i )" [disabled]="!ratingSet">Submit</button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+
+</div>
+<ng-template #noAppointments>
+  <h3 class="text-center mt-2">No appointments found</h3>
+</ng-template>
+
+<div class="buttons">
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/profile']">
+        My Profile
+    </button>
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto " type="button" [routerLink]="['/medical-history']">
+        My Medical History
+    </button>
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn appointment-btn scrollto" disabled type="button" [routerLink]="['/profile']">
+        My Appointments
+    </button>
+  </div>
+</div>

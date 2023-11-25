@@ -7,7 +7,7 @@ import { DoctorsForAllSpecializations } from '../Types/DoctorsForAllSpecializati
 import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
-
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-hero',
@@ -57,6 +57,8 @@ constructor(private doctorService : DoctorService ,
   }
 
 
+
+
   selected(e: Event):void{
 
       this.isSpecializationSelected = true;
@@ -78,23 +80,29 @@ constructor(private doctorService : DoctorService ,
 
   }
   onSearch(event : Event): void {
+    this.loadingService.setLoading(true);
 
-    if(this.isSpecializationSelected)
-    {
-      this.data.changeSpecializationId(this.id)
-    
-    }
+    setTimeout(() => {
+      if(this.isSpecializationSelected)
+      {
+        this.data.changeSpecializationId(this.id)
 
-    if(this.isDoctorSelected){
-      this.data.changeDoctorId(this.doctorId)
-    }
-    if(!this.isDoctorSelected){
-      this.data.changeDoctorId('0')
+      }
 
-    }
-    if(!this.isSpecializationSelected){
-      this.data.changeSpecializationId(0)}
-      
-      this.router.navigate(['/doctor'])
+      if(this.isDoctorSelected){
+        this.data.changeDoctorId(this.doctorId)
+      }
+      if(!this.isDoctorSelected){
+        this.data.changeDoctorId('0')
+
+      }
+      if(!this.isSpecializationSelected){
+        this.data.changeSpecializationId(0)
+      }
+        this.loadingService.setLoading(false);
+        this.router.navigate(['/doctor'])
+        // this.loadingService.setLoading(false);
+    },3000);
+
     }
 }
