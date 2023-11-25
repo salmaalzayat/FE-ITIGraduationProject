@@ -13,4 +13,6 @@ export interface GetAllDoctorsDto {
     imageStoredFileName? :string  
     imageContentType? :string 
     imageUrl? : string 
+    status? : boolean 
+
 }

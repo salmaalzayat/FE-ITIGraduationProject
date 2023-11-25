@@ -71,8 +71,10 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
                 specializationName : doctor.name,
                 description:item.description,
                 title:item.title,
+                status : item.status,
                 weekSchadual:item.weekSchadual}
                 this.getDate(this.doctorBySpecialization)
+
             })
            
           })

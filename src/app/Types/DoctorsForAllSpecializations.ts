@@ -1,4 +1,5 @@
 export interface DoctorsForAllSpecializations {
-    id: string;
-    name: string;
+    id: string
+    name: string
+    status? : boolean 
 }
