@@ -17,10 +17,11 @@
         <select  (change)="doctorSelected($event)" class=" col-lg-4  ml-md-0 mb-2 mb-lg-0 form-select border-2">
         <option value="allDoctors" selected="">All Doctors</option>
         <ng-container *ngIf="isSpecializationSelected" >
-          <option *ngFor="let doctor of Doctors"  [value]="doctor.id"> {{doctor.name}} </option>
+          <ng-container *ngFor="let doctor of Doctors"> <option *ngIf="doctor.status && doctor.weekSchadual?.length==7" [value]="doctor.id">{{doctor.name}}</option></ng-container>
         </ng-container>
         <ng-container *ngIf="!isSpecializationSelected" >
-          <option *ngFor="let doctor of doctors" [value]="doctor.id"> {{doctor.name}}</option>
+
+          <ng-container *ngFor="let doctor of doctors"> <option *ngIf="doctor.status && doctor.weekSchadual?.length==7" [value]="doctor.id">{{doctor.name}}</option></ng-container>
         </ng-container>
 
       </select>

@@ -70,6 +70,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
 
     ngOnInit():void
     { 
+      
       this.data.currentId.subscribe(sId => this.sId = sId)
       this.data.currentDoctorId.subscribe(dId => this.dId = dId)
       //#region get all doctors
@@ -102,8 +103,10 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
                 specializationName : doctor.name,
                 description:item.description,
                 title:item.title,
+                status : item.status,
                 weekSchadual:item.weekSchadual}
                 this.getDate(this.doctorBySpecialization)
+
             })
            
           })
@@ -119,6 +122,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         this.doctorService.getDoctorById(this.dId).subscribe({
         next:(doctorById) => {
           this.doctorById = doctorById;
+         
           this.getDate(this.doctorById)
          },
         error: (error) => {

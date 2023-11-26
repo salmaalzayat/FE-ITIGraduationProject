@@ -19,6 +19,7 @@ export class HeroComponent implements OnInit {
   doctors?: GetAllDoctorsDto[];
   specializations?: GetAllSpecializationsDto[];
   Doctors? : DoctorsForAllSpecializations[];
+  ActiveDoctors?:DoctorsForAllSpecializations[];
   doctorById?: GetDoctorByIDDto;
 
   sId : number =0;
@@ -29,28 +30,31 @@ export class HeroComponent implements OnInit {
   isDoctorSelected : boolean =false;
   isSpecializationSelected: boolean = false;
 
-constructor(private doctorService : DoctorService , private specializationService: SpecializationService, private router:Router, private data : DataBetweenDoctorCompHeroCompService , private loadingService:LoadingService){}
-ngOnInit():void{
-
-
-      this.data.currentId.subscribe(sId => this.sId = sId)
-      this.data.currentDoctorId.subscribe(dId => this.dId = dId)
-      this.doctorService.getDoctors().subscribe({
-        next:(doctors) => {
-          this.doctors = doctors;
-        },
-        error: (error) => {
-          console.log('calling All doctors api failed', error);
-        },
-      });
-      this.doctorService.GetAllSpecializations().subscribe({
-        next:(specializations) => {
-          this.specializations = specializations;
-        },
-        error: (error) => {
-          console.log('calling All specializations api failed', error);
-        },
-      })
+constructor(private doctorService : DoctorService , 
+  private specializationService: SpecializationService,
+   private router:Router,
+    private data : DataBetweenDoctorCompHeroCompService,
+    private loadingService: LoadingService){}
+  ngOnInit():void{
+    this.data.currentId.subscribe(sId => this.sId = sId)
+    this.data.currentDoctorId.subscribe(dId => this.dId = dId)
+    this.doctorService.getDoctors().subscribe({
+      next:(doctors) => {
+        this.doctors = doctors;
+        
+      },
+      error: (error) => {
+        console.log('calling All doctors api failed', error);
+      },
+    });
+    this.doctorService.GetAllSpecializations().subscribe({
+      next:(specializations) => {
+        this.specializations = specializations;
+      },
+      error: (error) => {
+        console.log('calling All specializations api failed', error);
+      },
+    })
   }
 
 
@@ -65,8 +69,8 @@ ngOnInit():void{
         this.isSpecializationSelected = false;
       }
       this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
+      console.log(this.Doctors)
     }
-
 
   doctorSelected(event: Event):void{
 
