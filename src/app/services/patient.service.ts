@@ -24,5 +24,7 @@ export class PatientService {
     return this.client.get<GetAllPatientsWithDateDto[]>(`https://localhost:7267/api/Doctor/dailySchedule/${date}?DoctorId=${drId}`);
   }
   
-
+  public deleteAppointment (patientVisitId : number):Observable<object>{
+    return this.client.delete(`https://localhost:7267/api/Patient/deletepatientvisit/${patientVisitId}`)
+  }
 }

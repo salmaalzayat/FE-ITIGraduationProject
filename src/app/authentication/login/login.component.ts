@@ -74,18 +74,18 @@ export class LoginComponent {
       credentials.password = this.form.controls.password.value ?? '';
 
       this.authService.login(credentials).subscribe((tokenDto) => {
-          this.loadingService.setLoading(true);
+        //  this.loadingService.setLoading(true);
           console.log(tokenDto);
           setTimeout(()=>{
-            if(!tokenDto){
+            if(tokenDto){
               if(this.dialog.isBooking){
                 this.router.navigate(['/doctor'])
                 this.patientNumber = this.form.controls.phoneNumber.value!
                 this.getPatient(this.patientNumber)
               }
             }
-            else if(tokenDto){
-            this.loadingService.setLoading(false);
+            else if(!tokenDto){
+          //  this.loadingService.setLoading(false);
             this.router.navigateByUrl('/');
             }
           },2000)

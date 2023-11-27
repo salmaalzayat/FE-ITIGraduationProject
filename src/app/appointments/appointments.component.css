@@ -211,3 +211,9 @@ padding-bottom: 5px;
 }
 
 
+.delete{
+  margin-left: 95%;
+}
+.delete:hover{
+  opacity: 0.6;
+}

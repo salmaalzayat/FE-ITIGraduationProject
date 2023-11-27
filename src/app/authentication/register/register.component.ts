@@ -118,7 +118,7 @@ export class RegisterComponent {
         // this.form.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
       } else if(!exists){
         console.log("not exist")
-        this.loadingService.setLoading(true);
+        // this.loadingService.setLoading(true);
 
            setTimeout(() => {
         const credentials = new RegisterPatientDto();
@@ -139,7 +139,7 @@ export class RegisterComponent {
               this.patientNumber = this.form.controls.phoneNumber.value!
               this.getPatient(this.patientNumber)
             }else{
-              this.loadingService.setLoading(false);
+          //this.loadingService.setLoading(false);
               this.router.navigateByUrl('/');
             }
           }
