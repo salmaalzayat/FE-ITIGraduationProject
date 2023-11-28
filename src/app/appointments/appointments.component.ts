@@ -10,6 +10,8 @@ import { ReviewService } from '../services/review.service';
 import VisitReviewAndRateDto from '../Types/VisitReviewAndRateDto';
 import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { PatientDataService } from '../services/PatientDataService';
+import { PatientService } from '../services/patient.service';
 
 
 @Component({
@@ -34,7 +36,8 @@ export class AppointmentsComponent implements OnInit {
 
   constructor(private appointmentService: AppointmentService ,
      private doctorService : DoctorService ,
-      private reviewService: ReviewService ) {}
+      private reviewService: ReviewService ,
+      private patientService : PatientService) {}
 
 
   ngOnInit(): void {
@@ -92,6 +95,20 @@ export class AppointmentsComponent implements OnInit {
     }
   }
 
+
+  onDelete(e:Event, id : number,status : string){
+    const event = (e.target as any).value
+    console.log(id)
+    if(status != 'done'){
+    this.patientService.deleteAppointment(id).subscribe({
+      next:()=>{
+      },
+      error:(error)=>{
+        console.log("delete patient visit api failed",error)
+      }
+    })}
+   
+  }
   // Function to load appointments from the API
   loadAppointments(phoneNumber: string): Observable<GetPatientVisitDto[]> {
     return this.appointmentService.getAppointmentsByPhoneNumber(phoneNumber);

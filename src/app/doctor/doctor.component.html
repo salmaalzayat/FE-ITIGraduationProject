@@ -136,15 +136,15 @@
               <div class="member" data-aos="fade-up" data-aos-delay="100">
                 <div class="doctorinfo">
                 <div class="member-img">
-                  <img src="{{doctorById?.imageUrl}}" class="img-fluid" alt="">
+                  <img  src="{{doctorById.imageUrl}}" class="img-fluid" alt="">
                   <img *ngIf="!doctorById?.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
 
                 </div>
 
                 <div class="member-info">
-                  <h3 class="doctorName">{{doctorById?.name}}</h3>
-                  <h4 class="doctorTitle">{{doctorById?.title}}</h4>
-                  <span class="doctorDes">{{doctorById?.description}}</span>
+                  <h3 class="doctorName">{{doctorById.name}}</h3>
+                  <h4 class="doctorTitle">{{doctorById.title}}</h4>
+                  <span class="doctorDes">{{doctorById.description}}</span>
                 </div></div>
                 <span  class="appointments" >
                   <div *ngFor="let record of visitCount" class="box">
