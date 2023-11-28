@@ -24,3 +24,10 @@ li{
   color: #3fbcc0;
 }
 
+.logo img {
+  width: 200PX;
+  height: 60px;
+}
+#header .logo img {
+  max-height: none;
+}
