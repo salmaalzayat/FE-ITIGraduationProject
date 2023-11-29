@@ -102,6 +102,37 @@ export class AppointmentsComponent implements OnInit {
     if(status != 'done'){
     this.patientService.deleteAppointment(id).subscribe({
       next:()=>{
+        this.loadAppointments(this.phoneNumber).subscribe((data) => {
+          this.appointments = data;
+          console.log(data)
+          const dataArray = Object.values(data);
+          console.log(dataArray);
+          this.appointments =dataArray;
+          console.log('Appointments loaded:', this.appointments[1].length);
+          this.appointments[1].forEach((e:any)=>{
+            this.rate = e.rate;
+            this.review = e.review;
+
+            this.doctorID = e.doctorId;
+
+            this.doctorService.getDoctorById(this.doctorID).subscribe((d)=>{
+              this.doctor = d;
+              console.log(this.doctor.name)
+            })
+
+          });
+          if (this.appointments[1].length > 0) {
+            console.log('First appointment name:', this.appointments[1]);
+            console.log('First appointment length:', this.appointments[1].length);
+
+            // Accessing patient visits of the first appointment
+            const patientVisits = this.appointments[1];
+            if (patientVisits.length > 0) {
+              console.log('First patient visit date:', patientVisits[0].dateOfVisit);
+              console.log('First patient visit comments:', patientVisits[0].comments);
+            }
+          }
+        });
       },
       error:(error)=>{
         console.log("delete patient visit api failed",error)
