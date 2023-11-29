@@ -27,7 +27,7 @@ export class BookDialogueComponent implements OnInit{
   getAllPatientsWithDate?: GetAllPatientsWithDateDto[];
   patientAlreadyBooked : boolean = false;
   patient? : GetAllPatientsWithDateDto;
-  patientRegistered? : boolean = false;
+  patientRegistered?: Boolean = undefined;
   isLoogedIn? :boolean;
   token?: string;
 
@@ -68,18 +68,16 @@ export class BookDialogueComponent implements OnInit{
 
   handleSubmit(e: Event){
     e.preventDefault;
-  
-
   }
 
   getPhoneNumber(e: Event){
     this.patientAlreadyBooked = false;
-    this.patientRegistered= false;
+    
 
     let day = this.data.date.split('/')[1]
     let month = this.data.date.split('/')[0]
     let year = this.data.date.split('/')[2]
-    console.log(day)
+    // console.log(day)
     let formattedDate  = `${year}-${month}-${day}`
 
     this.PatientPhoneNumber = (e.target as HTMLInputElement).value;
@@ -99,6 +97,7 @@ export class BookDialogueComponent implements OnInit{
         gender : ' '
 
       }
+      this.patientRegistered= false;
       },
     }); 
 
@@ -126,11 +125,14 @@ export class BookDialogueComponent implements OnInit{
   }
   onContinue(doctor:any,date : string , patient? : GetPatientByPhoneDTO){
     // var ref = this.ContinueBookingService.open(doctor,date,patient)
-    console.log(date)
+    // console.log(date)
   }
 
   loginAndRegister(data:any){
     this.dialog.sendDataToLoginOrRegister(data,true)
+    this.dialog.close()
+  }
+  close(){
     this.dialog.close()
   }
 }

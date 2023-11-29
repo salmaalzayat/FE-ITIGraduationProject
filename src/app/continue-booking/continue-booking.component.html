@@ -20,9 +20,13 @@
         </tr>
       </body>
     </table>
-    <mat-dialog-actions>
-      <button  mat-button mat-dialog-close>Close</button>
-      <button class="appointment-btn" mat-button mat-dialog-actions (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
-    </mat-dialog-actions>
+    <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+      <button type="button" class="btn btn-lg background" (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
+      <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+    </div>
+    <!-- <mat-dialog-actions> -->
+      <!-- <button  mat-button mat-dialog-close>Close</button> -->
+      <!-- <button class="appointment-btn" mat-button mat-dialog-actions (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button> -->
+    <!-- </mat-dialog-actions> -->
   </div>
 </div>
