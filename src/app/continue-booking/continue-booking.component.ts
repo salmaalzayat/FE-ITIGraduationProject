@@ -31,6 +31,9 @@ export class ContinueBookingComponent  implements OnInit{
   ngOnInit(): void {
     // console.log(this.dialog.patient.name )  
   }
+  close(){
+    this.dialog.close();
+  }
   bookVisit(doctor: GetDoctorByIDDto, patient:GetPatientByPhoneDTO, date : string){
     let day  = date.split('/')[1]
     let month = date.split('/')[0]

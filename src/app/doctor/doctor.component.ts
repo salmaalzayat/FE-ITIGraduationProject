@@ -143,12 +143,12 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
           j++
         }
       })
-      // if(this.tooken){
-      //   // console.log(localStorage.getItem('userData'))
-      //   var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
-      // }else{
+      if(this.tooken){
+        // console.log(localStorage.getItem('userData'))
+        var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
+      }else{
         var ref = this._dialog.open(bookDoctor,date);
-      // }
+      }
     }
 
     getDate(doctorById : GetDoctorByIDDto){

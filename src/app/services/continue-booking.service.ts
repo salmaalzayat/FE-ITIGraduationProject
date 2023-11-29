@@ -9,7 +9,7 @@ import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 export class ContinueBookingService {
 
   constructor(private dialog : MatDialog) {}
-    open(doctor : GetDoctorByIDDto,date :string , patient? : GetPatientByPhoneDTO){
+    open(doctor : any,date :string , patient? : GetPatientByPhoneDTO){
       return this.dialog.open(ContinueBookingComponent,{
         data:{doctor,date,patient}
       })
