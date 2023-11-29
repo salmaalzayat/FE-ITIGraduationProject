@@ -42,8 +42,8 @@
                   <div *ngFor="let schedule of doctor.weekSchadual">
                     <span *ngIf="schedule.id== c.weekScheduleId">
                          <span *ngIf="schedule.isAvailable ">
-                         <div>{{schedule.startTime}}</div>
-                         <div>{{schedule.endTime}}</div>
+                         <div>*ngIf="c.limitOfPatients==c.actualNoOfPatients" {{schedule.startTime}}</div>
+                         <div>*ngIf="c.limitOfPatients==c.actualNoOfPatients" {{schedule.endTime}}</div>
                          <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
                           <button [disabled]="true" class="book-disabled">Book</button></span>
                           <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)" class="book-btn">Book</button>
