@@ -8,6 +8,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { DataBetweenDoctorCompHeroCompService } from '../services/data-between-doctor-comp-hero-comp.service';
 import { GetDoctorByIDDto } from '../Types/GetDoctorByIDDto';
 import { LoadingService } from '../services/loading.service';
+import { VisitCountDto } from '../Types/VisitCountDto';
 
 @Component({
   selector: 'app-hero',
@@ -21,7 +22,7 @@ export class HeroComponent implements OnInit {
   Doctors? : DoctorsForAllSpecializations[];
   ActiveDoctors?:DoctorsForAllSpecializations[];
   doctorById?: GetDoctorByIDDto;
-
+  visitCount? : VisitCountDto
   sId : number =0;
   id: any;
   dId! : string;
@@ -57,9 +58,6 @@ constructor(private doctorService : DoctorService ,
     })
   }
 
-
-
-
   selected(e: Event):void{
 
       this.isSpecializationSelected = true;
@@ -68,8 +66,9 @@ constructor(private doctorService : DoctorService ,
       if(this.id === "All"){
         this.isSpecializationSelected = false;
       }
+
       this.Doctors = this.specializations?.find(s => s.id == this.id)?.doctorsForAllSpecializations!
-      console.log(this.Doctors)
+      
     }
 
   doctorSelected(event: Event):void{

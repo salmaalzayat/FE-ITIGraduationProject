@@ -28,7 +28,7 @@
 
                     <ng-container *ngFor="let record of Visits">
                     <span *ngIf="doctor.id==record.drId" class="appointments" >
-                   <span  *ngFor="let c of record.visitrecord" class="box">
+                   <span  *ngFor="let c of record.visitrecord" class="box col">
                     <ng-container *ngIf="c"  >
                       <span *ngIf="c.day==3" class="divider"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4" class="divider"> Thursday {{c.date}}</span>
@@ -42,8 +42,8 @@
                   <div *ngFor="let schedule of doctor.weekSchadual">
                     <span *ngIf="schedule.id== c.weekScheduleId">
                          <span *ngIf="schedule.isAvailable ">
-                         <div>*ngIf="c.limitOfPatients==c.actualNoOfPatients" {{schedule.startTime}}</div>
-                         <div>*ngIf="c.limitOfPatients==c.actualNoOfPatients" {{schedule.endTime}}</div>
+                         <div *ngIf="c.limitOfPatients!=c.actualNoOfPatients"> {{schedule.startTime}}</div>
+                         <div *ngIf="c.limitOfPatients!=c.actualNoOfPatients"> {{schedule.endTime}}</div>
                          <span *ngIf="c.limitOfPatients==c.actualNoOfPatients" >No Available Appointments
                           <button [disabled]="true" class="book-disabled">Book</button></span>
                           <button *ngIf="c.limitOfPatients>c.actualNoOfPatients"(click)="book(doctor,c.date)" class="book-btn">Book</button>
@@ -89,7 +89,7 @@
                   </div>
                    <ng-container *ngFor="let record of Visits">
                     <span *ngIf="doctor.id==record.drId" class="appointments">
-                   <span *ngFor="let c of record.visitrecord"  class="box">
+                   <span *ngFor="let c of record.visitrecord"  class="box col">
                       <ng-container *ngIf="c">
                       <span *ngIf="c.day==3" class="divider"> Wednesday {{c.date}}</span>
                       <span *ngIf="c.day==4" class="divider"> Thursday {{c.date}}</span>
@@ -147,7 +147,7 @@
                   <span class="doctorDes">{{doctorById.description}}</span>
                 </div></div>
                 <span  class="appointments" >
-                  <div *ngFor="let record of visitCount" class="box">
+                  <div *ngFor="let record of visitCount" class="box col">
                       <span *ngIf="record.day==3" class="divider">Wednesday {{record.date}}</span>
                       <span *ngIf="record.day==4" class="divider">Thursday {{record.date}}</span>
                       <span *ngIf="record.day==5" class="divider">Friday {{record.date}}</span>
@@ -157,7 +157,7 @@
                       <span *ngIf="record.day==2" class="divider">Tuesday {{record.date}}</span>
                 <div *ngFor="let schedule of doctorById?.weekSchadual">
                  <span *ngIf="schedule.id==record.weekScheduleId"> 
-                      <span *ngIf="schedule.isAvailable " class="time">
+                      <span *ngIf="schedule.isAvailable" class="time">
                       <div *ngIf="record.limitOfPatients!=record.actualNoOfPatients">{{schedule.startTime}}</div>
                       <div *ngIf="record.limitOfPatients!=record.actualNoOfPatients">{{schedule.endTime}}</div>
                       <span *ngIf="record.limitOfPatients==record.actualNoOfPatients" >No Available Appointments

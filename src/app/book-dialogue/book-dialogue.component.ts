@@ -72,8 +72,7 @@ export class BookDialogueComponent implements OnInit{
 
   getPhoneNumber(e: Event){
     this.patientAlreadyBooked = false;
-    
-
+    this.patientRegistered= false;
     let day = this.data.date.split('/')[1]
     let month = this.data.date.split('/')[0]
     let year = this.data.date.split('/')[2]
@@ -97,11 +96,16 @@ export class BookDialogueComponent implements OnInit{
         gender : ' '
 
       }
-      this.patientRegistered= false;
+     
       },
-    }); 
+    });  
 
-    this.PatientService.GetAllPatientWithVisitDate(formattedDate,this.data.data.id).subscribe({
+   this.getAllPatientVisits(formattedDate,this.data.data.id)
+  }
+
+  getAllPatientVisits(date : string , drId : string){
+    
+    this.PatientService.GetAllPatientWithVisitDate(date,drId).subscribe({
       next:(getAllPatientsWithDate) => {
         this.getAllPatientsWithDate = getAllPatientsWithDate;
         this.getAllPatientsWithDate?.forEach((patient)=>{
@@ -109,7 +113,7 @@ export class BookDialogueComponent implements OnInit{
             this.patientAlreadyBooked = true;
             
             console.log(this.PatientByPhoneNumber.id)
-            this.bookedDate=formattedDate
+            this.bookedDate=date
             console.log(this.bookedDate)
 
           }
@@ -119,9 +123,7 @@ export class BookDialogueComponent implements OnInit{
        
         console.log('calling get patients with date api failed', error);
       },
-    }); 
-
-   
+    });
   }
   onContinue(doctor:any,date : string , patient? : GetPatientByPhoneDTO){
     // var ref = this.ContinueBookingService.open(doctor,date,patient)
