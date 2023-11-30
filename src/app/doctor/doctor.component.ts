@@ -13,6 +13,8 @@ import { Token } from '@angular/compiler';
 import { PatientService } from '../services/patient.service';
 import { GetPatientByPhoneDTO } from '../Types/GetPatientByPhoneDto';
 import { ContinueBookingService } from '../services/continue-booking.service';
+import { GetAllPatientsWithDateDto } from '../Types/GetAllPatientWithDateDto';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
@@ -35,6 +37,9 @@ export class DoctorComponent implements OnInit , AfterViewInit{
    visitCount? : VisitCountDto[];
   bookDoctorVisitCount : boolean = false;
   i : number = 0
+  getAllPatientsWithDate?: GetAllPatientsWithDateDto[];
+  patientAlreadyBooked: boolean = false;
+
 
 visitCountsDrById : any
 
@@ -46,7 +51,8 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
   private data : DataBetweenDoctorCompHeroCompService, 
   private _dialog: DoctorDialogueService,
   private patientService : PatientService,
-  private confirmationDialog : ContinueBookingService ){}
+  private confirmationDialog : ContinueBookingService,
+  private toast: NgToastService  ){}
   ngAfterViewInit(): void {
     //#region get patient info if he is logged in
     this.tooken = localStorage.getItem('token')!;
@@ -144,11 +150,18 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         }
       })
       if(this.tooken){
-        // console.log(localStorage.getItem('userData'))
+        let day = date.split('/')[1]
+        let month = date.split('/')[0]
+        let year = date.split('/')[2]
+        var patientId = this.patient?.id;
+        let formattedDate  = `${year}-${month}-${day}`
         var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
       }else{
         var ref = this._dialog.open(bookDoctor,date);
       }
+    }
+    showError(errorMessage: string) {
+      this.toast.error({detail:"ERROR",summary:errorMessage,sticky:true});
     }
 
     getDate(doctorById : GetDoctorByIDDto){
