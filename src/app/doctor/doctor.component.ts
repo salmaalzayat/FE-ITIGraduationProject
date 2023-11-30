@@ -52,7 +52,6 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
   private _dialog: DoctorDialogueService,
   private patientService : PatientService,
   private confirmationDialog : ContinueBookingService,
-  private PatientService : PatientService,
   private toast: NgToastService  ){}
   ngAfterViewInit(): void {
     //#region get patient info if he is logged in
@@ -68,7 +67,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
           console.log(this.patient)
         },
         error: (error) => {
-         console.log('calling Patient api faileddddddddddd', error)
+         console.log('calling Patient api failed', error)
          },
       }); 
     }
@@ -156,34 +155,7 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
         let year = date.split('/')[2]
         var patientId = this.patient?.id;
         let formattedDate  = `${year}-${month}-${day}`
-        
-        this.PatientService.GetAllPatientWithVisitDate(formattedDate,bookDoctor.id).subscribe({
-          next:(getAllPatientsWithDate) => {
-            this.getAllPatientsWithDate = getAllPatientsWithDate;
-            this.getAllPatientsWithDate?.forEach((patient)=>{
-              if(patient.patientId == patientId){
-                this.patientAlreadyBooked = true;
-                
-                console.log(patientId)
-                // this.bookedDate=formattedDate
-                console.log("scjsugdchvgavshdfvjgashdfja")
-                
-                this.showError(`Patient already has an appointment with Dr ${this.patient?.name} on ${date}`)
-              }
-              if(patient.patientId != patientId)
-              {
-                console.log("hsbdhjsd")
-                var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
-              }
-            })
-          },
-          error: (error) => {
-           
-            console.log('calling get patients with date api failed', error);
-          },
-        }); 
-        
-        
+        var refr = this.confirmationDialog.open(bookDoctor , date ,this.patient );
       }else{
         var ref = this._dialog.open(bookDoctor,date);
       }
