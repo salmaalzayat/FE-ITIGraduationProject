@@ -171,7 +171,6 @@ Visits : {drId? : string , visitrecord?: VisitCountDto[]}[]=[];
        this.doctorService.GetVisitCountForWeek(startDate,endDate1,doctorById?.id).subscribe({
           next:(visitCount) => {
             this.visitCount = visitCount;
-
             this.Visits.push({drId: doctorById.id,visitrecord:this.visitCount})
             
           },
