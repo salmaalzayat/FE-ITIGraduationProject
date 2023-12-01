@@ -95,3 +95,19 @@ hr{
     border-radius: 10px;
     border: 1px ;
 }
+.inline-div {
+    display: flex;
+    padding-bottom: 10px;
+}
+   
+  .inline-span {
+    margin-right: 6px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+  
+  .doctorName {
+    font-size: 18px;
+    margin: 0px 3px;
+  }
+  
