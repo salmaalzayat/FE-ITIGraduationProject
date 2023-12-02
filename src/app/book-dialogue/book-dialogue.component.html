@@ -8,7 +8,12 @@
 <form [formGroup]="Form" (submit)="handleSubmit($event)">
   <input  id="formInput" class="form-control" (keyup.enter)="getPhoneNumber($event)" formControlName="phoneNumber" type="text" placeholder="Phone number">
   <ng-container mat-dialog-content *ngIf="patientAlreadyBooked">
-   <span>Patient already has an appointment with Dr {{this.data.data.name}} on {{bookedDate}}</span></ng-container>
+    <div class="text-center">
+      <span class="text fs-4">
+        Patient already has an appointment with Dr {{ this.data.data.name }} on {{ bookedDate }}
+      </span>
+    </div>
+  </ng-container>
   <!-- <button mat-button mat-dialog-actions *ngIf="!patientAlreadyBooked && token" (click)="onContinue(this.data.data,this.data.date,PatientByPhoneNumber)">Continue</button> -->
 </form>
 </div>
@@ -17,8 +22,10 @@
 <a >Register</a> -->
 <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
   <button *ngIf="patientRegistered" [routerLink]="(['/login'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background">Login</button>
-  <button *ngIf="patientRegistered == false" [routerLink]="(['/register'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background">Register</button>
-  <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+  <mat-dialog-actions class="btns">
+  <button *ngIf="patientRegistered == false" [routerLink]="(['/register'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background Registerbtn">Register</button>
+  <button type="button" class="btn btn-lg closebtn" data-bs-dismiss="modal" (click)="close()">Close</button>
+</mat-dialog-actions>
 </div>
 <!-- <mat-dialog-actions>
   <button class="btn btn-lg btn-secondary" mat-button mat-dialog-close>Close</button>

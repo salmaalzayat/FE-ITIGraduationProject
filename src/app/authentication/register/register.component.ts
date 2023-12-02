@@ -105,8 +105,6 @@ export class RegisterComponent {
   handleSubmit(e: Event) {
     e.preventDefault();
 
-
-
       const phoneNumber = this.form.get('phoneNumber')?.value ?? '';
     console.log(phoneNumber);
 
@@ -118,7 +116,7 @@ export class RegisterComponent {
         // this.form.get('phoneNumber')?.setErrors({ phoneNumberExists: true });
       } else if(!exists){
         console.log("not exist")
-        this.loadingService.setLoading(true);
+        // this.loadingService.setLoading(true);
 
            setTimeout(() => {
         const credentials = new RegisterPatientDto();
@@ -134,13 +132,13 @@ export class RegisterComponent {
         this.authService.register(credentials).subscribe((tokenDto) => {
           // Registration successful, you can navigate or perform other actions
           if(tokenDto){
-            this.loadingService.setLoading(false);
+            // this.loadingService.setLoading(false);
             if(this.dialog.isBooking){
               this.router.navigateByUrl('/doctor');
               this.patientNumber = this.form.controls.phoneNumber.value!
               this.getPatient(this.patientNumber)
             }else{
-          this.loadingService.setLoading(false);
+          // this.loadingService.setLoading(false);
               this.router.navigateByUrl('/');
             }
           }

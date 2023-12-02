@@ -69,6 +69,7 @@ export class ContinueBookingComponent  implements OnInit{
             // //this.showError(`Patient already has an appointment with Dr ${patient?.name} on ${date}`)
             // this.toast.success({ detail: "SUCCESS", summary: 'Receptionist added successfully', duration: 9000 });
             this.VisitsForPatient = true;
+
           }
         })
         if(!this.VisitsForPatient)
@@ -99,6 +100,9 @@ export class ContinueBookingComponent  implements OnInit{
       },
     });
 
+  
   }
+  
+  
 }
 

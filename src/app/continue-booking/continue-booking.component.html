@@ -22,8 +22,10 @@
     </table>
     <div *ngIf="VisitsForPatient">Patient already has an appointment with Dr {{this.data.doctor.name}} on {{this.data.date}}</div>
     <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-      <button *ngIf="!VisitsForPatient" type="button" class="btn btn-lg background" (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
-      <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+      <mat-dialog-actions class="btns"> 
+      <button *ngIf="!VisitsForPatient" type="button" class="btn btn-lg bookbtn" (click)="bookVisit(this.data.doctor, this.data.patient,this.data.date)">Book</button>
+      <button type="button" class="btn btn-lg btn-secondary closebtn" data-bs-dismiss="modal" (click)="close()">Close</button>
+      </mat-dialog-actions>
     </div>
     <!-- <mat-dialog-actions> -->
       <!-- <button  mat-button mat-dialog-close>Close</button> -->
