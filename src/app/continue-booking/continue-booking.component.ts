@@ -37,7 +37,31 @@ export class ContinueBookingComponent  implements OnInit{
   VisitsForPatient?: Boolean ;
   ngOnInit(): void {
     this.VisitsForPatient = false;
-    // console.log(this.dialog.patient.name )  
+    let day  = this.data.date.split('/')[1]
+    let month = this.data.date.split('/')[0]
+    let year = this.data.date.split('/')[2]
+    let formattedDate  = `${year}-${month}-${day}`
+    this.PatientService.GetAllPatientWithVisitDate(formattedDate,this.data.doctor.id).subscribe({
+      next:(getAllPatientsWithDate) => {
+        
+        this.getAllPatientsWithDate = getAllPatientsWithDate;
+        console.log("this.getAllPatientsWithDate")
+        this.getAllPatientsWithDate?.forEach((patientt)=>{
+          if(patientt.patientId == this.data.patient.id){
+            console.log(patientt.patientId)
+            console.log(this.data.patient.id)
+            this.VisitsForPatient = true
+            console.log(this.VisitsForPatient)
+          }
+        })
+      },
+      error: (error) => {
+       
+        console.log('calling get patients with date api failed', error);
+      },
+    });
+
+    
   }
   close(){
     this.dialog.close();
@@ -65,16 +89,15 @@ export class ContinueBookingComponent  implements OnInit{
           if(patientt.patientId == patient.id){
             console.log(patientt.patientId)
             console.log(patient.id)
-            console.log("mayarrr zah2etttt")
+           // console.log("mayarrr zah2etttt")
             // //this.showError(`Patient already has an appointment with Dr ${patient?.name} on ${date}`)
             // this.toast.success({ detail: "SUCCESS", summary: 'Receptionist added successfully', duration: 9000 });
-            this.VisitsForPatient = true;
-
+            this.VisitsForPatient = true
           }
         })
         if(!this.VisitsForPatient)
         {
-          console.log("haha")
+         // console.log("haha")
           const addPatientVisit : AddPatientVisitDto={
             doctorId : doctor.id,
             patientId : patient.id,
@@ -83,7 +106,7 @@ export class ContinueBookingComponent  implements OnInit{
           console.log(addPatientVisit.dateOfVisit)
           this.patientService.addPatientVisit(addPatientVisit).subscribe({
             next :  ()=>{
-              console.log("done")
+             // console.log("done")
               this.router.navigate(['/appointments'])
               
               this.dialog.close()
