@@ -103,7 +103,7 @@ constructor(private doctorService : DoctorService ,
         this.loadingService.setLoading(false);
         this.router.navigate(['/doctor'])
         // this.loadingService.setLoading(false);
-    },3000);
+    });
 
     }
 }

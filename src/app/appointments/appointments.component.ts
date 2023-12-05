@@ -119,8 +119,10 @@ export class AppointmentsComponent implements OnInit {
         const event = (e.target as any).value
     //console.log(id)
     if(status != 'done'){
+      
     this.patientService.deleteAppointment(id).subscribe({
       next:()=>{
+        this.visits = []
         this.loadAppointments(this.phoneNumber).subscribe((data) => {
           this.appointments = data;
        //   console.log(data)
@@ -136,6 +138,8 @@ export class AppointmentsComponent implements OnInit {
 
             this.doctorService.getDoctorById(this.doctorID).subscribe((d)=>{
               this.doctor = d;
+              this.visits.push({doctor:d,visit:e})
+
               console.log(this.doctor.name)
             })
 

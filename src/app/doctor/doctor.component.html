@@ -102,8 +102,14 @@
                      </div>
                      <div class="member-info">
                       <h3 class="doctorName">{{doctor.name}}</h3>
-                      <h4 class="doctorTitle">{{doctor.title}}</h4>
-                      <span class="doctorDes">{{doctor.description}}</span>
+                      <div class="inline-div">
+                        <svg width="20px" height="20px" fill="#000000" viewBox="0 0 24 24" id="medical-report" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M15,6h3a1,1,0,0,1,1,1V20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V7A1,1,0,0,1,6,6H9" style="fill: none; stroke: #3fbbc0; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="secondary" d="M14,5h0a2,2,0,0,0-2-2h0a2,2,0,0,0-2,2h0A1,1,0,0,0,9,6V8h6V6A1,1,0,0,0,14,5ZM12,16V12m2,2H10" style="fill: none; stroke: #2ca9bc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
+                        <div class="doctorTitle ml-2">{{doctor.title}}</div>
+                      </div>    
+                      <div class="inline-div">
+                      <svg fill="#3fbbc0" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#3fbbc0" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M21,2H3A1,1,0,0,0,2,3V21a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V3A1,1,0,0,0,21,2ZM4,4H20V6H4ZM20,20H4V8H20ZM6,12a1,1,0,0,1,1-1H17a1,1,0,0,1,0,2H7A1,1,0,0,1,6,12Zm0,4a1,1,0,0,1,1-1h5a1,1,0,0,1,0,2H7A1,1,0,0,1,6,16Z"></path></g></svg>           
+                        <div class="doctorDes ml-2">{{doctor.description}}</div>
+                      </div>
                     </div>
                   </div>
                    <ng-container *ngFor="let record of Visits">
@@ -162,8 +168,14 @@
 
                 <div class="member-info">
                   <h3 class="doctorName">{{doctorById.name}}</h3>
-                  <h4 class="doctorTitle">{{doctorById.title}}</h4>
-                  <span class="doctorDes">{{doctorById.description}}</span>
+                  <div class="inline-div">
+                    <svg width="20px" height="20px" fill="#000000" viewBox="0 0 24 24" id="medical-report" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M15,6h3a1,1,0,0,1,1,1V20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V7A1,1,0,0,1,6,6H9" style="fill: none; stroke: #3fbbc0; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="secondary" d="M14,5h0a2,2,0,0,0-2-2h0a2,2,0,0,0-2,2h0A1,1,0,0,0,9,6V8h6V6A1,1,0,0,0,14,5ZM12,16V12m2,2H10" style="fill: none; stroke: #2ca9bc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
+                    <div class="doctorTitle ml-2">{{doctorById.title}}</div>
+                  </div>    
+                  <div class="inline-div">
+                  <svg fill="#3fbbc0" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#3fbbc0" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M21,2H3A1,1,0,0,0,2,3V21a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V3A1,1,0,0,0,21,2ZM4,4H20V6H4ZM20,20H4V8H20ZM6,12a1,1,0,0,1,1-1H17a1,1,0,0,1,0,2H7A1,1,0,0,1,6,12Zm0,4a1,1,0,0,1,1-1h5a1,1,0,0,1,0,2H7A1,1,0,0,1,6,16Z"></path></g></svg>           
+                    <div class="doctorDes ml-2">{{doctorById.description}}</div>
+                  </div>
                 </div></div>
                 <span  class="appointments" >
                   <div *ngFor="let record of visitCount" class="box col">
