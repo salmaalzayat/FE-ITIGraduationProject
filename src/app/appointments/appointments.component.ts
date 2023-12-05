@@ -13,6 +13,8 @@ import { AppComponent } from '../app.component';
 import { PatientDataService } from '../services/PatientDataService';
 import { PatientService } from '../services/patient.service';
 import { VisitCountDto } from '../Types/VisitCountDto';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -101,7 +103,20 @@ export class AppointmentsComponent implements OnInit {
 
 
   onDelete(e:Event, id : number,status : string){
-    const event = (e.target as any).value
+    this.showConfirmation(e , id , status)
+   
+  }
+  showConfirmation(e:Event, id : number , status : string) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+    }).then((result) => {
+      if (result.value) {
+        const event = (e.target as any).value
     console.log(id)
     if(status != 'done'){
     this.patientService.deleteAppointment(id).subscribe({
@@ -142,8 +157,14 @@ export class AppointmentsComponent implements OnInit {
         console.log("delete patient visit api failed",error)
       }
     })}
-   
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your file is safe :)', 'info');
+      }
+    });
   }
+  
+
   // Function to load appointments from the API
   loadAppointments(phoneNumber: string): Observable<GetPatientVisitDto[]> {
     return this.appointmentService.getAppointmentsByPhoneNumber(phoneNumber);
