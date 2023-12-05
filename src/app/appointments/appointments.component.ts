@@ -12,6 +12,7 @@ import { ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { PatientDataService } from '../services/PatientDataService';
 import { PatientService } from '../services/patient.service';
+import { VisitCountDto } from '../Types/VisitCountDto';
 
 
 @Component({
@@ -32,8 +33,8 @@ export class AppointmentsComponent implements OnInit {
   formSubmitted: boolean = false;
   ratingSet: boolean = false;
   dateOfVisit: any;
+  visits : { doctor : GetDoctorByIDDto , visit : any}[]=[]
   formattedDate: string = '';
-
   constructor(private appointmentService: AppointmentService ,
      private doctorService : DoctorService ,
       private reviewService: ReviewService ,
@@ -51,16 +52,17 @@ export class AppointmentsComponent implements OnInit {
       if (this.phoneNumber) {
         this.loadAppointments(this.phoneNumber).subscribe((data) => {
           this.appointments = data;
-          console.log(data)
+       //   console.log(data)
           const dataArray = Object.values(data);
-          console.log(dataArray);
+      //    console.log(dataArray);
           this.appointments =dataArray;
-          console.log('Appointments loaded:', this.appointments[1].length);
+     //     console.log('Appointments loaded:', this.appointments[1].length);
           this.appointments[1].forEach((e:any)=>{
-            this.rate = e.rate;
-            this.review = e.review;
+          this.rate = e.rate;
+          this.review = e.review;
 
-            this.doctorID = e.doctorId;
+          this.doctorID = e.doctorId;
+        //    console.log(this.doctor?.name)
             // this.dateOfVisit = e.dateOfVisit;
             // console.log(this.dateOfVisit);
             // console.log(typeof(this.dateOfVisit));
@@ -71,19 +73,21 @@ export class AppointmentsComponent implements OnInit {
 
             this.doctorService.getDoctorById(this.doctorID).subscribe((d)=>{
               this.doctor = d;
-              console.log(this.doctor.name)
+          //    console.log(this.doctor.name)
+              this.visits.push({doctor:d,visit:e})
+             // console.log(this.visits)
             })
 
           });
           if (this.appointments[1].length > 0) {
-            console.log('First appointment name:', this.appointments[1]);
-            console.log('First appointment length:', this.appointments[1].length);
+           // console.log('First appointment name:', this.appointments[1]);
+           // console.log('First appointment length:', this.appointments[1].length);
 
             // Accessing patient visits of the first appointment
             const patientVisits = this.appointments[1];
             if (patientVisits.length > 0) {
-              console.log('First patient visit date:', patientVisits[0].dateOfVisit);
-              console.log('First patient visit comments:', patientVisits[0].comments);
+          //    console.log('First patient visit date:', patientVisits[0].dateOfVisit);
+           //   console.log('First patient visit comments:', patientVisits[0].comments);
             }
           }
         });
@@ -172,9 +176,9 @@ export class AppointmentsComponent implements OnInit {
   }
   get sortedAppointments(): any[] {
     // Assuming appointments[1] is an array of appointments
-    return this.appointments[1].sort((a: any, b: any) => {
-      const dateA = new Date(a.dateOfVisit);
-      const dateB = new Date(b.dateOfVisit);
+    return this.visits.sort((a: any, b: any) => {
+      const dateA = new Date(a.visit.dateOfVisit);
+      const dateB = new Date(b.visit.dateOfVisit);
       return dateB.getTime() - dateA.getTime();
     });
   }
