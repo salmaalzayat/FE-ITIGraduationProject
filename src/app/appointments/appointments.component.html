@@ -7,25 +7,25 @@
 <div *ngIf="appointments[1].length > 0; else noAppointments">
 
   <div>
-    <div class="patientVisitsCard" *ngFor="let appointment of sortedAppointments; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.dateOfVisit), 'today-visit': isTodayVisit(appointment.dateOfVisit), 'past-visit': isPastVisit(appointment.dateOfVisit)}">
+    <div class="patientVisitsCard" *ngFor="let appointment of visits; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.visit.dateOfVisit), 'today-visit': isTodayVisit(appointment.visit.dateOfVisit), 'past-visit': isPastVisit(appointment.visit.dateOfVisit)}">
       <div class="bookmark"></div>
       <h3 class="patientVisitsTitle">Appointment <span>#{{ sortedAppointments.length - i  }}</span></h3>
-      <p><span> Doctor Name: </span>{{ this.doctor?.name }}</p>
-      <p><span>Date of Visit : </span> {{ appointment.dateOfVisit | date:'dd/MM/yyyy':'en-US' }} </p>
-      <div *ngIf="appointment.visitStatus != 'done'" (click)="onDelete($event,appointment.id,appointment.visitStatus)">
+      <p><span> Doctor Name: </span>{{ appointment.doctor.name }}</p>
+      <p><span>Date of Visit : </span> {{ appointment.visit.dateOfVisit | date:'dd/MM/yyyy':'en-US' }} </p>
+      <div *ngIf="appointment.visit.visitStatus != 'done'" (click)="onDelete($event,appointment.visit.id,appointment.visit.visitStatus)">
         <svg  viewBox="0 0 24 24" class="delete" width="20px"  height="20px" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f70808"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ff2e2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#ff2e2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#ff2e2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ff2e2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ff2e2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>      </div>
-      <p *ngIf="appointment.visitStatus == 'done' "><span> Prescription: </span> {{ appointment.prescription }}</p>
-      <p *ngIf="formSubmitted || appointment.review" class="reviewData ratingDiv">
-        <span>Your Review For This Appointment:</span> {{ appointment.review }}
+      <p *ngIf="appointment.visit.visitStatus == 'done' "><span> Prescription: </span> {{ appointment.visit.prescription }}</p>
+      <p *ngIf="formSubmitted || appointment.visit.review" class="reviewData ratingDiv">
+        <span>Your Review For This Appointment:</span> {{ appointment.visit.review }}
       </p>
 
       <div>
-      <div *ngIf="appointment.rate"  class="ratingDiv"><span>Your Rate For This Appointment:</span>
+      <div *ngIf="appointment.visit.rate"  class="ratingDiv"><span>Your Rate For This Appointment:</span>
         <div class="rating-stars">
-        <span  *ngFor="let star of getStarsArray(appointment.rate)" (load)="setRating(star, i)">
+        <span  *ngFor="let star of getStarsArray(appointment.visit.rate)" (load)="setRating(star, i)">
           <i class="fas fa-star fiiled-stars"></i>
         </span>
-        <span *ngFor="let star of getRemainingStarsArray(appointment.rate)" (load)="setRating(star, i)">
+        <span *ngFor="let star of getRemainingStarsArray(appointment.visit.rate)" (load)="setRating(star, i)">
           <i class="fas fa-star"></i>
         </span>
       </div>
@@ -34,7 +34,7 @@
 
 
 
-      <form [formGroup]="form" [id]="i" #ratingForm *ngIf="appointment.visitStatus == 'done' && appointment.rate == null">
+      <form [formGroup]="form" [id]="i" #ratingForm *ngIf="appointment.visit.visitStatus == 'done' && appointment.visit.rate == null">
 
         <div class="ratingDiv">
           <label for="rate">Rate This Appointment: </label>
@@ -47,10 +47,10 @@
         </div>
         <div class="ratingDiv" [id]="'i_' + i">
           <label for="review">Your Review: </label>
-          <textarea id="review" formControlName="review" [(ngModel)]="appointment.review"></textarea>
+          <textarea id="review" formControlName="review" [(ngModel)]="appointment.visit.review"></textarea>
         </div>
         <div class="ratingDiv buttonDiv">
-          <button class="ButtonItem" (click)="clickHandle($event , appointment.id ,i )" [disabled]="!ratingSet">Submit</button>
+          <button class="ButtonItem" (click)="clickHandle($event , appointment.visit.id ,i )" [disabled]="!ratingSet">Submit</button>
         </div>
       </form>
 
