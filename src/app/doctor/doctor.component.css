@@ -117,3 +117,13 @@ hr{
     font-size: 18px;
     margin-bottom: 10px;
 }
+.doctorDes{
+    width: 550px;
+}
+.member-img img {
+    height: 180px;
+    margin-top: 20px;
+  }
+.member-info .fixed{
+   width: 200px;  
+}
