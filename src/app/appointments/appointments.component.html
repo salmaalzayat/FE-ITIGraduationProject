@@ -4,7 +4,7 @@
   <h2>My Appointments</h2>
 </div>
 
-<div *ngIf="appointments[1].length > 0; else noAppointments">
+<div *ngIf="visits.length > 0; else noAppointments">
 
   <div>
     <div class="patientVisitsCard" *ngFor="let appointment of visits; let i = index" [ngClass]="{'future-visit': isFutureVisit(appointment.visit.dateOfVisit), 'today-visit': isTodayVisit(appointment.visit.dateOfVisit), 'past-visit': isPastVisit(appointment.visit.dateOfVisit)}">
