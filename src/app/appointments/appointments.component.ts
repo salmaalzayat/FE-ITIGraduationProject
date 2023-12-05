@@ -59,7 +59,7 @@ export class AppointmentsComponent implements OnInit {
       //    console.log(dataArray);
           this.appointments =dataArray;
      //     console.log('Appointments loaded:', this.appointments[1].length);
-          this.appointments[1].forEach((e:any)=>{
+          this.appointments[2].forEach((e:any)=>{
           this.rate = e.rate;
           this.review = e.review;
 
@@ -117,18 +117,18 @@ export class AppointmentsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         const event = (e.target as any).value
-    console.log(id)
+    //console.log(id)
     if(status != 'done'){
     this.patientService.deleteAppointment(id).subscribe({
       next:()=>{
         this.loadAppointments(this.phoneNumber).subscribe((data) => {
           this.appointments = data;
-          console.log(data)
+       //   console.log(data)
           const dataArray = Object.values(data);
-          console.log(dataArray);
+        //  console.log(dataArray);
           this.appointments =dataArray;
-          console.log('Appointments loaded:', this.appointments[1].length);
-          this.appointments[1].forEach((e:any)=>{
+        //  console.log('Appointments loaded:', this.appointments[1].length);
+          this.appointments[2].forEach((e:any)=>{
             this.rate = e.rate;
             this.review = e.review;
 
@@ -140,17 +140,17 @@ export class AppointmentsComponent implements OnInit {
             })
 
           });
-          if (this.appointments[1].length > 0) {
-            console.log('First appointment name:', this.appointments[1]);
-            console.log('First appointment length:', this.appointments[1].length);
+          // if (this.appointments[1].length > 0) {
+          //   console.log('First appointment name:', this.appointments[1]);
+          //   console.log('First appointment length:', this.appointments[1].length);
 
             // Accessing patient visits of the first appointment
-            const patientVisits = this.appointments[1];
-            if (patientVisits.length > 0) {
-              console.log('First patient visit date:', patientVisits[0].dateOfVisit);
-              console.log('First patient visit comments:', patientVisits[0].comments);
-            }
-          }
+            const patientVisits = this.appointments[2];
+          //   if (patientVisits.length > 0) {
+          //     console.log('First patient visit date:', patientVisits[0].dateOfVisit);
+          //     console.log('First patient visit comments:', patientVisits[0].comments);
+          //   }
+          // }
         });
       },
       error:(error)=>{
@@ -216,16 +216,16 @@ export class AppointmentsComponent implements OnInit {
   clickHandle(e: Event , id:string , i:number) {
     const rate: number | null = this.form.controls.rate.value;
     const review: string | null = this.form.controls.review.value;
-    const appointmentIndex = this.appointments[1].findIndex((appointment: any) => appointment.id === id);
-      this.appointments[1][appointmentIndex].review = review;
+    const appointmentIndex = this.appointments[2].findIndex((appointment: any) => appointment.id === id);
+      this.appointments[2][appointmentIndex].review = review;
     // const visitId : int | null = e.Id;
-    console.log(this.appointments[1].Id);
+    console.log(this.appointments[2].Id);
     if ((rate !== null && this.form.controls.rate.valid)&& (review !== null && this.form.controls.review.valid)) {
       console.log(rate);
       console.log(review);
       console.log(id);
-      const appointmentIndex = this.appointments[1].findIndex((appointment: any) => appointment.id === id);
-      this.appointments[1][appointmentIndex].review = review;
+      const appointmentIndex = this.appointments[2].findIndex((appointment: any) => appointment.id === id);
+      this.appointments[2][appointmentIndex].review = review;
 
       const reviewDto: VisitReviewAndRateDto = {
         id: +id,  // Assuming id is the property in VisitReviewAndRateDto
