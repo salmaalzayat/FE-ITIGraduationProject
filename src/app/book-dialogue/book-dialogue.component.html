@@ -1,7 +1,8 @@
 <div class="modal-content rounded-4 shadow">
   <div > 
 <div class="modal-header border-bottom-0" >
-<h1 *ngIf="patientRegistered" class=" color">{{PatientByPhoneNumber?.name}}</h1>
+
+  <h1 *ngIf="patientRegistered" class=" color"><span>Name:</span>{{PatientByPhoneNumber?.name}}</h1>
 </div>
 
 <div class="modal-body py-0 color">
@@ -23,8 +24,9 @@
 <!-- <a >Login</a>
 <a >Register</a> -->
 <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
-  <button *ngIf="patientRegistered" [routerLink]="(['/login'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background ">Login</button>
+
   <mat-dialog-actions class="btns">
+    <button *ngIf="patientRegistered" [routerLink]="(['/login'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background Registerbtn">Login</button>
   <button *ngIf="patientRegistered == false" [routerLink]="(['/register'])" (click)="loginAndRegister(data)" type="button" class="btn btn-lg background Registerbtn">Register</button>
   <button type="button" class="btn btn-lg closebtn" data-bs-dismiss="modal" (click)="close()">Close</button>
 </mat-dialog-actions>

@@ -14,8 +14,8 @@
               <div class="member" data-aos="fade-up" data-aos-delay="100">
                 <div class="doctorinfo">
                 <div class="member-img" >
-                  <img *ngIf="doctor.imageStoredFileName" src="{{doctor.imageUrl}}" class="img-fluid" alt="">
-                  <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
+                  <img *ngIf="doctor.imageStoredFileName" src="{{doctor.imageUrl}}" class="fixed" alt="">
+                  <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="fixed" alt="">
 
                 </div>
                 
@@ -97,8 +97,8 @@
                    <div class="member" data-aos="fade-up" data-aos-delay="100">
                     <div class="doctorinfo">
                      <div class="member-img">
-                       <img src="{{doctor.imageUrl}}" class="img-fluid" alt="">
-                       <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
+                       <img src="{{doctor.imageUrl}}" class="fixed" alt="">
+                       <img *ngIf="!doctor.imageStoredFileName" src="assets/img/userB.png" class="fixed" alt="">
                      </div>
                      <div class="member-info">
                       <h3 class="doctorName">{{doctor.name}}</h3>
@@ -161,8 +161,8 @@
               <div class="member" data-aos="fade-up" data-aos-delay="100">
                 <div class="doctorinfo">
                 <div class="member-img">
-                  <img  src="{{doctorById.imageUrl}}" class="img-fluid" alt="">
-                  <img *ngIf="!doctorById?.imageStoredFileName" src="assets/img/userB.png" class="img-fluid" alt="">
+                  <img  src="{{doctorById.imageUrl}}" class="fixed" alt="">
+                  <img *ngIf="!doctorById?.imageStoredFileName" src="assets/img/userB.png" class="fixed" alt="">
 
                 </div>
 
