@@ -5,9 +5,9 @@
 
 ## Repositories
 
-- **Frontend Booking Repo**: https://github.com/salmaalzayat/FE-ITIGraduationProject
-- **Frontend Consultation Management Repo**: https://github.com/MayarRezq214/FE-ITIGraduationProjectPart2- 
-- **Backend Repo**: https://github.com/7HAB/Hospital-Online-Booking-System-and-Consultaion-Management
+- **Front-End Booking System Code**: https://github.com/salmaalzayat/FE-ITIGraduationProject
+- **Front-End Consultation Management System Code**: https://github.com/MayarRezq214/FE-ITIGraduationProjectPart2- 
+- **Back-End Code**: https://github.com/7HAB/Hospital-Online-Booking-System-and-Consultaion-Management
 
 ## Project Demo
 
