@@ -1,7 +1,7 @@
 
 # ITIGraduationProject
 
-👨🏻‍💻 Welcome to the Front-End Booking System repository for our Hospital-Online-Booking-System-and-Consultaion-Management project! This project is organized into three repositories.
+👨🏻‍💻 Welcome to the Front-End Booking System repository for our Hospital Online Booking System and Consultaion Management project! This project is organized into three repositories.
 
 ## Repositories
 
